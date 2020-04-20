@@ -1,0 +1,10 @@
+@import "src/index";
+
+header {
+  height: 78px;
+  background-color: $color-orange;
+
+  ul{
+    display: inline;
+  }
+}
