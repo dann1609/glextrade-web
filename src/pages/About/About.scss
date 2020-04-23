@@ -1,0 +1,128 @@
+@import "src/config/theme/theme";
+
+.about {
+  h1 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 300;
+    color: $color-orange;
+    margin-left: $octuple-standard-spacing;
+    margin-right: $octuple-standard-spacing;
+  }
+
+  h2 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 300;
+    color: $color-orange;
+  }
+
+  h4 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 300;
+  }
+
+  .about-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-dark;
+
+    .about-1-paragraph {
+      margin-top: 0;
+      margin-bottom: $sextuple-standard-spacing;
+      padding-left: $sextuple-standard-spacing;
+      padding-right: $sextuple-standard-spacing;
+      font-size: 1.56rem;
+    }
+  }
+
+  .about-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-orange-17;
+
+    .about-2-paragraph {
+      margin-top: 0;
+      color: $color-dark;
+      margin-bottom: $quadruple-standard-spacing;
+    }
+  }
+
+  .members-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 $octuple-standard-spacing $quadruple-standard-spacing $octuple-standard-spacing;
+  }
+
+  .member-container{
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    padding-top: 50%;
+    margin: 0 $standard-spacing;
+
+    .member-image{
+      position: absolute;
+      top:0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .member-overlay {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: $color-dark;
+      overflow: hidden;
+      width: 100%;
+      height: $standard-spacing;
+      transition: .5s ease;
+      overflow: auto;
+
+      .member-name {
+        margin-bottom: 0;
+      }
+
+      .member-position {
+        margin-top: $standard-spacing;
+        color: $color-orange;
+      }
+
+      .member-paragraph {
+        color: $color-orange;
+        line-height: 2rem;
+        margin: 0 $standard-spacing;
+        text-align: justify;
+      }
+
+      .member-icons-container{
+
+        margin-top: auto;
+        height: auto;
+
+        .linkedin-icon{
+          display: block;
+          padding: $double-standard-spacing $standard-spacing;
+          font-size: 1rem;
+          color: $linkedin-blue;
+        }
+
+      }
+    }
+
+  }
+
+  .member-container:hover .member-overlay {
+    height: 100%;
+  }
+}

@@ -1,10 +1,35 @@
 @import "src/index";
 
 header {
-  height: 78px;
+  display: flex;
+  justify-content: flex-end;
+  height: $quintuple-standard-spacing;
   background-color: $color-orange;
 
-  ul{
-    display: inline;
+  ul {
+    display: flex;
+    list-style-type:none;
+    margin: 0 0;
   }
+
+  a {
+    display: block;
+    min-width: $quintuple-standard-spacing;
+    height: $quintuple-standard-spacing;
+    line-height: $quintuple-standard-spacing;
+    text-align: center;
+    padding: 0 $standard-spacing;
+    font-size: 1.25rem;
+    font-family: sans-serif;
+
+    &:hover {
+      text-decoration-line: underline;
+    }
+  }
+}
+
+.homeLink {
+  font-size: 2rem;
+  font-family: sans-serif;
+  margin-right: auto;
 }

@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-brands-svg-icons": "^5.13.0",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -16,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "lint": "eslint src/",
+    "lint": "eslint src/ --ext js,jsx",
     "build": "react-scripts build",
     "deploy": "npm run build && aws s3 sync build/ s3://glextrade-web --delete",
     "eject": "react-scripts eject"
