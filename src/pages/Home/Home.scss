@@ -1,4 +1,4 @@
-@import "src/config/theme/theme";
+@import "src/index";
 
 .home {
   h1 {
@@ -41,6 +41,7 @@
   .home-sub-section {
     display: flex;
     flex-grow: 1;
+    width: 0;
     flex-direction: column;
   }
 
@@ -70,12 +71,60 @@
   }
 
   .home-3 {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100vh;
     background-color: $color-orange-17;
     padding: $quadruple-standard-spacing 0;
+    box-sizing: border-box;
+    overflow: hidden;
+
+      .home-3-to-register {
+        min-height: $triple-standard-spacing;
+        border-radius: $double-standard-spacing;
+        border-width: 0px;
+        min-width: 12rem;
+        margin: $standard-spacing auto;
+        padding: 0 $standard-spacing;
+        color: white;
+        font-size: 1rem;
+        font-family: "Noto Sans", sans-serif;
+        background-color: $color-dark;
+        transition: min-width 0.5s, font-size 0.5s, padding 0.5s;
+
+        &:hover {
+          min-width: 16rem;
+          font-size: 1.3rem;
+          text-decoration: underline;
+          padding: 0 $triple-standard-spacing;
+        }
+      }
+  }
+
+  .home-3-background {
+    position: absolute;
+    top:-8px;
+    bottom: -8px;
+    left: -8px;
+    right: -8px;
+    z-index: -1;
+    background-image: url('../../assets/images/container-terminal.jpg');
+    filter: blur(4px) brightness(90%);
+    background-size: cover;
+  }
+
+  .home-3-particles {
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right: 0;
+    z-index: -1;
   }
 
   .home-3-sub-title {
-    color: $color-dark;
+    color: white;
   }
 
   .home-3-sub-title-animated-container {
@@ -100,7 +149,7 @@
   .animated-caret {
     border-right-style: solid;
     border-right-width: 3px;
-    border-right-color: $color-dark;
+    border-right-color: white;
     margin: $double-standard-spacing 0;
   }
 
@@ -212,7 +261,8 @@
     background-color: $color-orange;
   }
 
-  .fast-register-link {
-
+  .fast-register-label {
+    font-weight: 300;
+    text-transform: uppercase;
   }
 }

@@ -9,6 +9,9 @@ import HeaderBar from '../HeaderBar/HeaderBar';
 import Home from '../../pages/Home/Home';
 import About from '../../pages/About/About';
 import FooterBar from '../FooterBar/FooterBar';
+import SignUp from '../../pages/SignUp/SignUp';
+import Profile from '../../pages/Profile/Profile';
+import SignIn from '../../pages/SignIn/SignIn';
 
 function App() {
   return (
@@ -23,10 +26,13 @@ function App() {
             <About />
           </Route>
           <Route path="/sign_in">
-            <Users />
+            <SignIn />
           </Route>
           <Route path="/sign_up">
-            <Users />
+            <SignUp />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/">
             <Home />

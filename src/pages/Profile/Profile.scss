@@ -1,0 +1,19 @@
+@import "src/index";
+
+.profile{
+
+  display: flex;
+  flex-direction: row;
+  background-color: $color-orange-17;
+
+  .profile-data{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .profile-video{
+    display: flex;
+    width: 50%;
+  }
+}

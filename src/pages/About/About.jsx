@@ -1,10 +1,12 @@
 import React from 'react';
 import i18n from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faLinkedinIn} from '@fortawesome/free-brands-svg-icons'
-import { Link } from 'react-router-dom';
+import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 import './About.scss';
+
+import CLlinasPicture from '../../assets/images/CLlinas-profile.jpg';
+import DPadillaPicture from '../../assets/images/DPadilla-profile.jpg';
 
 function MemberCard(member) {
   return (
@@ -15,8 +17,8 @@ function MemberCard(member) {
         <h4 className="member-position">{member.position}</h4>
         <p className="member-paragraph">{member.paragraph}</p>
         <div className="member-icons-container">
-          <a className="linkedin-icon" target="_blank" href={member.linkedinLink}>
-        <FontAwesomeIcon  icon={faLinkedinIn} />
+          <a className="linkedin-icon" target="_blank" rel="noopener noreferrer" href={member.linkedinLink}>
+            <FontAwesomeIcon icon={faLinkedinIn} />
           </a>
         </div>
       </div>
@@ -27,14 +29,14 @@ function MemberCard(member) {
 function about() {
   const members = [
     {
-      url: require('../../assets/images/CLlinas-profile.jpg'),
+      url: CLlinasPicture,
       name: 'Carlos Llinas',
       position: i18n.t('CL_POSITION'),
       paragraph: i18n.t('CL_PARAGRAPH'),
       linkedinLink: 'https://www.linkedin.com/in/carlosllinas1/',
     },
     {
-      url: require('../../assets/images/DPadilla-profile.jpg'),
+      url: DPadillaPicture,
       name: 'Daniel Padilla',
       position: i18n.t('DP_POSITION'),
       paragraph: i18n.t('DP_PARAGRAPH'),

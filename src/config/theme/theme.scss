@@ -2,12 +2,15 @@
 $color-orange: #ff6700;
 $color-orange-17: #ff670017;
 $color-dark: #343a41;
+$error: #ff0000;
 $linkedin-blue: #0e76a8;
+$light:#dddddd;
 
 /* Dimensions */
 $standard-spacing: 16px;
+$half-standard-spacing: $standard-spacing / 2;
 $double-standard-spacing: 2*$standard-spacing;
-$triple-standard-spacing: 2*$standard-spacing;
+$triple-standard-spacing: 3*$standard-spacing;
 $quadruple-standard-spacing: 4*$standard-spacing;
 $quintuple-standard-spacing: 5*$standard-spacing;
 $sextuple-standard-spacing: 6*$standard-spacing;
@@ -31,6 +34,11 @@ h1 {
 h2 {
   color: white;
   font-size: 3rem;
+}
+
+h3 {
+  color: white;
+  font-size: 1.5rem;
 }
 
 h4 {

@@ -1,0 +1,40 @@
+@import "src/index";
+
+.text-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: $half-standard-spacing 0 0 0;
+
+  .text-input-label {
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: "Noto Sans", sans-serif;
+    margin-bottom: $standard-spacing;
+  }
+
+  .text-input-input {
+    font-size: 1rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: $light;
+    padding: 0 $half-standard-spacing;
+
+    &:focus{
+      outline-color: $color-orange;
+    }
+  }
+
+  .text-input-error-area{
+    height: 1rem;
+    padding: 0 $half-standard-spacing;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: white;
+    font-family: "Noto Sans", sans-serif;
+    &.error-enabled{
+      background-color: $error;
+    }
+  }
+}

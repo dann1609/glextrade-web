@@ -1,0 +1,34 @@
+@import "src/index";
+
+.sign-up {
+
+  h2 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 300;
+    color: $color-orange;
+    margin-left: $octuple-standard-spacing;
+    margin-right: $octuple-standard-spacing;
+  }
+
+  .sign-up-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-dark;
+
+    .sign-up-1-title{
+      text-align: center;
+    }
+  }
+
+  .sign-up-2{
+    display: flex;
+    background-color: $color-orange-17;
+
+    .sign-up-form{
+      margin: 0 auto;
+      max-width: 40% ;
+    }
+  }
+}

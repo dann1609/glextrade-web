@@ -1,4 +1,4 @@
-@import "src/config/theme/theme";
+@import "src/index";
 
 .about {
   h1 {
@@ -47,6 +47,7 @@
       margin-top: 0;
       color: $color-dark;
       margin-bottom: $quadruple-standard-spacing;
+      font-size: 1.9rem;
     }
   }
 
@@ -55,7 +56,7 @@
     flex-direction: row;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 $octuple-standard-spacing $quadruple-standard-spacing $octuple-standard-spacing;
+    padding: 0 12* $standard-spacing $quadruple-standard-spacing 12*$standard-spacing;
   }
 
   .member-container{
@@ -91,16 +92,18 @@
 
       .member-name {
         margin-bottom: 0;
+        text-align: center;
       }
 
       .member-position {
         margin-top: $standard-spacing;
+        margin-bottom: $standard-spacing;
         color: $color-orange;
       }
 
       .member-paragraph {
         color: $color-orange;
-        line-height: 2rem;
+        line-height: 1.5rem;
         margin: 0 $standard-spacing;
         text-align: justify;
       }
@@ -112,7 +115,7 @@
 
         .linkedin-icon{
           display: block;
-          padding: $double-standard-spacing $standard-spacing;
+          padding: $standard-spacing $standard-spacing $double-standard-spacing $standard-spacing;
           font-size: 1rem;
           color: $linkedin-blue;
         }
