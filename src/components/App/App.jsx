@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,36 +12,56 @@ import FooterBar from '../FooterBar/FooterBar';
 import SignUp from '../../pages/SignUp/SignUp';
 import Profile from '../../pages/Profile/Profile';
 import SignIn from '../../pages/SignIn/SignIn';
+import { persistSession, restoreSession } from '../../actions/persist';
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <HeaderBar />
+class App extends Component {
+  constructor(props) {
+    super(props);
+    restoreSession();
+  }
 
-        {/* A <Switch> looks through its children <Route>s and
+  UNSAFE_componentWillMount() {
+    window.addEventListener('beforeunload', this.saveState);
+  }
+
+  UNSAFE_componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.saveState);
+  }
+
+  saveState=() => {
+    persistSession();
+  }
+
+  render() {
+    return (
+      <Router>
+        <div>
+          <HeaderBar />
+
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/sign_in">
-            <SignIn />
-          </Route>
-          <Route path="/sign_up">
-            <SignUp />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-        <FooterBar />
-      </div>
-    </Router>
-  );
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/sign_in">
+              <SignIn />
+            </Route>
+            <Route path="/sign_up">
+              <SignUp />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+          <FooterBar />
+        </div>
+      </Router>
+    );
+  }
 }
 
 function Users() {

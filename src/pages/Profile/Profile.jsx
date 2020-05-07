@@ -11,16 +11,15 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
 import ProfileField from '../../components/ProfileField/ProfileField';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import countryList from '../../tools/countries';
-import industryList from "../../tools/industries";
-import companyTypes from "../../tools/companyTypes";
+import industryList from '../../tools/industries';
+import companyTypes from '../../tools/companyTypes';
 
 function Profile(props) {
-  console.log(props.session);
   const { session } = props;
   const { user } = session || {};
   const { company } = user || {};
   const {
-    name, country, industry, type, phone, website
+    name, country, industry, type, phone, website,
   } = company || {};
 
   if (!session.token) {
