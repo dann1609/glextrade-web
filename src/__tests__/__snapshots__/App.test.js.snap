@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders learn react link 1`] = `
+<div>
+  <header
+    className="header"
+  >
+    <nav>
+      <ul>
+        <li>
+          <a
+            href="/"
+            onClick={[Function]}
+          />
+        </li>
+        <li>
+          <a
+            href="/about"
+            onClick={[Function]}
+          />
+        </li>
+        <li>
+          <a
+            href="/users"
+            onClick={[Function]}
+          />
+        </li>
+        <li>
+          <a
+            href="/users"
+            onClick={[Function]}
+          />
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <h2>
+    Home
+  </h2>
+</div>
+`;
