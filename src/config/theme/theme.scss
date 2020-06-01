@@ -9,6 +9,8 @@ $light:#dddddd;
 /* Dimensions */
 $standard-spacing: 16px;
 $half-standard-spacing: $standard-spacing / 2;
+$quarter-standard-spacing: $standard-spacing / 4;
+
 $double-standard-spacing: 2*$standard-spacing;
 $triple-standard-spacing: 3*$standard-spacing;
 $quadruple-standard-spacing: 4*$standard-spacing;
@@ -43,6 +45,16 @@ h3 {
 }
 
 h4 {
+  color: white;
+  font-size: 1.25rem;
+}
+
+h5 {
+  color: white;
+  font-size: 1rem;
+}
+
+h6 {
   color: white;
   font-size: 1.25rem;
 }

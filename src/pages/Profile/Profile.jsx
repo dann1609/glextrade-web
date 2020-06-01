@@ -2,10 +2,10 @@ import React from 'react';
 import {
   Redirect,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import './Profile.scss';
-import { connect } from 'react-redux';
 import ProfileField from '../../components/ProfileField/ProfileField';
 import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import countryList from '../../tools/countries';

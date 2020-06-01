@@ -8,6 +8,7 @@ const es = {
     SIGN_UP_YOUR_COMPANY: 'Registra tu empresa',
     SIGN_IN: 'Ingresa',
     PROFILE: 'Perfil',
+    SEARCH_COMPANY: 'Lista de Compañias',
 
 
     /* Home */
@@ -50,6 +51,9 @@ const es = {
     PASSWORD_TOO_SHORT: 'La contraseña debe tener minimo 8 caracteres',
     PASSWORD_DONT_MATCH: 'Las claves no coinciden',
     INVALID_EMAIL: 'No es un email valido',
+
+    /* COMPANIES */
+    COMPANIES_PARAGRAPH_1: 'Aca puedes encontrar a todos los importadores y exportadores.',
 
     /* Footer */
     ALL_CONTACTS: 'Cra 5 # 75 -11, Bogota, Colombia | Phone: +57 314-610-1765 | Email: cllinas@glextrade.com',

@@ -1,0 +1,91 @@
+@import "src/index";
+
+.companies{
+
+  display: flex;
+  flex-direction: column;
+  background-color: $color-orange-17;
+
+  .companies-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-dark;
+
+    .companies-1-paragraph {
+      color: $color-orange;
+      margin-top: $triple-standard-spacing;
+      margin-bottom: $triple-standard-spacing;
+      padding-left: $sextuple-standard-spacing;
+      padding-right: $sextuple-standard-spacing;
+      font-size: 1.56rem;
+    }
+  }
+
+  .companyList{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90vw;
+    flex-grow: 1;
+    margin: $double-standard-spacing auto $double-standard-spacing auto;
+    overflow: auto;
+  }
+}
+
+.card-container{
+  display: flex;
+  width: 250px;
+  height: 300px;
+  padding: $standard-spacing;
+
+  .card{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+
+    &:hover{
+      box-shadow: 0px 0px 12px $color-dark ;
+    }
+
+    .cover-image{
+      background: $color-dark;
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-style: solid;
+      border-width: 0px;
+      border-bottom-width: 1px;
+    }
+
+    .profile-image{
+      position: absolute;
+      top:60px;
+      left: 85px;
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+    }
+
+    .name{
+      margin: $standard-spacing $standard-spacing;
+      margin-top: $triple-standard-spacing;
+      color: $color-dark;
+      text-align: center;
+    }
+
+    .property{
+      margin: $quarter-standard-spacing 20px;
+      color: $color-dark;
+      text-align: center;
+    }
+  }
+}

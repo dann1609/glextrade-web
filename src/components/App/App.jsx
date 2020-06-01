@@ -12,6 +12,8 @@ import FooterBar from '../FooterBar/FooterBar';
 import SignUp from '../../pages/SignUp/SignUp';
 import Profile from '../../pages/Profile/Profile';
 import SignIn from '../../pages/SignIn/SignIn';
+import Companies from '../../pages/Companies/Companies';
+
 import { persistSession, restoreSession } from '../../actions/persist';
 
 class App extends Component {
@@ -52,6 +54,9 @@ class App extends Component {
             </Route>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/companies">
+              <Companies />
             </Route>
             <Route path="/">
               <Home />

@@ -27,9 +27,14 @@ function HeaderBar(props) {
               )}
           {props.session.token
           && (
-          <li>
-            <Link to="/profile">{i18n.t('PROFILE')}</Link>
-          </li>
+          <>
+            <li>
+              <Link to="/companies">{i18n.t('SEARCH_COMPANY')}</Link>
+            </li>
+            <li>
+              <Link to="/profile">{i18n.t('PROFILE')}</Link>
+            </li>
+          </>
           )}
         </ul>
       </nav>
