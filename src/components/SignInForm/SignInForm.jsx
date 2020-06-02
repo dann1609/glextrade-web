@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import {
   Redirect, withRouter,
 } from 'react-router-dom';
-import TextInput from '../TextInput/TextInput';
+import PropTypes from 'prop-types';
 
 import './SignInForm.scss';
 import { signIn } from '../../actions/user';
-import i18n from 'i18next';
+import TextInput from '../TextInput/TextInput';
+import propTypes from '../../tools/propTypes';
 
 class SignInForm extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class SignInForm extends Component {
 
     handleSubmit = async (event) => {
       event.preventDefault();
+      const { history } = this.props;
       const {
         password, email,
       } = this.state;
@@ -25,9 +27,9 @@ class SignInForm extends Component {
         password, email,
       });
       if (response.error) {
-
+        //
       } else {
-        this.props.history.push('profile');
+        history.push('profile');
       }
     };
 
@@ -39,7 +41,7 @@ class SignInForm extends Component {
 
    render() {
      const {
-       navigate, password, email, passwordError, emailError,
+       navigate, password, email,
      } = this.state;
      const disabled = !(password && email);
      const { className } = this.props;
@@ -56,5 +58,14 @@ class SignInForm extends Component {
      );
    }
 }
+
+SignInForm.propTypes = {
+  className: PropTypes.string,
+  history: propTypes.ReactRouterHistory.isRequired,
+};
+
+SignInForm.defaultProps = {
+  className: '',
+};
 
 export default compose(withRouter, connect(null, null))(SignInForm);

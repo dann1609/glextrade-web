@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 
 import './Home.scss';
+import propTypes from '../../tools/propTypes';
 
 const particles = {
   particles: {
@@ -189,5 +190,9 @@ function Home(props) {
     </div>
   );
 }
+
+Home.propTypes = {
+  history: propTypes.ReactRouterHistory.isRequired,
+};
 
 export default withRouter(Home);

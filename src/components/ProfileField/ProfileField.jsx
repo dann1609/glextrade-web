@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './ProfileField.scss';
 
@@ -15,5 +16,10 @@ function ProfileField(props) {
     </div>
   );
 }
+
+ProfileField.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default ProfileField;

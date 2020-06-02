@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
 import './ProfileHeader.scss';
 import defaultImage from '../../assets/images/default_avatar.jpg';
@@ -57,5 +58,14 @@ class ProfileHeader extends Component {
       );
     }
 }
+
+ProfileHeader.propTypes = {
+  name: PropTypes.string.isRequired,
+  profileUrl: PropTypes.string.isRequired,
+  coverUrl: PropTypes.string.isRequired,
+};
+
+ProfileHeader.defaultProps = {
+};
 
 export default ProfileHeader;

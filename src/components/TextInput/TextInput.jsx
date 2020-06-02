@@ -34,6 +34,7 @@ class TextInput extends Component {
 
     return (
       <div className={`${className} text-input-container`}>
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label className="text-input-label">
           {label}
         </label>
@@ -50,10 +51,24 @@ class TextInput extends Component {
 
 TextInput.propTypes = {
   className: PropTypes.string,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  error: PropTypes.string,
+  prefix: PropTypes.string,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 TextInput.defaultProps = {
   className: '',
+  label: '',
+  placeholder: '',
+  type: '',
+  error: '',
+  prefix: '',
+  onChange: null,
+  onBlur: null,
 };
 
 export default TextInput;

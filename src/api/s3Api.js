@@ -25,7 +25,7 @@ const S3Api = {
     mode: 'cors',
     body: data.file,
   }).then((response) => {
-    if (response.status == 200) {
+    if (response.status === 200) {
       return {
         success: true,
       };

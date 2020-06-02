@@ -3,22 +3,18 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 
 import './Companies.scss';
 import i18n from 'i18next';
 import { getCompanies } from '../../actions/company';
-
-import countryList from '../../tools/countries';
-import industryList from '../../tools/industries';
-import companyTypes from '../../tools/companyTypes';
-import defaultImage from '../../assets/images/default_avatar.jpg';
+import propTypes from '../../tools/propTypes';
+import CompanyCardProfile from '../../components/CompanyCardProfile/CompanyCardProfile';
 
 
 function Companies(props) {
   const { session } = props;
 
-  const [page, setPage] = useState(0);
+  const [page] = useState(0);
   const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
@@ -33,35 +29,9 @@ function Companies(props) {
     return <Redirect to="/sign_in" />;
   }
 
-  const CompanyCardProfile = (props) => {
-    const { company } = props;
-    const {
-      name, country, industry, type, coverUrl, profileUrl,
-    } = company;
-
-    const countryObject = _.find(countryList, { code: country });
-    const countryName = countryObject && countryObject.es;
-
-    const industryObject = _.find(industryList, { code: industry });
-    const industryName = industryObject && industryObject.es;
-
-    const typeObject = _.find(companyTypes, { code: type });
-    const typeName = typeObject && typeObject.es;
-    return (
-      <div className="card-container">
-        <div className="card">
-          <img src={coverUrl} alt="" className="cover-image" />
-          <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
-          <h3 className="name">{name}</h3>
-          <h4 className="property">{typeName}</h4>
-          <h4 className="property">{industryName}</h4>
-          <h4 className="property">{countryName}</h4>
-        </div>
-      </div>
-    );
-  };
-
-  const renderList = () => companies.map((item) => <CompanyCardProfile key={item.id} company={item} />);
+  const renderList = () => companies.map(
+    (item) => <CompanyCardProfile key={item.id} company={item} />,
+  );
 
   return (
     <div className="companies">
@@ -74,6 +44,14 @@ function Companies(props) {
     </div>
   );
 }
+
+Companies.propTypes = {
+  session: propTypes.session,
+};
+
+Companies.defaultProps = {
+  session: null,
+};
 
 const mapStateToProps = (state) => ({
   session: state.session,

@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import i18n from 'i18next';
 
 import './HeaderBar.scss';
+import propTypes from '../../tools/propTypes';
 
 function HeaderBar(props) {
+  const { session } = props;
+
   return (
     <header className="header">
       <Link className="homeLink" to="/">{i18n.t('GLEXTRADE')}</Link>
@@ -14,7 +17,7 @@ function HeaderBar(props) {
           <li>
             <Link to="/about">{i18n.t('ABOUT')}</Link>
           </li>
-          {!props.session.token
+          {!session.token
               && (
               <>
                 <li>
@@ -25,7 +28,7 @@ function HeaderBar(props) {
                 </li>
               </>
               )}
-          {props.session.token
+          {session.token
           && (
           <>
             <li>
@@ -41,6 +44,14 @@ function HeaderBar(props) {
     </header>
   );
 }
+
+HeaderBar.propTypes = {
+  session: propTypes.session,
+};
+
+HeaderBar.defaultProps = {
+  session: null,
+};
 
 const mapStateToProps = (state) => ({
   session: state.session,

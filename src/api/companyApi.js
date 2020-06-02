@@ -1,5 +1,5 @@
 const CompanyApi = {
-  listCompanies: (data) => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies`, {
+  listCompanies: () => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

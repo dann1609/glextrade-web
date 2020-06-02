@@ -1,5 +1,4 @@
 import React from 'react';
-import i18n from 'i18next';
 
 import './SignIn.scss';
 import SignInForm from '../../components/SignInForm/SignInForm';

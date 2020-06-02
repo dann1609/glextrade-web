@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import _ from 'lodash';
 import i18n from 'i18next';
+import PropTypes from 'prop-types';
 import TextInput from '../TextInput/TextInput';
 
 import './SignUpForm.scss';
@@ -14,6 +15,7 @@ import SelectInput from '../SelectInput/SelectInput';
 import countryList from '../../tools/countries';
 import companyTypes from '../../tools/companyTypes';
 import industryList from '../../tools/industries';
+import propTypes from '../../tools/propTypes';
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -36,16 +38,17 @@ class SignUpForm extends Component {
 
     handleSubmit = async (event) => {
       event.preventDefault();
+      const { history } = this.props;
       const {
-        name, country, industry, type, password, password2, email, phone, website,
+        name, country, industry, type, password, email, phone, website,
       } = this.state;
       const response = await signUp({
-        name, country, industry, type, password, email, phone,
+        name, country, industry, type, password, email, phone, website,
       });
       if (response.error) {
-
+        //
       } else {
-        this.props.history.push('profile');
+        history.push('profile');
       }
     };
 
@@ -59,7 +62,7 @@ class SignUpForm extends Component {
    };
 
    onBlurName=() => {
-     const { name, password, email } = this.state;
+     const { name, password } = this.state;
      if (!name && password) {
        this.setState({ nameError: i18n.t('NAME_REQUIRED') });
      } else {
@@ -106,7 +109,7 @@ class SignUpForm extends Component {
 
    onBlurPassword2=() => {
      const { password, password2 } = this.state;
-     if (password != password2) {
+     if (password !== password2) {
        this.setState({ password2Error: i18n.t('PASSWORD_DONT_MATCH') });
      } else {
        this.setState({ password2Error: null });
@@ -125,10 +128,13 @@ class SignUpForm extends Component {
 
    render() {
      const {
-       navigate, name, country, industry, type, password, password2, email, phonePrefix, nameError, countryError, industryError, typeError, passwordError, password2Error, emailError,
+       navigate, name, country, industry, type, password, password2, email, phonePrefix, nameError,
+       countryError, industryError, typeError, passwordError, password2Error, emailError,
      } = this.state;
-     const error = nameError || countryError || industryError || typeError || passwordError || password2Error || emailError;
-     const disabled = !(name && country && industry && type && password && password2 && email && !error);
+     const error = nameError || countryError || industryError || typeError || passwordError
+         || password2Error || emailError;
+     const disabled = !(name && country && industry && type && password && password2 && email
+         && !error);
      const { className } = this.props;
      if (navigate) {
        return <Redirect to="/profile" />;
@@ -151,5 +157,14 @@ class SignUpForm extends Component {
      );
    }
 }
+
+SignUpForm.propTypes = {
+  className: PropTypes.string,
+  history: propTypes.ReactRouterHistory.isRequired,
+};
+
+SignUpForm.defaultProps = {
+  className: '',
+};
 
 export default compose(withRouter, connect(null, null))(SignUpForm);

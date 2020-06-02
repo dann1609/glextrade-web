@@ -1,11 +1,11 @@
 import UsersApi from '../api/usersApi';
-import store, { dispatch, getState } from '../config/store';
+import { dispatch, getState } from '../config/store';
 import { setSession } from './reducers/session';
 import S3Api from '../api/s3Api';
 
 export async function signUp(query) {
   const {
-    name, country, industry, type, email, password, phone,
+    name, country, industry, type, email, password, phone, website,
   } = query || {};
 
   const response = await UsersApi.registerUser({
@@ -16,10 +16,11 @@ export async function signUp(query) {
     email,
     password,
     phone,
+    website,
   });
 
   if (response.token) {
-    store.dispatch(setSession(response));
+    dispatch(setSession(response));
     return response;
   }
 
@@ -35,7 +36,7 @@ export async function signIn(query) {
   });
 
   if (response.token) {
-    store.dispatch(setSession(response));
+    dispatch(setSession(response));
     return response;
   }
 
@@ -117,11 +118,9 @@ export async function uploadCoverPicture(query) {
 }
 
 export async function uploadVideo(query) {
-  const { name, type, file } = query;
+  const { file } = query;
 
   const uploadS3Response = await S3Api.uploadS3Video(file);
-
-  console.log('pepe', uploadS3Response);
 
   if (uploadS3Response.success) {
     const { session } = getState();
@@ -130,7 +129,6 @@ export async function uploadVideo(query) {
       token: session.token,
       videoUrl: uploadS3Response.url,
     });
-    console.log(companyUpdateResponse);
 
     session.user.company = companyUpdateResponse;
     dispatch(setSession(session));

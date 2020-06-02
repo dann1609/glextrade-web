@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './SelectInput.scss';
 
 class SelectInput extends Component {
     onChange= (event) => {
       const { onChange } = this.props;
-      this.setState({ value: event.target.value });
       if (onChange) {
         onChange(event.target.value);
       }
@@ -25,6 +25,7 @@ class SelectInput extends Component {
       } = this.props;
       return (
         <div className="select-input-container">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label className="text-input-label">
             {label}
           </label>
@@ -43,5 +44,26 @@ class SelectInput extends Component {
       );
     }
 }
+
+SelectInput.propTypes = {
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  list: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+  })),
+  error: PropTypes.string,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+};
+
+SelectInput.defaultProps = {
+  label: '',
+  placeholder: '',
+  list: [],
+  error: '',
+  onBlur: null,
+  onChange: null,
+};
 
 export default SelectInput;

@@ -22,16 +22,18 @@ class App extends Component {
     restoreSession();
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
     window.addEventListener('beforeunload', this.saveState);
   }
 
-  UNSAFE_componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.saveState);
-  }
-
   saveState=() => {
     persistSession();
+  }
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.saveState);
   }
 
   render() {
@@ -67,10 +69,6 @@ class App extends Component {
       </Router>
     );
   }
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
 
 export default App;
