@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+
 import './App.scss';
 import HeaderBar from '../HeaderBar/HeaderBar';
 import Home from '../../pages/Home/Home';
@@ -13,13 +14,17 @@ import SignUp from '../../pages/SignUp/SignUp';
 import Profile from '../../pages/Profile/Profile';
 import SignIn from '../../pages/SignIn/SignIn';
 import Companies from '../../pages/Companies/Companies';
+import Notifications from '../../pages/Notifications/Notifications';
 
 import { persistSession, restoreSession } from '../../actions/persist';
+import { getNotifications } from '../../actions/notification';
 
 class App extends Component {
   constructor(props) {
     super(props);
     restoreSession();
+    this.state = {};
+    this.checkNotifications();
   }
 
   // eslint-disable-next-line camelcase
@@ -36,11 +41,27 @@ class App extends Component {
     window.removeEventListener('beforeunload', this.saveState);
   }
 
+  setNotifications=(notifications) => {
+    this.setState({
+      notifications,
+    });
+  }
+
+  checkNotifications=() => {
+    getNotifications().then((response) => {
+      if (!response.error) {
+        this.setNotifications(response.notifications);
+      }
+    });
+  }
+
   render() {
+    const { notifications } = this.state;
+
     return (
       <Router>
-        <div>
-          <HeaderBar />
+        <div className="app-style">
+          <HeaderBar notifications={notifications} />
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -54,12 +75,10 @@ class App extends Component {
             <Route path="/sign_up">
               <SignUp />
             </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/companies">
-              <Companies />
-            </Route>
+            <Route path="/profile" component={Profile} />
+            <Route path="/companies/:id" component={Profile} />
+            <Route path="/companies" component={Companies} />
+            <Route path="/notifications" component={Notifications} />
             <Route path="/">
               <Home />
             </Route>

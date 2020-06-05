@@ -40,18 +40,24 @@ class ProfileHeader extends Component {
     }
 
     render() {
-      const { name, profileUrl, coverUrl } = this.props;
+      const {
+        name, profileUrl, coverUrl, isMyProfile,
+      } = this.props;
       return (
         <div className="profile-header">
           {coverUrl && <img src={coverUrl} alt="Cover" className="cover-image" />}
           <div className={`cover-add-container ${coverUrl ? '' : 'full-cover'}`}>
-            <FontAwesomeIcon className="cover-add-icon" icon={faCamera} />
-            <p className="cover-add-text">{coverUrl ? 'Cambia tu cover foto' : 'Sube tu cover foto'}</p>
+            {isMyProfile && (
+            <>
+              <FontAwesomeIcon className="cover-add-icon" icon={faCamera} />
+              <p className="cover-add-text">{coverUrl ? 'Cambia tu cover foto' : 'Sube tu cover foto'}</p>
+            </>
+            )}
           </div>
-          <input className="cover-image-input" onChange={this.coverChanged} type="file" accept="image/*" />
+          {isMyProfile && <input className="cover-image-input" onChange={this.coverChanged} type="file" accept="image/*" />}
           <div className="profile-image-container">
             <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
-            <input className="profile-image-input" onChange={this.avatarChanged} type="file" accept="image/*" />
+            { isMyProfile && <input className="profile-image-input" onChange={this.avatarChanged} type="file" accept="image/*" />}
           </div>
           <h3 className="profile-header-title">{name}</h3>
         </div>
@@ -63,9 +69,11 @@ ProfileHeader.propTypes = {
   name: PropTypes.string.isRequired,
   profileUrl: PropTypes.string.isRequired,
   coverUrl: PropTypes.string.isRequired,
+  isMyProfile: PropTypes.bool,
 };
 
 ProfileHeader.defaultProps = {
+  isMyProfile: false,
 };
 
 export default ProfileHeader;

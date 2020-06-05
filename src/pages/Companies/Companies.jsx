@@ -25,12 +25,20 @@ function Companies(props) {
     });
   }, [page]);
 
-  if (!session.token) {
-    return <Redirect to="/sign_in" />;
-  }
+  const goToCompanyProfile = (id) => {
+    if (session.token) {
+      props.history.push(`companies/${id}`);
+    }
+  };
 
   const renderList = () => companies.map(
-    (item) => <CompanyCardProfile key={item.id} company={item} />,
+    (item) => (
+      <CompanyCardProfile
+        key={item._id}
+        company={item}
+        onClick={() => goToCompanyProfile(item._id)}
+      />
+    ),
   );
 
   return (
@@ -38,7 +46,7 @@ function Companies(props) {
       <section className="companies-1">
         <p className="companies-1-paragraph">{i18n.t('COMPANIES_PARAGRAPH_1')}</p>
       </section>
-      <section className="companyList">
+      <section className="company-list">
         {renderList()}
       </section>
     </div>
@@ -47,6 +55,7 @@ function Companies(props) {
 
 Companies.propTypes = {
   session: propTypes.session,
+  history: propTypes.ReactRouterHistory.isRequired,
 };
 
 Companies.defaultProps = {

@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import i18n from 'i18next';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 import './HeaderBar.scss';
 import propTypes from '../../tools/propTypes';
 
 function HeaderBar(props) {
-  const { session } = props;
+  const { session, notifications } = props;
+  const signedIn = session.token;
+
+  const pendingNotifications = notifications.reduce((total, notification) => {
+    if (!notification.seen) {
+      return total + 1;
+    }
+    return total;
+  }, 0);
 
   return (
     <header className="header">
@@ -17,7 +28,7 @@ function HeaderBar(props) {
           <li>
             <Link to="/about">{i18n.t('ABOUT')}</Link>
           </li>
-          {!session.token
+          {!signedIn
               && (
               <>
                 <li>
@@ -28,11 +39,17 @@ function HeaderBar(props) {
                 </li>
               </>
               )}
-          {session.token
+          {signedIn
           && (
           <>
             <li>
               <Link to="/companies">{i18n.t('SEARCH_COMPANY')}</Link>
+            </li>
+            <li>
+              <Link className="bell-icon-link" to="/notifications">
+                <FontAwesomeIcon className="sub-home-icon" icon={faBell} />
+                {pendingNotifications}
+              </Link>
             </li>
             <li>
               <Link to="/profile">{i18n.t('PROFILE')}</Link>
@@ -47,10 +64,14 @@ function HeaderBar(props) {
 
 HeaderBar.propTypes = {
   session: propTypes.session,
+  notifications: PropTypes.arrayOf(PropTypes.shape({
+
+  })),
 };
 
 HeaderBar.defaultProps = {
   session: null,
+  notifications: [],
 };
 
 const mapStateToProps = (state) => ({

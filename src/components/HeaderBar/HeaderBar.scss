@@ -9,12 +9,12 @@ header {
   ul {
     display: flex;
     list-style-type:none;
-    margin: 0 0;
+    margin: 0 $standard-spacing 0 0;
   }
 
   a {
     display: block;
-    min-width: $quintuple-standard-spacing;
+    min-width: $standard-spacing;
     height: $quintuple-standard-spacing;
     line-height: $quintuple-standard-spacing;
     text-align: center;
@@ -24,6 +24,9 @@ header {
 
     &:hover {
       text-decoration-line: underline;
+    }
+
+    &.bell-icon-link{
     }
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import './CompanyCardProfile.scss';
 import countryList from '../../tools/countries';
@@ -10,7 +11,7 @@ import propTypes from '../../tools/propTypes';
 
 
 const CompanyCardProfile = (props) => {
-  const { company } = props;
+  const { company, onClick } = props;
   const {
     name, country, industry, type, coverUrl, profileUrl,
   } = company;
@@ -25,7 +26,7 @@ const CompanyCardProfile = (props) => {
   const typeName = typeObject && typeObject.es;
   return (
     <div className="company-card-container">
-      <div className="card">
+      <div className="card" onClick={onClick}>
         <img src={coverUrl} alt="" className="cover-image" />
         <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
         <h3 className="name">{name}</h3>
@@ -39,6 +40,11 @@ const CompanyCardProfile = (props) => {
 
 CompanyCardProfile.propTypes = {
   company: propTypes.company.isRequired,
+  onClick: PropTypes.func,
+};
+
+CompanyCardProfile.defaultProps = {
+  onClick: () => {},
 };
 
 

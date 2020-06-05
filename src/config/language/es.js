@@ -55,6 +55,9 @@ const es = {
     /* COMPANIES */
     COMPANIES_PARAGRAPH_1: 'Aca puedes encontrar a todos los importadores y exportadores.',
 
+    /* NOTIFICATIONS */
+    NOTIFICATIONS_PARAGRAPH_1: 'Tus ultimas notificaciones',
+
     /* Footer */
     ALL_CONTACTS: 'Cra 5 # 75 -11, Bogota, Colombia | Phone: +57 314-610-1765 | Email: cllinas@glextrade.com',
   },

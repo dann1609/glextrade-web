@@ -7,9 +7,12 @@ const store = createStore(
 
 const { getState, dispatch } = store;
 
+const getAuthorization = () => getState().session.token;
+
 export default store;
 
 export {
   getState,
   dispatch,
+  getAuthorization,
 };

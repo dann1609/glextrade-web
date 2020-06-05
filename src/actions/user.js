@@ -1,7 +1,8 @@
 import UsersApi from '../api/usersApi';
-import { dispatch, getState } from '../config/store';
+import { dispatch, getAuthorization, getState } from '../config/store';
 import { setSession } from './reducers/session';
 import S3Api from '../api/s3Api';
+import CompanyApi from '../api/companyApi';
 
 export async function signUp(query) {
   const {
@@ -51,8 +52,6 @@ export async function uploadPicture(query) {
     fileType: type,
   });
 
-  console.log(signS3Response);
-
   if (signS3Response.success) {
     const { signedRequest } = signS3Response;
 
@@ -63,16 +62,12 @@ export async function uploadPicture(query) {
       fileType: type,
     });
 
-    console.log(uploadS3Response);
-
     if (uploadS3Response.success) {
       const { session } = getState();
 
-      const companyUpdateResponse = await UsersApi.updateCompany({
-        token: session.token,
+      const companyUpdateResponse = await CompanyApi.updateCompany({
         profileUrl: signS3Response.url,
-      });
-      console.log(companyUpdateResponse);
+      }, getAuthorization());
 
       session.user.company = companyUpdateResponse;
       dispatch(setSession(session));
@@ -88,8 +83,6 @@ export async function uploadCoverPicture(query) {
     fileType: type,
   });
 
-  console.log(signS3Response);
-
   if (signS3Response.success) {
     const { signedRequest } = signS3Response;
 
@@ -100,16 +93,12 @@ export async function uploadCoverPicture(query) {
       fileType: type,
     });
 
-    console.log(uploadS3Response);
-
     if (uploadS3Response.success) {
       const { session } = getState();
 
-      const companyUpdateResponse = await UsersApi.updateCompany({
-        token: session.token,
+      const companyUpdateResponse = await CompanyApi.updateCompany({
         coverUrl: signS3Response.url,
-      });
-      console.log(companyUpdateResponse);
+      }, getAuthorization());
 
       session.user.company = companyUpdateResponse;
       dispatch(setSession(session));
@@ -125,10 +114,9 @@ export async function uploadVideo(query) {
   if (uploadS3Response.success) {
     const { session } = getState();
 
-    const companyUpdateResponse = await UsersApi.updateCompany({
-      token: session.token,
+    const companyUpdateResponse = await CompanyApi.updateCompany({
       videoUrl: uploadS3Response.url,
-    });
+    }, getAuthorization());
 
     session.user.company = companyUpdateResponse;
     dispatch(setSession(session));

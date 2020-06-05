@@ -1,0 +1,19 @@
+@import "src/index";
+
+.notification-container{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  height: 80px + $double-standard-spacing;
+
+  .event-image{
+    margin: auto $standard-spacing;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+  }
+
+  .event-message{
+    color: $color-dark;
+  }
+}
