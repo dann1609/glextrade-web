@@ -46,7 +46,7 @@ function Profile(props) {
 
   const user = getProfileUser(props);
   const [company, setCompany] = useState(user.company);
-  const isMyProfile = isProfileScreen(props);
+  const isMyProfile = session.user && company && session.user.company._id === company._id;
 
   useEffect(() => {
     if (!company) {
@@ -88,10 +88,13 @@ function Profile(props) {
     <div className="profile">
       <section className="profile-data-section">
         <ProfileHeader
+          company={company}
+          setCompany={setCompany}
           name={name}
           profileUrl={profileUrl}
           coverUrl={coverUrl}
           isMyProfile={isMyProfile}
+          session={session}
         />
         <ProfileField label="Nombre de la empresa" value={name} />
         <ProfileField label="Industria" value={industryName} />
@@ -111,7 +114,6 @@ function Profile(props) {
           </video>
         </div>
         { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
-
       </section>
     </div>
   );

@@ -5,6 +5,11 @@
   flex-direction: row;
   background-color: white;
   height: 80px + $double-standard-spacing;
+  margin: 0 $half-standard-spacing $standard-spacing $half-standard-spacing;
+
+  &:hover{
+    box-shadow: 0px 0px 12px $color-dark ;
+  }
 
   .event-image{
     margin: auto $standard-spacing;
@@ -16,4 +21,22 @@
   .event-message{
     color: $color-dark;
   }
+
+  .notification-action-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: auto;
+    padding: 0 $half-standard-spacing;
+
+    .notification-action-accept{
+      margin: $half-standard-spacing;
+    }
+
+    .notification-action-cancel{
+      margin: $half-standard-spacing;
+    }
+  }
+
 }

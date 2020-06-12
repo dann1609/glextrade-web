@@ -9,3 +9,11 @@ export async function getCompanies() {
 export async function getCompanyById(id) {
   return CompanyApi.getCompanyById(id, getAuthorization());
 }
+
+export async function connect(id) {
+  return CompanyApi.connect(id, getAuthorization());
+}
+
+export async function disconnect(id) {
+  return CompanyApi.disconnect(id, getAuthorization());
+}

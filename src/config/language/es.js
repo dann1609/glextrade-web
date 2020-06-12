@@ -56,6 +56,7 @@ const es = {
     COMPANIES_PARAGRAPH_1: 'Aca puedes encontrar a todos los importadores y exportadores.',
 
     /* NOTIFICATIONS */
+    NOTIFICATIONS_PARAGRAPH_0: 'No hay notificaciones',
     NOTIFICATIONS_PARAGRAPH_1: 'Tus ultimas notificaciones',
 
     /* Footer */

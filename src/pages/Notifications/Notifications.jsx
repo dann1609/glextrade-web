@@ -43,7 +43,7 @@ function Notifications(props) {
   return (
     <div className="notifications">
       <section className="notifications-1">
-        <p className="notifications-1-paragraph">{i18n.t('NOTIFICATIONS_PARAGRAPH_1')}</p>
+        <p className="notifications-1-paragraph">{i18n.t(notifications.length ? 'NOTIFICATIONS_PARAGRAPH_1' : 'NOTIFICATIONS_PARAGRAPH_0')}</p>
       </section>
       <section className="notification-list">
         {renderList()}

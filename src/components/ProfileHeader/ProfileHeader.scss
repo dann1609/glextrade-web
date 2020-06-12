@@ -103,7 +103,25 @@
     }
   }
 
+  .profile-action-area{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    padding: $standard-spacing;
+  }
+
   .profile-header-title{
     color: $color-dark;
+    margin: 0 auto;
+  }
+
+  .connect{
+
+    .icon{
+      color: #008800;
+      margin: 0 $half-standard-spacing;
+    }
   }
 }

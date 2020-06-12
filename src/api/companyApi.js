@@ -50,6 +50,40 @@ const CompanyApi = {
         },
       };
     }),
+  connect: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization,
+    },
+  }).then((response) => response.json())
+    .then((responseJson) => responseJson)
+    .catch((error) => {
+      console.log('api error');
+      console.error(error);
+      return {
+        error: {
+          message: "Can't reach server",
+        },
+      };
+    }),
+  disconnect: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization,
+    },
+  }).then((response) => response.json())
+    .then((responseJson) => responseJson)
+    .catch((error) => {
+      console.log('api error');
+      console.error(error);
+      return {
+        error: {
+          message: "Can't reach server",
+        },
+      };
+    }),
 };
 
 export default CompanyApi;

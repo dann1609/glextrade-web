@@ -31,7 +31,8 @@
     flex-wrap: wrap;
     width: 90vw;
     flex-grow: 1;
-    margin: $double-standard-spacing auto $double-standard-spacing auto;
+    margin: 0 auto 0 auto;
+    padding: $double-standard-spacing 0 $double-standard-spacing 0;
     overflow: auto;
   }
 }

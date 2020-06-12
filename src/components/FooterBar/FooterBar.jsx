@@ -5,9 +5,9 @@ import './FooterBar.scss';
 
 function FooterBar() {
   return (
-    <footer>
+    <footer className="footer">
       <div className="footer-content">{i18n.t('ALL_CONTACTS')}</div>
-      <div>{i18n.t('COPYRIGHT')}</div>
+      <div className="footer-content">{i18n.t('COPYRIGHT')}</div>
     </footer>
   );
 }
