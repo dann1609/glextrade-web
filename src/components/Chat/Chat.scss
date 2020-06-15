@@ -1,0 +1,139 @@
+@import "src/index";
+
+.chat-item-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 $standard-spacing;
+  width:$n16-standard-spacing;
+  height:$triple-standard-spacing;
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 0.001px;
+  border-bottom-color: $color-dark;
+  box-sizing: border-box;
+  background: white;
+
+  .chat-item-image{
+    width: $double-standard-spacing;
+    height: $double-standard-spacing;
+    border-radius: $standard-spacing;
+  }
+
+  .chat-item-text-container{
+    display: flex;
+    flex-direction: column;
+    .chat-item-company-name{
+      color: $color-dark;
+      margin:  $quarter-standard-spacing $quarter-standard-spacing 0 $quarter-standard-spacing ;
+      font-weight: 600;
+    }
+
+    .chat-item-message{
+      color: $color-dark;
+      margin: 0 $quarter-standard-spacing $quarter-standard-spacing $quarter-standard-spacing;
+      font-weight: 400;
+    }
+  }
+}
+
+.chat-no-messages{
+  text-align: center;
+  color: $color-dark;
+  margin: $double-standard-spacing auto;
+}
+
+.chat-container {
+  position: fixed;
+  right: $double-standard-spacing;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  z-index: 10;
+
+  .chat-individual-container {
+    margin-right: $standard-spacing;
+
+    .chat-name-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: $n16-standard-spacing;
+      height: $triple-standard-spacing;
+      padding: 0 $standard-spacing;
+      background-color: $color-orange;
+      box-sizing: border-box;
+
+      .chat-title {
+        margin: 0 $quarter-standard-spacing
+      }
+
+      .chat-image {
+        width: $double-standard-spacing;
+        height: $double-standard-spacing;
+        border-radius: $standard-spacing;
+      }
+
+      .chat-close{
+        color: white;
+        margin-left: auto;
+        font-size: 28px;
+        line-height: 16px;
+        font-weight: bold;
+      }
+    }
+
+    .chat-list-container {
+      display: flex;
+      overflow: auto;
+      transition: height 1s;
+      height: 0;
+      background: white;
+    }
+
+    .chat-list-container-open {
+      height: auto;
+      max-height: 40vh;
+    }
+  }
+
+
+  .chat-menu-container {
+
+    .chat-name-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: $n16-standard-spacing;
+      height: $triple-standard-spacing;
+      padding: 0 $standard-spacing;
+      background-color: $color-orange;
+      box-sizing: border-box;
+
+      .chat-title {
+        margin: 0 $quarter-standard-spacing
+      }
+
+      .chat-image {
+        width: $double-standard-spacing;
+        height: $double-standard-spacing;
+        border-radius: $standard-spacing;
+      }
+    }
+
+    .chat-list-container {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      transition: height 1s;
+      height: 0;
+      background: white;
+    }
+
+    .chat-list-container-open {
+      height: auto;
+      max-height: 40vh;
+    }
+  }
+}

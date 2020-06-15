@@ -18,6 +18,7 @@ import Notifications from '../../pages/Notifications/Notifications';
 
 import { persistSession, restoreSession } from '../../actions/persist';
 import { getNotifications } from '../../actions/notification';
+import Chat from '../Chat/Chat';
 
 class App extends Component {
   constructor(props) {
@@ -83,6 +84,7 @@ class App extends Component {
               <Home />
             </Route>
           </Switch>
+          <Chat />
           <FooterBar />
         </div>
       </Router>

@@ -37,6 +37,12 @@
             "rules": {
                 "react/jsx-filename-extension": "off"
             }
+        },
+        {
+            "files": ["*.jsx"],
+            "rules": {
+                "no-underscore-dangle": "off"
+            }
         }
     ],
     "settings": {
