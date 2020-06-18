@@ -9,6 +9,8 @@ import { uploadPicture, uploadCoverPicture } from '../../actions/user';
 import Modal from '../Modal/Modal';
 import { connect } from '../../actions/company';
 import Button from '../Button/Button';
+import { dispatch } from '../../config/store';
+import { setActiveChat } from '../../actions/reducers/chat';
 
 const avatarChanged = (event) => {
   const { files } = event.target;
@@ -71,10 +73,20 @@ function ProfileHeader(props) {
     });
   };
 
+  const sendMessage = () => {
+    const { ourRelation = {} } = company;
+    const { relation = {} } = ourRelation;
+    const { chatRoom } = relation;
+    chatRoom.company = company;
+    dispatch(setActiveChat(chatRoom));
+  };
+
   const getRightButton = () => {
     const { ourRelation = {} } = company;
     const { relation = {} } = ourRelation;
     const { type } = relation;
+
+    console.log('relation', relation);
 
     const invitationSender = type === 'INVITATION_SEND' && currentCompany._id === relation.sender;
     const connection = type === 'CONNECTED';
@@ -92,7 +104,7 @@ function ProfileHeader(props) {
 
     if (connection) {
       rightButtonOptions.name = 'Mensaje';
-      rightButtonOptions.onClick = null;
+      rightButtonOptions.onClick = sendMessage;
     }
 
     return (

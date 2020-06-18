@@ -5,6 +5,11 @@ export const setSession = (session) => ({
   session,
 });
 
+export const setUser = (user) => ({
+  type: sessionType.SET_USER,
+  user,
+});
+
 export const resetSession = () => ({
   type: sessionType.CLEAR_SESSION,
 });

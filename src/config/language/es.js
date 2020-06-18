@@ -53,14 +53,15 @@ const es = {
     INVALID_EMAIL: 'No es un email valido',
 
     /* COMPANIES */
-    COMPANIES_PARAGRAPH_1: 'Aca puedes encontrar a todos los importadores y exportadores.',
+    COMPANIES_PARAGRAPH_1: 'Exportadores e importadores registrados.',
 
     /* NOTIFICATIONS */
     NOTIFICATIONS_PARAGRAPH_0: 'No hay notificaciones',
-    NOTIFICATIONS_PARAGRAPH_1: 'Tus ultimas notificaciones',
+    NOTIFICATIONS_PARAGRAPH_1: 'Mis notificaciones',
 
     /* Footer */
-    ALL_CONTACTS: 'Cra 5 # 75 -11, Bogota, Colombia | Phone: +57 314-610-1765 | Email: cllinas@glextrade.com',
+    COLOMBIA_CONTACT: 'Cra 5 # 75 -11, Bogota, Colombia | Phone: +57 314-610-1765 | Email: cllinas@glextrade.com',
+    MIAMI_CONTACT: '355 SW 25th Rd, Miami, FL                                                                                         ',
   },
 };
 

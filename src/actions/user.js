@@ -1,6 +1,6 @@
 import UsersApi from '../api/usersApi';
 import { dispatch, getAuthorization, getState } from '../config/store';
-import { setSession } from './reducers/session';
+import { setSession, setUser } from './reducers/session';
 import S3Api from '../api/s3Api';
 import CompanyApi from '../api/companyApi';
 
@@ -42,6 +42,16 @@ export async function signIn(query) {
   }
 
   return response;
+}
+
+export async function refreshUser() {
+  const response = await UsersApi.refreshUser(getAuthorization());
+
+  console.log(response);
+
+  if (response._id) {
+    dispatch(setUser(response));
+  }
 }
 
 export async function uploadPicture(query) {
