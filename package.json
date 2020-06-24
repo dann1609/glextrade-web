@@ -28,7 +28,7 @@
     "test": "react-scripts test",
     "lint": "eslint src/ --ext js,jsx",
     "build": "react-scripts build",
-    "deploy": "npm run build && aws s3 sync build/ s3://glextrade-web --delete",
+    "deploy": "CI=false npm run build && aws s3 sync build/ s3://glextrade-web --delete",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3001",
