@@ -53,8 +53,10 @@ function Notifications(props) {
 }
 
 Notifications.propTypes = {
-  session: propTypes.session,
-  history: propTypes.ReactRouterHistory.isRequired,
+  ...propTypes.ScreenProptypes,
+  ...{
+    session: propTypes.session,
+  },
 };
 
 Notifications.defaultProps = {

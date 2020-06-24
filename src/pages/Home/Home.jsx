@@ -2,7 +2,6 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndustry, faPlayCircle, faHandshake } from '@fortawesome/free-solid-svg-icons';
 import i18n from 'i18next';
-import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 
 import './Home.scss';
@@ -192,7 +191,10 @@ function Home(props) {
 }
 
 Home.propTypes = {
-  history: propTypes.ReactRouterHistory.isRequired,
+  ...propTypes.ScreenProptypes,
+  ...{
+    session: propTypes.session,
+  },
 };
 
-export default withRouter(Home);
+export default Home;

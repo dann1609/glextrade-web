@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Redirect,
-} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './Companies.scss';
@@ -9,7 +6,6 @@ import i18n from 'i18next';
 import { getCompanies } from '../../actions/company';
 import propTypes from '../../tools/propTypes';
 import CompanyCardProfile from '../../components/CompanyCardProfile/CompanyCardProfile';
-
 
 function Companies(props) {
   const { session } = props;
@@ -54,8 +50,10 @@ function Companies(props) {
 }
 
 Companies.propTypes = {
-  session: propTypes.session,
-  history: propTypes.ReactRouterHistory.isRequired,
+  ...propTypes.ScreenProptypes,
+  ...{
+    session: propTypes.session,
+  },
 };
 
 Companies.defaultProps = {

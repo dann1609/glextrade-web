@@ -11,6 +11,7 @@ import { connect } from '../../actions/company';
 import Button from '../Button/Button';
 import { dispatch } from '../../config/store';
 import { setActiveChat } from '../../actions/reducers/chat';
+import propTypes from '../../tools/propTypes';
 
 const avatarChanged = (event) => {
   const { files } = event.target;
@@ -56,6 +57,7 @@ function ProfileHeader(props) {
 
   const connectWithCompany = () => {
     connect(company._id).then((response) => {
+      // eslint-disable-next-line no-empty
       if (response.error) {} else {
         setCompany(response);
       }
@@ -77,7 +79,8 @@ function ProfileHeader(props) {
     const { ourRelation = {} } = company;
     const { relation = {} } = ourRelation;
     const { chatRoom } = relation;
-    chatRoom.company = company;
+    chatRoom.company = { ...company, ...{ ourRelation: null } };
+    chatRoom.newMessages = [];
     dispatch(setActiveChat(chatRoom));
   };
 
@@ -85,8 +88,6 @@ function ProfileHeader(props) {
     const { ourRelation = {} } = company;
     const { relation = {} } = ourRelation;
     const { type } = relation;
-
-    console.log('relation', relation);
 
     const invitationSender = type === 'INVITATION_SEND' && currentCompany._id === relation.sender;
     const connection = type === 'CONNECTED';
@@ -139,7 +140,12 @@ function ProfileHeader(props) {
         <h3 className="profile-header-title">{name}</h3>
         {getRightButton()}
       </div>
-      <Modal visible={modal.visible} message={modal.message} close={() => setModal({ visible: false })} actions={modal.actions} />
+      <Modal
+        visible={modal.visible}
+        message={modal.message}
+        close={() => setModal({ visible: false })}
+        actions={modal.actions}
+      />
     </div>
   );
 }
@@ -147,12 +153,17 @@ function ProfileHeader(props) {
 ProfileHeader.propTypes = {
   name: PropTypes.string.isRequired,
   profileUrl: PropTypes.string.isRequired,
-  coverUrl: PropTypes.string.isRequired,
+  coverUrl: PropTypes.string,
   isMyProfile: PropTypes.bool,
+  company: propTypes.company.isRequired,
+  setCompany: PropTypes.func.isRequired,
+  session: propTypes.session,
 };
 
 ProfileHeader.defaultProps = {
+  coverUrl: null,
   isMyProfile: false,
+  session: null,
 };
 
 export default ProfileHeader;

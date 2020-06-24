@@ -47,8 +47,6 @@ export async function signIn(query) {
 export async function refreshUser() {
   const response = await UsersApi.refreshUser(getAuthorization());
 
-  console.log(response);
-
   if (response._id) {
     dispatch(setUser(response));
   }

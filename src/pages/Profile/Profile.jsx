@@ -120,7 +120,10 @@ function Profile(props) {
 }
 
 Profile.propTypes = {
-  session: propTypes.session,
+  ...propTypes.ScreenProptypes,
+  ...{
+    session: propTypes.session,
+  },
 };
 
 Profile.defaultProps = {

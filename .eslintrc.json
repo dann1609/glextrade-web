@@ -39,9 +39,11 @@
             }
         },
         {
-            "files": ["*.jsx"],
+            "files": ["*.js","*.jsx"],
             "rules": {
-                "no-underscore-dangle": "off"
+                "no-underscore-dangle": "off",
+                "no-fallthrough": "off",
+                "jsx-a11y/click-events-have-key-events": "off"
             }
         }
     ],

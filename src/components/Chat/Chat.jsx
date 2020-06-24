@@ -1,129 +1,58 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './Chat.scss';
-import { connect } from 'react-redux';
 import defaultImage from '../../assets/images/default_avatar.jpg';
-import Button from '../Button/Button';
-import { getChatRoom, sendMessage } from '../../actions/messages';
+import IndividualChat from './IndividualChat';
+import ChatItem from './ChatItem';
+import { onMessageReceived } from '../../actions/messages';
 import { dispatch } from '../../config/store';
 import { setActiveChat } from '../../actions/reducers/chat';
-
-function ChatItem(props) {
-  const {
-    onClick, lastMessage, name, image,
-  } = props;
-
-  return (
-    <div className="chat-item-container" onClick={onClick}>
-      <img src={image || defaultImage} alt="Avatar" className="chat-item-image" />
-      <div className="chat-item-text-container">
-        <h5 className="chat-item-company-name">{name}</h5>
-        <h6 className="chat-item-message">{lastMessage}</h6>
-      </div>
-    </div>
-  );
-}
-
-function IndividualChat(props) {
-  const {
-    onClose, title, image, chat, ownCompany,
-  } = props;
-
-  console.log(chat);
-
-  const [chatOpen, setChatOpen] = useState(true);
-  const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    console.log('chatEfect');
-    getChatRoom(chat._id).then((response) => {
-      if (response._id) {
-        setMessages(response.data);
-      }
-    });
-  }, chat._id);
-
-  const toggleChat = () => {
-    setChatOpen(!chatOpen);
-  };
-
-  const closeChat = () => {
-    onClose();
-  };
-
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-  };
-
-  const send = () => {
-    sendMessage(chat._id, message);
-    setMessage('');
-  };
-
-  const renderMessages = () => messages.map((message) => {
-    const image = message.owner == chat.company._id ? chat.company.profileUrl : ownCompany.profileUrl;
-
-    return (
-      <div className="message-container">
-        <img src={image || defaultImage} alt="Avatar" className="message-image" />
-        <p className="message">{message.message}</p>
-      </div>
-    );
-  });
-
-  console.log('messages', messages);
-
-  return (
-    <div className="chat-individual-container">
-      <div className="chat-name-container" onClick={toggleChat}>
-        <img src={image || defaultImage} alt="Avatar" className="chat-image" />
-        <h4 className="chat-title">{title}</h4>
-        <span className="chat-close" onClick={closeChat}>&times;</span>
-      </div>
-      <div className={`chat-list-container ${chatOpen ? 'chat-list-container-open' : ''}`}>
-        <div className="message-area">
-          {renderMessages()}
-        </div>
-        <div className="input-container">
-          <textarea className="chat-input" value={message} onChange={handleChange} />
-          <Button className="send" type="button" onClick={send}>Enviar</Button>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { refreshUser } from '../../actions/user';
+import propTypes from '../../tools/propTypes';
 
 function Chat(props) {
-  const { session, chat } = props;
+  const { session, chat, socket } = props;
   const { user } = session;
   const { company } = user || {};
   const { network } = company || {};
 
   const [chatOpen, setChatOpen] = useState(false);
 
+  useEffect(() => {
+    socket.emit('connect company', {
+      company,
+    });
+    socket.on('msg', (data) => {
+      onMessageReceived(data);
+    });
+  }, [company?._id]);
+
   const toggleChat = () => {
+    refreshUser();
     setChatOpen(!chatOpen);
   };
 
   const renderChatListContainer = () => {
-    const chatList = network.reduce((chatList, connection) => {
+    const chatList = network.reduce((accumulativeChatList, connection) => {
       if (connection?.relation?.chatRoom) {
         const { chatRoom } = connection.relation;
 
         chatRoom.company = connection.company;
-        chatList.push(connection.relation.chatRoom);
+        chatRoom.newMessages = [];
+        accumulativeChatList.push(connection.relation.chatRoom);
       }
-      return chatList;
+      return accumulativeChatList;
     }, []);
 
     if (chatList.length > 0) {
-      return chatList.map((chat) => (
+      return chatList.map((chatItem) => (
         <ChatItem
-          name={chat.company.name}
-          image={chat.company.profileUrl}
-          lastMessage={chat.lastMessage}
-          onClick={() => dispatch(setActiveChat(chat))}
+          name={chatItem.company.name}
+          image={chatItem.company.profileUrl}
+          lastMessage={chatItem.lastMessage}
+          onClick={() => dispatch(setActiveChat(chatItem))}
         />
       ));
     }
@@ -132,10 +61,10 @@ function Chat(props) {
 
   const renderIndividualChats = () => {
     const individualChat = chat.activeChat;
-    console.log('individual', individualChat);
     if (individualChat) {
       return (
         <IndividualChat
+          socket={socket}
           ownCompany={company}
           chat={individualChat}
           title={individualChat.company.name}
@@ -144,6 +73,8 @@ function Chat(props) {
         />
       );
     }
+
+    return null;
   };
 
   if (!session._id) { return null; }
@@ -154,7 +85,7 @@ function Chat(props) {
           }
 
       <div className="chat-menu-container">
-        <div className="chat-name-container" onClick={toggleChat}>
+        <div className="chat-name-container" onClick={toggleChat} role="button" tabIndex="0">
           <img src={defaultImage} alt="Avatar" className="chat-image" />
           <h4 className="chat-title">Chat</h4>
         </div>
@@ -165,6 +96,19 @@ function Chat(props) {
     </div>
   );
 }
+
+Chat.propTypes = {
+  session: propTypes.session,
+  chat: PropTypes.shape({
+    activeChat: propTypes.chat,
+  }),
+  socket: propTypes.socket.isRequired,
+};
+
+Chat.defaultProps = {
+  session: null,
+  chat: null,
+};
 
 const mapStateToProps = (state) => ({
   session: state.session,

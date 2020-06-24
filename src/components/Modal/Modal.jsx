@@ -15,9 +15,9 @@ function Modal(props) {
   const renderActions = () => actions.map((action) => <button className="modal-action" type="button" onClick={action.onClick}>{action.name}</button>);
 
   return (
-    <div className={`modal-container ${visible ? 'visible' : ''}`} onClick={closeModal}>
+    <div className={`modal-container ${visible ? 'visible' : ''}`} onClick={closeModal} role="button" tabIndex="0">
       <div className="modal-content">
-        <span className="close" onClick={closeModal}>&times;</span>
+        <span className="close" onClick={closeModal} role="button" tabIndex="0">&times;</span>
         <p className="modal-message">{message}</p>
         <div className="modal-action-container">
           {renderActions()}

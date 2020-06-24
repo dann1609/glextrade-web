@@ -26,7 +26,7 @@ const CompanyCardProfile = (props) => {
   const typeName = typeObject && typeObject.es;
   return (
     <div className="company-card-container">
-      <div className="card" onClick={onClick}>
+      <div className="card" onClick={onClick} role="button" tabIndex="0">
         <img src={coverUrl} alt="" className="cover-image" />
         <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
         <h3 className="name">{name}</h3>

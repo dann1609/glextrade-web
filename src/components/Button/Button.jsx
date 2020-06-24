@@ -19,7 +19,7 @@ Button.propTypes = {
   type: PropTypes.string,
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  children: PropTypes.any,
+  children: PropTypes.node,
 };
 
 Button.defaultProps = {

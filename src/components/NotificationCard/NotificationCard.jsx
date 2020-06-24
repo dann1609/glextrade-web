@@ -20,12 +20,12 @@ const getMessage = (type, data) => {
 };
 
 const NotificationCard = (props) => {
-  const { event } = props;
+  const { event = {} } = props;
   const { type, data } = event;
   const { profileUrl } = event.data.company;
 
-  const acceptConnection = (event) => {
-    event.stopPropagation();
+  const acceptConnection = (nativeEvent) => {
+    nativeEvent.stopPropagation();
     connect(data.company._id).then((response) => {
       if (!response.error) {
         props.history.push(`companies/${data.company._id}`);
@@ -33,8 +33,8 @@ const NotificationCard = (props) => {
     });
   };
 
-  const ignoreConnection = (event) => {
-    event.stopPropagation();
+  const ignoreConnection = (nativeEvent) => {
+    nativeEvent.stopPropagation();
   };
 
   const notificationActions = {
@@ -50,11 +50,13 @@ const NotificationCard = (props) => {
     case 'CONNECTION_ACCEPTED':
     case 'SEEN_PROFILE':
       notificationActions.container = () => props.history.push(`companies/${data.company._id}`);
+      break;
     default:
+      break;
   }
 
   return (
-    <div className="notification-container" onClick={notificationActions.container}>
+    <div className="notification-container" onClick={notificationActions.container} role="button" tabIndex="0">
       <img src={profileUrl || defaultImage} alt="Avatar" className="event-image" />
       <p className="event-message">
         {getMessage(type, data)}
@@ -77,7 +79,12 @@ const NotificationCard = (props) => {
 };
 
 NotificationCard.propTypes = {
-  history: propTypes.ReactRouterHistory.isRequired,
+  history: propTypes.history.isRequired,
+  event: propTypes.event,
+};
+
+NotificationCard.defaultProps = {
+  event: null,
 };
 
 export default NotificationCard;

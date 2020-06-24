@@ -9,7 +9,6 @@ const S3Api = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -33,7 +32,6 @@ const S3Api = {
     return response;
   })
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -51,7 +49,6 @@ const S3Api = {
       body: formData,
     }).then((response) => response.json())
       .catch((error) => {
-        console.log('api error');
         console.error(error);
         return {
           error: {

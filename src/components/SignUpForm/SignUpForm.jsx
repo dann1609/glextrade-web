@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import {
   Redirect, withRouter,
 } from 'react-router-dom';
@@ -160,11 +158,11 @@ class SignUpForm extends Component {
 
 SignUpForm.propTypes = {
   className: PropTypes.string,
-  history: propTypes.ReactRouterHistory.isRequired,
+  history: propTypes.history.isRequired,
 };
 
 SignUpForm.defaultProps = {
   className: '',
 };
 
-export default compose(withRouter, connect(null, null))(SignUpForm);
+export default withRouter(SignUpForm);

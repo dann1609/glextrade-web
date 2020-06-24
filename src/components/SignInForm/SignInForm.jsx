@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import {
   Redirect, withRouter,
 } from 'react-router-dom';
@@ -61,11 +59,11 @@ class SignInForm extends Component {
 
 SignInForm.propTypes = {
   className: PropTypes.string,
-  history: propTypes.ReactRouterHistory.isRequired,
+  history: propTypes.history.isRequired,
 };
 
 SignInForm.defaultProps = {
   className: '',
 };
 
-export default compose(withRouter, connect(null, null))(SignInForm);
+export default withRouter(SignInForm);

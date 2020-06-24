@@ -1,48 +1,5 @@
 @import "src/index";
 
-.chat-item-container{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 $standard-spacing;
-  width:$n16-standard-spacing;
-  height:$triple-standard-spacing;
-  border-style: solid;
-  border-width: 0;
-  border-bottom-width: 0.001px;
-  border-bottom-color: $color-dark;
-  box-sizing: border-box;
-  background: white;
-
-  .chat-item-image{
-    width: $double-standard-spacing;
-    height: $double-standard-spacing;
-    border-radius: $standard-spacing;
-  }
-
-  .chat-item-text-container{
-    display: flex;
-    flex-direction: column;
-    .chat-item-company-name{
-      color: $color-dark;
-      margin:  $quarter-standard-spacing $quarter-standard-spacing 0 $quarter-standard-spacing ;
-      font-weight: 600;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .chat-item-message{
-      color: $color-dark;
-      margin: 0 $quarter-standard-spacing $quarter-standard-spacing $quarter-standard-spacing;
-      font-weight: 400;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-  }
-}
-
 .chat-no-messages{
   text-align: center;
   color: $color-dark;
@@ -57,79 +14,6 @@
   flex-direction: row;
   align-items: flex-end;
   z-index: 10;
-
-  .chat-individual-container {
-    margin-right: $standard-spacing;
-
-    .chat-name-container {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: $n23-standard-spacing;
-      height: $triple-standard-spacing;
-      padding: 0 $standard-spacing;
-      background-color: $color-dark;
-      box-sizing: border-box;
-
-      .chat-title {
-        margin: 0 $quarter-standard-spacing;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
-      .chat-image {
-        width: $double-standard-spacing;
-        height: $double-standard-spacing;
-        border-radius: $standard-spacing;
-      }
-
-      .chat-close{
-        color: white;
-        margin-left: auto;
-        font-size: 28px;
-        line-height: 16px;
-        font-weight: bold;
-      }
-    }
-
-    .chat-list-container {
-      display: flex;
-      flex-direction: column;
-      transition: height 1s;
-      height: 0;
-      background: white;
-
-      .message-area{
-        flex-grow: 1;
-        overflow: auto;
-      }
-
-      .input-container{
-        display: flex;
-        flex-direction: row;
-        width:100%;
-        .chat-input{
-          flex-grow: 1;
-          height:$triple-standard-spacing;
-          box-sizing: border-box;
-        }
-
-        .send{
-          min-width: 0;
-          height: $triple-standard-spacing;
-          box-sizing: border-box;
-        }
-      }
-
-    }
-
-    .chat-list-container-open {
-      height:auto;
-      max-height: $n23-standard-spacing;
-    }
-  }
-
 
   .chat-menu-container {
 
@@ -170,28 +54,5 @@
       height: auto;
       max-height: 40vh;
     }
-  }
-}
-
-.message-container {
-
-  display: flex;
-  flex-direction: row;
-  border-style: solid;
-  border-width: 0;
-  border-bottom-width: 1px;
-  padding: $half-standard-spacing $half-standard-spacing;
-  align-items: center;
-
-  .message-image{
-    width: $double-standard-spacing;
-    height: $double-standard-spacing;
-    border-radius: $standard-spacing;
-  }
-  .message {
-    color: $color-dark;
-    margin: 0;
-    margin-left: $half-standard-spacing;
-
   }
 }

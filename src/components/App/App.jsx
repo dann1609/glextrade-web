@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import io from 'socket.io-client';
 
 import './App.scss';
 import HeaderBar from '../HeaderBar/HeaderBar';
@@ -26,6 +27,8 @@ class App extends Component {
     restoreSession();
     this.state = {};
     this.checkNotifications();
+
+    this.socket = io.connect('http://localhost:3001');
   }
 
   // eslint-disable-next-line camelcase
@@ -80,11 +83,9 @@ class App extends Component {
             <Route path="/companies/:id" component={Profile} />
             <Route path="/companies" component={Companies} />
             <Route path="/notifications" component={Notifications} />
-            <Route path="/">
-              <Home />
-            </Route>
+            <Route path="/" component={Home} />
           </Switch>
-          <Chat />
+          <Chat socket={this.socket} />
           <FooterBar />
         </div>
       </Router>

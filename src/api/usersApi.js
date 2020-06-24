@@ -9,7 +9,6 @@ const UsersApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -26,7 +25,6 @@ const UsersApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -43,7 +41,6 @@ const UsersApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {

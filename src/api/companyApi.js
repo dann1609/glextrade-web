@@ -7,7 +7,6 @@ const CompanyApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -25,7 +24,6 @@ const CompanyApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -42,7 +40,6 @@ const CompanyApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -59,7 +56,6 @@ const CompanyApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
@@ -76,7 +72,6 @@ const CompanyApi = {
   }).then((response) => response.json())
     .then((responseJson) => responseJson)
     .catch((error) => {
-      console.log('api error');
       console.error(error);
       return {
         error: {
