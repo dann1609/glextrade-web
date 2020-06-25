@@ -1,0 +1,44 @@
+@import "src/index";
+
+.chat-item-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 $standard-spacing;
+  width:$n16-standard-spacing;
+  height:$triple-standard-spacing;
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 0.001px;
+  border-bottom-color: $color-dark;
+  box-sizing: border-box;
+  background: white;
+
+  .chat-item-image{
+    width: $double-standard-spacing;
+    height: $double-standard-spacing;
+    border-radius: $standard-spacing;
+  }
+
+  .chat-item-text-container{
+    display: flex;
+    flex-direction: column;
+    .chat-item-company-name{
+      color: $color-dark;
+      margin:  $quarter-standard-spacing $quarter-standard-spacing 0 $quarter-standard-spacing ;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .chat-item-message{
+      color: $color-dark;
+      margin: 0 $quarter-standard-spacing $quarter-standard-spacing $quarter-standard-spacing;
+      font-weight: 400;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}

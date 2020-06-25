@@ -1,0 +1,38 @@
+@import "src/index";
+
+.notifications{
+
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  background-color: $color-orange-17;
+
+  .notifications-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-dark;
+
+    .notifications-1-paragraph {
+      color: $color-orange;
+      margin-top: $triple-standard-spacing;
+      margin-bottom: $triple-standard-spacing;
+      padding-left: $sextuple-standard-spacing;
+      padding-right: $sextuple-standard-spacing;
+      font-size: 1.56rem;
+    }
+  }
+
+  .notification-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90vw;
+    flex-grow: 1;
+    margin: 0 auto 0 auto;
+    padding: $double-standard-spacing 0 $double-standard-spacing 0;
+    overflow: auto;
+  }
+}

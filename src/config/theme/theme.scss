@@ -1,0 +1,71 @@
+/* Colors */
+$color-orange: #ff6700;
+$color-orange-17: #ff670017;
+$color-dark: #343a41;
+$error: #ff0000;
+$linkedin-blue: #0e76a8;
+$light:#dddddd;
+
+/* Dimensions */
+$standard-spacing: 16px;
+$half-standard-spacing: $standard-spacing / 2;
+$quarter-standard-spacing: $standard-spacing / 4;
+
+$double-standard-spacing: 2*$standard-spacing;
+$triple-standard-spacing: 3*$standard-spacing;
+$quadruple-standard-spacing: 4*$standard-spacing;
+$quintuple-standard-spacing: 5*$standard-spacing;
+$sextuple-standard-spacing: 6*$standard-spacing;
+$septuple-standard-spacing: 7*$standard-spacing;
+$octuple-standard-spacing: 8*$standard-spacing;
+$n11-standard-spacing: 11*$standard-spacing;
+$n16-standard-spacing: 16*$standard-spacing;
+$n23-standard-spacing: 23*$standard-spacing;
+$min-width: 62*$standard-spacing;
+
+body{
+  min-width: $min-width;
+}
+a {
+  color: white;
+  text-decoration-line: none;
+}
+
+h1 {
+  color: white;
+  font-size: 4rem;
+}
+
+h2 {
+  color: white;
+  font-size: 3rem;
+}
+
+h3 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+h4 {
+  color: white;
+  font-size: 1.25rem;
+}
+
+h5 {
+  color: white;
+  font-size: 1rem;
+}
+
+h6 {
+  color: white;
+  font-size: 0.75rem;
+}
+
+p {
+  color: white;
+  font-size: 1.125rem;
+}
+
+.invisible{
+  visibility: hidden
+}

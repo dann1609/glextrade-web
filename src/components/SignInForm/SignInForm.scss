@@ -1,0 +1,21 @@
+@import "src/index";
+
+.sign-up-form-container {
+  display: flex;
+  flex-direction: column;
+  padding: $standard-spacing 0;
+  width: 500px;
+
+  .sign-up-submit{
+    height: $quadruple-standard-spacing;
+    min-width: 12rem;
+    margin: $standard-spacing auto;
+    color: white;
+    font-size: 1rem;
+    font-family: "Noto Sans", sans-serif;
+    background-color: $color-orange;
+    &:disabled{
+      opacity: 0.6;
+    }
+  }
+}

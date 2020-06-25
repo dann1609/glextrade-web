@@ -1,0 +1,116 @@
+@import "src/index";
+
+.chat-individual-container {
+  margin-right: $standard-spacing;
+
+  .chat-name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: $n23-standard-spacing;
+    height: $triple-standard-spacing;
+    padding: 0 $standard-spacing;
+    background-color: $color-dark;
+    box-sizing: border-box;
+
+    .chat-title {
+      margin: 0 $quarter-standard-spacing;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .chat-image {
+      width: $double-standard-spacing;
+      height: $double-standard-spacing;
+      border-radius: $standard-spacing;
+    }
+
+    .chat-close{
+      color: white;
+      margin-left: auto;
+      font-size: 28px;
+      line-height: 16px;
+      font-weight: bold;
+    }
+  }
+
+  .chat-list-container {
+    display: flex;
+    flex-direction: column;
+    transition: height 1s;
+    height: 0;
+    background: white;
+
+    .message-area{
+      flex-grow: 1;
+      overflow: auto;
+      .last-message-reference{
+        height:0;
+      }
+    }
+
+
+
+    .input-container{
+      display: flex;
+      flex-direction: row;
+      width:100%;
+      .chat-input{
+        flex-grow: 1;
+        height:$triple-standard-spacing;
+        box-sizing: border-box;
+      }
+
+      .send{
+        min-width: 0;
+        height: $triple-standard-spacing;
+        box-sizing: border-box;
+      }
+    }
+
+  }
+
+  .chat-list-container-open {
+    height:auto;
+    max-height: $n23-standard-spacing;
+  }
+}
+
+.message-container {
+
+  display: flex;
+  flex-direction: row;
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 1px;
+  padding: $half-standard-spacing $half-standard-spacing;
+  align-items: center;
+
+  .message-image{
+    width: $double-standard-spacing;
+    height: $double-standard-spacing;
+    border-radius: $standard-spacing;
+  }
+  .message {
+    color: $color-dark;
+    margin: 0;
+    margin-left: $half-standard-spacing;
+
+  }
+}
+
+.head-message-container{
+  padding-bottom: 0;
+  border-bottom-width: 0;
+}
+
+.foot-message-container{
+  padding-top: 0;
+  .message-image{
+    width: $double-standard-spacing;
+    height: $double-standard-spacing;
+    border-radius: $standard-spacing;
+    visibility: hidden;
+  }
+}

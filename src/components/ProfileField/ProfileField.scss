@@ -1,0 +1,24 @@
+@import "src/index";
+
+.profile-field{
+  display: flex;
+  flex-direction: column;
+  padding: $half-standard-spacing 0;
+  margin: 0 $standard-spacing;
+  border-top-style: solid;
+  border-top-width: 1px;
+
+  .profile-field-label{
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: "Noto Sans", sans-serif;
+    padding: $half-standard-spacing 0;
+  }
+
+  .profile-field-value{
+    font-size: 1rem;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 300;
+    padding: $half-standard-spacing 0;
+  }
+}
