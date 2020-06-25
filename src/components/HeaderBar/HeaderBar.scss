@@ -1,8 +1,9 @@
 @import "src/index";
 
-header {
+.header {
   display: flex;
   justify-content: flex-end;
+  box-sizing: border-box;
   height: $quintuple-standard-spacing;
   background-color: $color-orange;
 

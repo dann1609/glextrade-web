@@ -3,6 +3,7 @@
 .companies{
 
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   background-color: $color-orange-17;
 

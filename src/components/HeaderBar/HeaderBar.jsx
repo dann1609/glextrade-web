@@ -21,14 +21,15 @@ function HeaderBar(props) {
   }, 0);
 
   return (
-    <header className="header">
-      <Link className="homeLink" to="/">{i18n.t('GLEXTRADE')}</Link>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/about">{i18n.t('ABOUT')}</Link>
-          </li>
-          {!signedIn
+    <header>
+      <div className="header">
+        <Link className="homeLink" to="/">{i18n.t('GLEXTRADE')}</Link>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/about">{i18n.t('ABOUT')}</Link>
+            </li>
+            {!signedIn
               && (
               <>
                 <li>
@@ -39,7 +40,7 @@ function HeaderBar(props) {
                 </li>
               </>
               )}
-          {signedIn
+            {signedIn
           && (
           <>
             <li>
@@ -56,8 +57,9 @@ function HeaderBar(props) {
             </li>
           </>
           )}
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }

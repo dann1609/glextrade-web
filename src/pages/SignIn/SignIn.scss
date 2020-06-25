@@ -1,6 +1,8 @@
 @import "src/index";
 
 .sign-in {
+  display:flex;
+  flex-grow: 1;
 
   h2 {
     font-family: Montserrat, sans-serif;
@@ -14,6 +16,7 @@
     display: flex;
     background-color: $color-orange-17;
     padding: $double-standard-spacing 0;
+    width: 100%;
 
     .sign-in-form{
       margin: 0 auto;
