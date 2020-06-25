@@ -1,0 +1,58 @@
+@import "src/index";
+
+.chat-no-messages{
+  text-align: center;
+  color: $color-dark;
+  margin: $double-standard-spacing auto;
+}
+
+.chat-container {
+  position: fixed;
+  right: $double-standard-spacing;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  z-index: 10;
+
+  .chat-menu-container {
+
+    .chat-name-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: $n16-standard-spacing;
+      height: $triple-standard-spacing;
+      padding: 0 $standard-spacing;
+      background-color: $color-dark;
+      box-sizing: border-box;
+
+      .chat-title {
+        margin: 0 $quarter-standard-spacing;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .chat-image {
+        width: $double-standard-spacing;
+        height: $double-standard-spacing;
+        border-radius: $standard-spacing;
+      }
+    }
+
+    .chat-list-container {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      transition: height 1s;
+      height: 0;
+      background: white;
+    }
+
+    .chat-list-container-open {
+      height: auto;
+      max-height: 40vh;
+    }
+  }
+}

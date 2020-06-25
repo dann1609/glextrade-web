@@ -1,0 +1,37 @@
+@import "src/index";
+
+.companies{
+
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  background-color: $color-orange-17;
+
+  .companies-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-dark;
+
+    .companies-1-paragraph {
+      color: $color-orange;
+      margin-top: $triple-standard-spacing;
+      margin-bottom: $triple-standard-spacing;
+      padding-left: $sextuple-standard-spacing;
+      padding-right: $sextuple-standard-spacing;
+      font-size: 1.56rem;
+    }
+  }
+
+  .company-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90vw;
+    flex-grow: 1;
+    margin: $double-standard-spacing auto $double-standard-spacing auto;
+    overflow: auto;
+  }
+}

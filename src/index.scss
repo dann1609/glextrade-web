@@ -1,6 +1,5 @@
 @import-normalize;
-
-$color-orange: #ff6700;
+@import "src/config/theme/theme";
 
 body {
   margin: 0;
