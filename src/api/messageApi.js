@@ -1,5 +1,5 @@
 const MessageApi = {
-  getMessages: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/messages/${id}`, {
+  getMessages: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/messages/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ const MessageApi = {
         },
       };
     }),
-  sendMessage: (id, message, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/messages/${id}`, {
+  sendMessage: (id, message, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/messages/${id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

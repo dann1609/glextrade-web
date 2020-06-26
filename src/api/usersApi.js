@@ -1,6 +1,6 @@
 
 const UsersApi = {
-  registerUser: (data) => fetch(`${process.env.REACT_APP_API_DOMAIN}/users`, {
+  registerUser: (data) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/users`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ const UsersApi = {
         },
       };
     }),
-  loginUser: (data) => fetch(`${process.env.REACT_APP_API_DOMAIN}/auth`, {
+  loginUser: (data) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const UsersApi = {
         },
       };
     }),
-  refreshUser: (Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/auth`, {
+  refreshUser: (Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/auth`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 const CompanyApi = {
-  listCompanies: () => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies`, {
+  listCompanies: () => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/companies`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ const CompanyApi = {
         },
       };
     }),
-  updateCompany: (data, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies/my_company`, {
+  updateCompany: (data, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/companies/my_company`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const CompanyApi = {
         },
       };
     }),
-  getCompanyById: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies/${id}?profile_view=true`, {
+  getCompanyById: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/companies/${id}?profile_view=true`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const CompanyApi = {
         },
       };
     }),
-  connect: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies/${id}`, {
+  connect: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/companies/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const CompanyApi = {
         },
       };
     }),
-  disconnect: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/companies/${id}`, {
+  disconnect: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/companies/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
