@@ -1,5 +1,5 @@
 const NotificationApi = {
-  listNotifications: (Authorization) => fetch(`$${process.env.REACT_APP_API_DOMAIN}/api/notifications`, {
+  listNotifications: (Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/notifications`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ const NotificationApi = {
         },
       };
     }),
-  setAllSeenNotifications: (Authorization) => fetch(`$${process.env.REACT_APP_API_DOMAIN}/api/notifications`, {
+  setAllSeenNotifications: (Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/notifications`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
