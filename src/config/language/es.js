@@ -38,7 +38,7 @@ const es = {
     CL_PARAGRAPH: 'Carlos tiene más de siete años de experiencia en diseño de productos en diferentes industrias como químicos, manufactura, alimentos, consumo masivo y plásticos. Luego de trabajar en la industria de factoring internacional financiando a exportadores e importadores en Latinoamérica y Estados Unidos decidió lanzar Glextrade. Carlos es ingeniero químico de la Universidad de los Andes y MBA de Babson College en Boston.',
 
     DP_POSITION: 'Co-founder/CTO',
-    DP_PARAGRAPH: 'Daniel tiene mas de 5 años de experiencia en el desarrollo de aplicaciones para web y movil. Luego de trabajar por por mas de 4 años con startups en USA decidio buscar un socio para crear y darle infraestructura a su propia startup. Daniel es ingeniero electronico de la Universidad del Norte en Barranquilla.',
+    DP_PARAGRAPH: 'Daniel tiene mas de 5 años de experiencia en el desarrollo de aplicaciones para web y movil. Luego de trabajar por mas de 4 años con startups en USA decidio buscar un socio para crear y darle infraestructura a su propia startup. Daniel es ingeniero electronico de la Universidad del Norte en Barranquilla.',
 
     /* SignIn */
     SIGN_UP_TITLE_1: 'Registra tu empresa para conectar y ser visto por exportadores e importadores',

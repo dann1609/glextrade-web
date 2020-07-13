@@ -1,6 +1,6 @@
 
 const S3Api = {
-  signS3: (data) => fetch(`$${process.env.REACT_APP_API_DOMAIN}/api/s3/sign_s3`, {
+  signS3: (data) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/s3/sign_s3`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const S3Api = {
   uploadS3Video: (data) => {
     const formData = new FormData();
     formData.append('companyVideo', data);
-    return fetch(`$${process.env.REACT_APP_API_DOMAIN}/api/s3/upload_video`, {
+    return fetch(`${process.env.REACT_APP_API_DOMAIN}/api/s3/upload_video`, {
       method: 'POST',
       headers: {},
       mode: 'cors',

@@ -28,7 +28,7 @@ class App extends Component {
     this.state = {};
     this.checkNotifications();
 
-    this.socket = io.connect('http://localhost:3001');
+    this.socket = io.connect(`${process.env.REACT_APP_API_DOMAIN}/api`);
   }
 
   // eslint-disable-next-line camelcase
