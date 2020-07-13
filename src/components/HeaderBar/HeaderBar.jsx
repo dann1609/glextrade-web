@@ -10,7 +10,7 @@ import './HeaderBar.scss';
 import propTypes from '../../tools/propTypes';
 
 function HeaderBar(props) {
-  const { session, notifications } = props;
+  const { session, notifications, newNotifications } = props;
   const signedIn = session.token;
 
   const pendingNotifications = notifications.reduce((total, notification) => {
@@ -49,7 +49,7 @@ function HeaderBar(props) {
             <li>
               <Link className="bell-icon-link" to="/notifications">
                 <FontAwesomeIcon className="sub-home-icon" icon={faBell} />
-                {pendingNotifications}
+                {pendingNotifications + newNotifications}
               </Link>
             </li>
             <li>
@@ -69,11 +69,13 @@ HeaderBar.propTypes = {
   notifications: PropTypes.arrayOf(PropTypes.shape({
 
   })),
+  newNotifications: PropTypes.number,
 };
 
 HeaderBar.defaultProps = {
   session: null,
   notifications: [],
+  newNotifications: 0,
 };
 
 const mapStateToProps = (state) => ({

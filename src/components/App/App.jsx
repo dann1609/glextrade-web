@@ -25,10 +25,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     restoreSession();
-    this.state = {};
+    this.state = {
+      notifications: [],
+      newNotifications: 0,
+    };
     this.checkNotifications();
-
     this.socket = io.connect(`${process.env.REACT_APP_API_DOMAIN}/api`);
+
+    this.socket.on('notifications', (data) => {
+      this.setState((previousState) => ({ newNotifications: previousState.newNotifications + 1 }));
+    });
   }
 
   // eslint-disable-next-line camelcase
@@ -60,12 +66,12 @@ class App extends Component {
   }
 
   render() {
-    const { notifications } = this.state;
+    const { notifications, newNotifications } = this.state;
 
     return (
       <Router>
         <div className="app-style">
-          <HeaderBar notifications={notifications} />
+          <HeaderBar notifications={notifications} newNotifications={newNotifications} />
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
