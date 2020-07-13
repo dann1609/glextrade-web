@@ -13,39 +13,10 @@ import { dispatch } from '../../config/store';
 import { setActiveChat } from '../../actions/reducers/chat';
 import propTypes from '../../tools/propTypes';
 
-const avatarChanged = (event) => {
-  const { files } = event.target;
-  const file = files[0];
-
-  if (file) {
-    const { name, type } = file;
-
-    uploadPicture({
-      name,
-      type,
-      file,
-    });
-  }
-};
-
-const coverChanged = (event) => {
-  const { files } = event.target;
-  const file = files[0];
-
-  if (file) {
-    const { name, type } = file;
-
-    uploadCoverPicture({
-      name,
-      type,
-      file,
-    });
-  }
-};
-
 function ProfileHeader(props) {
   const {
-    company, name, profileUrl, coverUrl, isMyProfile, setCompany, session,
+    company, name, profileUrl, coverUrl, isMyProfile, setCompany,
+    session, history, editingProfile, editProfile, saveProfile,
   } = props;
 
   const currentUser = session.user;
@@ -54,6 +25,8 @@ function ProfileHeader(props) {
   const [modal, setModal] = useState({
     visible: false,
   });
+
+  const [loading, setLoading] = useState(false);
 
   const connectWithCompany = () => {
     connect(company._id).then((response) => {
@@ -84,6 +57,44 @@ function ProfileHeader(props) {
     dispatch(setActiveChat(chatRoom));
   };
 
+  const avatarChanged = async (event) => {
+    setLoading(true);
+
+    const { files } = event.target;
+    const file = files[0];
+
+    if (file) {
+      const { name, type } = file;
+
+      await uploadPicture({
+        name,
+        type,
+        file,
+      });
+    }
+
+    setLoading(false);
+  };
+
+  const coverChanged = async (event) => {
+    setLoading(true);
+
+    const { files } = event.target;
+    const file = files[0];
+
+    if (file) {
+      const { name, type } = file;
+
+      await uploadCoverPicture({
+        name,
+        type,
+        file,
+      });
+    }
+
+    setLoading(false);
+  };
+
   const getRightButton = () => {
     const { ourRelation = {} } = company;
     const { relation = {} } = ourRelation;
@@ -92,25 +103,40 @@ function ProfileHeader(props) {
     const invitationSender = type === 'INVITATION_SEND' && currentCompany._id === relation.sender;
     const connection = type === 'CONNECTED';
 
-    const rightButtonOptions = {
-      name: 'Conectar',
-      onClick: connectDialog,
-    };
+    const rightButtonOptions = {};
 
-    if (invitationSender) {
-      rightButtonOptions.name = 'Invitacion enviada';
-      rightButtonOptions.onClick = null;
-      rightButtonOptions.disabled = true;
-    }
+    if (isMyProfile) {
+      if (editingProfile) {
+        rightButtonOptions.name = 'Guardar';
+        rightButtonOptions.onClick = () => {
+          editProfile(false);
+          saveProfile();
+        };
+      } else {
+        rightButtonOptions.name = 'Editar Perfil';
+        rightButtonOptions.onClick = () => {
+          editProfile(true);
+        };
+      }
+    } else {
+      rightButtonOptions.name = 'Conectar';
+      rightButtonOptions.onClick = connectDialog;
 
-    if (connection) {
-      rightButtonOptions.name = 'Mensaje';
-      rightButtonOptions.onClick = sendMessage;
+      if (invitationSender) {
+        rightButtonOptions.name = 'Invitacion enviada';
+        rightButtonOptions.onClick = null;
+        rightButtonOptions.disabled = true;
+      }
+
+      if (connection) {
+        rightButtonOptions.name = 'Mensaje';
+        rightButtonOptions.onClick = sendMessage;
+      }
     }
 
     return (
       <>
-        <Button className={`connect ${isMyProfile ? 'invisible' : ''}`} type="button" onClick={rightButtonOptions.onClick} disabled={rightButtonOptions.disabled}>
+        <Button className="connect" type="button" onClick={rightButtonOptions.onClick} disabled={rightButtonOptions.disabled}>
           { invitationSender && <FontAwesomeIcon className="icon" icon={faCheck} />}
           {rightButtonOptions.name}
         </Button>
@@ -118,6 +144,10 @@ function ProfileHeader(props) {
     );
   };
 
+  const leftButtonOptions = {
+    name: 'Mis Conexiones',
+    onClick: () => history.push('my_connections'),
+  };
 
   return (
     <div className="profile-header">
@@ -135,8 +165,9 @@ function ProfileHeader(props) {
         <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
         { isMyProfile && <input className="profile-image-input" onChange={avatarChanged} type="file" accept="image/*" />}
       </div>
+      { loading && <div className="loader profile-header-loader" /> }
       <div className="profile-action-area">
-        <Button className={`connect ${!isMyProfile ? 'invisible' : ''}`} type="button">Mis Conexiones</Button>
+        <Button className={`connect ${!isMyProfile ? 'invisible' : ''}`} type="button" onClick={leftButtonOptions.onClick}>{leftButtonOptions.name}</Button>
         <h3 className="profile-header-title">{name}</h3>
         {getRightButton()}
       </div>
@@ -151,6 +182,7 @@ function ProfileHeader(props) {
 }
 
 ProfileHeader.propTypes = {
+  ...propTypes.ScreenProptypes,
   name: PropTypes.string.isRequired,
   profileUrl: PropTypes.string.isRequired,
   coverUrl: PropTypes.string,

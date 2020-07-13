@@ -8,3 +8,7 @@ export async function getNotifications() {
 export async function setSeenNotifications() {
   return NotificationApi.setAllSeenNotifications(getAuthorization());
 }
+
+export async function deleteNotification(id) {
+  return NotificationApi.deleteNotification(id, getAuthorization());
+}

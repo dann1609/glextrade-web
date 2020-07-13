@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import i18n from 'i18next';
 import PropTypes from 'prop-types';
@@ -8,9 +9,10 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 import './HeaderBar.scss';
 import propTypes from '../../tools/propTypes';
+import { signOut } from '../../actions/user';
 
 function HeaderBar(props) {
-  const { session, notifications } = props;
+  const { session, notifications, newNotifications } = props;
   const signedIn = session.token;
 
   const pendingNotifications = notifications.reduce((total, notification) => {
@@ -19,6 +21,11 @@ function HeaderBar(props) {
     }
     return total;
   }, 0);
+
+  const logout = () => {
+    signOut();
+    props.history.push('');
+  };
 
   return (
     <header>
@@ -49,11 +56,14 @@ function HeaderBar(props) {
             <li>
               <Link className="bell-icon-link" to="/notifications">
                 <FontAwesomeIcon className="sub-home-icon" icon={faBell} />
-                {pendingNotifications}
+                {pendingNotifications + newNotifications}
               </Link>
             </li>
-            <li>
+            <li className="profile-option">
               <Link to="/profile">{i18n.t('PROFILE')}</Link>
+              <div className="dropdown-content">
+                <h4 className="logout-option" onClick={logout}>Salir</h4>
+              </div>
             </li>
           </>
           )}
@@ -65,19 +75,22 @@ function HeaderBar(props) {
 }
 
 HeaderBar.propTypes = {
+  ...propTypes.ScreenProptypes,
   session: propTypes.session,
   notifications: PropTypes.arrayOf(PropTypes.shape({
 
   })),
+  newNotifications: PropTypes.number,
 };
 
 HeaderBar.defaultProps = {
   session: null,
   notifications: [],
+  newNotifications: 0,
 };
 
 const mapStateToProps = (state) => ({
   session: state.session,
 });
 
-export default connect(mapStateToProps)(HeaderBar);
+export default compose(withRouter, connect(mapStateToProps))(HeaderBar);

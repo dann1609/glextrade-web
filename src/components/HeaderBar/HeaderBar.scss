@@ -37,3 +37,36 @@
   font-family: sans-serif;
   margin-right: auto;
 }
+
+.dropdown-content {
+  display: none;
+  background-color: $color-orange;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Show the dropdown menu on hover */
+.profile-option{
+  display: flex;
+  flex-direction: column;
+
+  &:hover .dropdown-content {
+    display: flex;
+
+    .logout-option{
+      min-width: $standard-spacing;
+      height: $quintuple-standard-spacing;
+      line-height: $quintuple-standard-spacing;
+      text-align: center;
+      padding: 0 $standard-spacing;
+      margin: 0;
+      font-size: 1.25rem;
+      font-family: sans-serif;
+      font-weight: normal;
+
+      &:hover {
+        text-decoration-line: underline;
+      }
+    }
+  }
+}

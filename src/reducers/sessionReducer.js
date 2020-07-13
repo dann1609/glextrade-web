@@ -7,7 +7,7 @@ export const sessionType = {
 export const session = (state = {}, action) => {
   switch (action.type) {
     case sessionType.SET_SESSION:
-      return { ...state, ...action.session };
+      return { ...action.session };
     case sessionType.SET_USER:
       return { ...state, ...{ user: action.user } };
     case sessionType.CLEAR_SESSION:

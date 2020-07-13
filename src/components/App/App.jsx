@@ -20,15 +20,22 @@ import Notifications from '../../pages/Notifications/Notifications';
 import { persistSession, restoreSession } from '../../actions/persist';
 import { getNotifications } from '../../actions/notification';
 import Chat from '../Chat/Chat';
+import MyConnections from '../../pages/MyConnections/MyConnections';
 
 class App extends Component {
   constructor(props) {
     super(props);
     restoreSession();
-    this.state = {};
+    this.state = {
+      notifications: [],
+      newNotifications: 0,
+    };
     this.checkNotifications();
-
     this.socket = io.connect(`${process.env.REACT_APP_API_DOMAIN}/api`);
+
+    this.socket.on('notifications', () => {
+      this.setState((previousState) => ({ newNotifications: previousState.newNotifications + 1 }));
+    });
   }
 
   // eslint-disable-next-line camelcase
@@ -60,12 +67,12 @@ class App extends Component {
   }
 
   render() {
-    const { notifications } = this.state;
+    const { notifications, newNotifications } = this.state;
 
     return (
       <Router>
         <div className="app-style">
-          <HeaderBar notifications={notifications} />
+          <HeaderBar notifications={notifications} newNotifications={newNotifications} />
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -82,6 +89,7 @@ class App extends Component {
             <Route path="/profile" component={Profile} />
             <Route path="/companies/:id" component={Profile} />
             <Route path="/companies" component={Companies} />
+            <Route path="/my_connections" component={MyConnections} />
             <Route path="/notifications" component={Notifications} />
             <Route path="/" component={Home} />
           </Switch>

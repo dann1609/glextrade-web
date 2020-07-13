@@ -15,6 +15,20 @@
 }
 
 .footer-content {
-  text-align: justify;
-  white-space: pre;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  .footer-text{
+    width:0;
+    flex-grow: 1;
+    text-align: center;
+    padding: 0px 50px;
+  }
+}
+
+.vertical-divider{
+  height:100%;
+  width:1px;
+  background-color: black;
 }

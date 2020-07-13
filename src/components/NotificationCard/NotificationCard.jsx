@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './NotificationCard.scss';
 import defaultImage from '../../assets/images/default_avatar.jpg';
@@ -20,7 +21,7 @@ const getMessage = (type, data) => {
 };
 
 const NotificationCard = (props) => {
-  const { event = {} } = props;
+  const { event = {}, removeNotification } = props;
   const { type, data } = event;
   const { profileUrl } = event.data.company;
 
@@ -28,6 +29,7 @@ const NotificationCard = (props) => {
     nativeEvent.stopPropagation();
     connect(data.company._id).then((response) => {
       if (!response.error) {
+        removeNotification();
         props.history.push(`companies/${data.company._id}`);
       }
     });
@@ -35,6 +37,7 @@ const NotificationCard = (props) => {
 
   const ignoreConnection = (nativeEvent) => {
     nativeEvent.stopPropagation();
+    removeNotification();
   };
 
   const notificationActions = {
@@ -81,10 +84,12 @@ const NotificationCard = (props) => {
 NotificationCard.propTypes = {
   history: propTypes.history.isRequired,
   event: propTypes.event,
+  removeNotification: PropTypes.func,
 };
 
 NotificationCard.defaultProps = {
   event: null,
+  removeNotification: () => {},
 };
 
 export default NotificationCard;

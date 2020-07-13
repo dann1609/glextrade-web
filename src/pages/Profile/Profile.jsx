@@ -13,22 +13,7 @@ import industryList from '../../tools/industries';
 import companyTypes from '../../tools/companyTypes';
 import { uploadVideo } from '../../actions/user';
 import propTypes from '../../tools/propTypes';
-import { getCompanyById } from '../../actions/company';
-
-const videoChanged = (event) => {
-  const { files } = event.target;
-  const file = files[0];
-
-  if (file) {
-    const { name, type } = file;
-
-    uploadVideo({
-      name,
-      type,
-      file,
-    });
-  }
-};
+import { getCompanyById, updateCompany } from '../../actions/company';
 
 const isProfileScreen = (props) => props.match.path === '/profile';
 
@@ -42,11 +27,15 @@ const getProfileUser = (props) => {
 };
 
 function Profile(props) {
-  const { session } = props;
+  const { session, history } = props;
 
   const user = getProfileUser(props);
   const [company, setCompany] = useState(user.company);
   const isMyProfile = session.user && company && session.user.company._id === company._id;
+
+  const [loading, setLoading] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editedCompany, setEditedCompany] = useState({});
 
   useEffect(() => {
     if (!company) {
@@ -61,6 +50,7 @@ function Profile(props) {
     }
   });
 
+
   if (!session.token) {
     return <Redirect to="/sign_in" />;
   }
@@ -70,6 +60,25 @@ function Profile(props) {
       <div className="profile" />
     );
   }
+
+  const videoChanged = async (event) => {
+    setLoading(true);
+
+    const { files } = event.target;
+    const file = files[0];
+
+    if (file) {
+      const { name, type } = file;
+
+      await uploadVideo({
+        name,
+        type,
+        file,
+      });
+    }
+
+    setLoading(false);
+  };
 
   const {
     name, country, industry, type, phone, website, profileUrl, coverUrl, videoUrl,
@@ -84,6 +93,18 @@ function Profile(props) {
   const typeObject = _.find(companyTypes, { code: type });
   const typeName = typeObject && typeObject.es;
 
+  const onChange = (type, value) => {
+    const newState = { [type]: value };
+    setEditedCompany({ ...editedCompany, ...newState });
+  };
+
+  const saveProfile = () => {
+    if (Object.keys(editedCompany).length > 0) {
+      updateCompany(editedCompany);
+      setEditedCompany({});
+    }
+  };
+
   return (
     <div className="profile">
       <section className="profile-data-section">
@@ -95,13 +116,17 @@ function Profile(props) {
           coverUrl={coverUrl}
           isMyProfile={isMyProfile}
           session={session}
+          history={history}
+          editingProfile={editing}
+          editProfile={setEditing}
+          saveProfile={saveProfile}
         />
         <ProfileField label="Nombre de la empresa" value={name} />
         <ProfileField label="Industria" value={industryName} />
         <ProfileField label="País" value={countryName} />
         <ProfileField label="Tipo de empresa" value={typeName} />
-        <ProfileField label="Teléfono" value={phone} />
-        <ProfileField label="Website" value={website} />
+        <ProfileField label="Teléfono" value={phone} contentEditable={editing} onChange={(value) => onChange('phone', value)} />
+        <ProfileField label="Website" value={website} contentEditable={editing} onChange={(value) => onChange('website', value)} />
       </section>
       <section className="profile-video-section">
         <div className="profile-video-container">
@@ -113,6 +138,7 @@ function Profile(props) {
             Your browser does not support HTML video.
           </video>
         </div>
+        { loading && <div className="loader profile-video-loader" /> }
         { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
       </section>
     </div>
@@ -121,9 +147,7 @@ function Profile(props) {
 
 Profile.propTypes = {
   ...propTypes.ScreenProptypes,
-  ...{
-    session: propTypes.session,
-  },
+  session: propTypes.session,
 };
 
 Profile.defaultProps = {

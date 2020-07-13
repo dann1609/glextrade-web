@@ -2,8 +2,8 @@
 
 .company-card-container{
   display: flex;
-  width: 250px;
-  height: 300px;
+  width: 280px;
+  height: 310px;
   padding: $standard-spacing;
 
   .card{
@@ -34,17 +34,25 @@
     .profile-image{
       position: absolute;
       top:60px;
-      left: 85px;
+      left: 100px;
       width: 80px;
       height: 80px;
       border-radius: 40px;
     }
 
     .name{
-      margin: $standard-spacing $standard-spacing;
+      margin: $half-standard-spacing;
       margin-top: $triple-standard-spacing;
       color: $color-dark;
       text-align: center;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      height: 3rem;
+      line-height: 1.5rem;
+      word-break: break-word;
     }
 
     .property{

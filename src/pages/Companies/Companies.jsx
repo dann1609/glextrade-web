@@ -51,9 +51,7 @@ function Companies(props) {
 
 Companies.propTypes = {
   ...propTypes.ScreenProptypes,
-  ...{
-    session: propTypes.session,
-  },
+  session: propTypes.session,
 };
 
 Companies.defaultProps = {
