@@ -60,8 +60,10 @@ const es = {
     NOTIFICATIONS_PARAGRAPH_1: 'Mis notificaciones',
 
     /* Footer */
-    COLOMBIA_CONTACT: 'Cra 5 # 75 -11, Bogota, Colombia         |         Phone: +57 314-610-1765         |         Email: cllinas@glextrade.com',
-    MIAMI_CONTACT: '355 SW 25th Rd, Miami, FL                                                                                                                         ',
+    COLOMBIA_ADDRESS: 'Cra 5 # 75 -11, Bogota, Colombia',
+    COLOMBIA_PHONE: 'Phone: +57 314-610-1765',
+    COLOMBIA_EMAIL: 'Email: cllinas@glextrade.com',
+    MIAMI_ADDRESS: '355 SW 25th Rd, Miami, FL',
   },
 };
 
