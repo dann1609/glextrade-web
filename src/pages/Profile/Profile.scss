@@ -52,6 +52,13 @@
         box-sizing: content-box;
       }
     }
+    .profile-video-loader{
+      position: absolute;
+      top: 4vw;
+      height:20vw;
+      width:20vw;
+      z-index: 5;
+    }
     .profile-video-input{
       margin-top: $standard-spacing;
     }

@@ -124,4 +124,11 @@
       margin: 0 $half-standard-spacing;
     }
   }
+
+  .profile-header-loader{
+    position: absolute;
+    top: 10px;
+    height:140px;
+    width:140px;
+  }
 }

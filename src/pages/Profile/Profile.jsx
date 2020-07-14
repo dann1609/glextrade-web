@@ -15,21 +15,6 @@ import { uploadVideo } from '../../actions/user';
 import propTypes from '../../tools/propTypes';
 import { getCompanyById } from '../../actions/company';
 
-const videoChanged = (event) => {
-  const { files } = event.target;
-  const file = files[0];
-
-  if (file) {
-    const { name, type } = file;
-
-    uploadVideo({
-      name,
-      type,
-      file,
-    });
-  }
-};
-
 const isProfileScreen = (props) => props.match.path === '/profile';
 
 const getProfileUser = (props) => {
@@ -47,6 +32,8 @@ function Profile(props) {
   const user = getProfileUser(props);
   const [company, setCompany] = useState(user.company);
   const isMyProfile = session.user && company && session.user.company._id === company._id;
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!company) {
@@ -70,6 +57,25 @@ function Profile(props) {
       <div className="profile" />
     );
   }
+
+  const videoChanged = async (event) => {
+    setLoading(true)
+
+    const { files } = event.target;
+    const file = files[0];
+
+    if (file) {
+      const { name, type } = file;
+
+      await uploadVideo({
+        name,
+        type,
+        file,
+      });
+    }
+
+    setLoading(false)
+  };
 
   const {
     name, country, industry, type, phone, website, profileUrl, coverUrl, videoUrl,
@@ -114,6 +120,7 @@ function Profile(props) {
             Your browser does not support HTML video.
           </video>
         </div>
+        { loading && <div className="loader profile-video-loader" /> }
         { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
       </section>
     </div>

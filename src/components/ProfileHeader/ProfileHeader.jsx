@@ -13,36 +13,6 @@ import { dispatch } from '../../config/store';
 import { setActiveChat } from '../../actions/reducers/chat';
 import propTypes from '../../tools/propTypes';
 
-const avatarChanged = (event) => {
-  const { files } = event.target;
-  const file = files[0];
-
-  if (file) {
-    const { name, type } = file;
-
-    uploadPicture({
-      name,
-      type,
-      file,
-    });
-  }
-};
-
-const coverChanged = (event) => {
-  const { files } = event.target;
-  const file = files[0];
-
-  if (file) {
-    const { name, type } = file;
-
-    uploadCoverPicture({
-      name,
-      type,
-      file,
-    });
-  }
-};
-
 function ProfileHeader(props) {
   const {
     company, name, profileUrl, coverUrl, isMyProfile, setCompany, session, history,
@@ -54,6 +24,8 @@ function ProfileHeader(props) {
   const [modal, setModal] = useState({
     visible: false,
   });
+
+  const [loading, setLoading] = useState(false);
 
   const connectWithCompany = () => {
     connect(company._id).then((response) => {
@@ -82,6 +54,44 @@ function ProfileHeader(props) {
     chatRoom.company = { ...company, ...{ ourRelation: null } };
     chatRoom.newMessages = [];
     dispatch(setActiveChat(chatRoom));
+  };
+
+  const avatarChanged = async (event) => {
+    setLoading(true);
+
+    const { files } = event.target;
+    const file = files[0];
+
+    if (file) {
+      const { name, type } = file;
+
+      await uploadPicture({
+        name,
+        type,
+        file,
+      });
+    }
+
+    setLoading(false);
+  };
+
+  const coverChanged = async (event) => {
+    setLoading(true);
+
+    const { files } = event.target;
+    const file = files[0];
+
+    if (file) {
+      const { name, type } = file;
+
+      await uploadCoverPicture({
+        name,
+        type,
+        file,
+      });
+    }
+
+    setLoading(false);
   };
 
   const getRightButton = () => {
@@ -139,6 +149,7 @@ function ProfileHeader(props) {
         <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
         { isMyProfile && <input className="profile-image-input" onChange={avatarChanged} type="file" accept="image/*" />}
       </div>
+      { loading && <div className="loader profile-header-loader" /> }
       <div className="profile-action-area">
         <Button className={`connect ${!isMyProfile ? 'invisible' : ''}`} type="button" onClick={leftButtonOptions.onClick}>{leftButtonOptions.name}</Button>
         <h3 className="profile-header-title">{name}</h3>
