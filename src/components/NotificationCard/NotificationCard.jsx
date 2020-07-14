@@ -20,7 +20,7 @@ const getMessage = (type, data) => {
 };
 
 const NotificationCard = (props) => {
-  const { event = {} } = props;
+  const { event = {}, removeNotification } = props;
   const { type, data } = event;
   const { profileUrl } = event.data.company;
 
@@ -28,6 +28,7 @@ const NotificationCard = (props) => {
     nativeEvent.stopPropagation();
     connect(data.company._id).then((response) => {
       if (!response.error) {
+        removeNotification();
         props.history.push(`companies/${data.company._id}`);
       }
     });
@@ -35,6 +36,7 @@ const NotificationCard = (props) => {
 
   const ignoreConnection = (nativeEvent) => {
     nativeEvent.stopPropagation();
+    removeNotification();
   };
 
   const notificationActions = {

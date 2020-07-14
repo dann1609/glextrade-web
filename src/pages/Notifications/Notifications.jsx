@@ -8,19 +8,19 @@ import './Notifications.scss';
 import i18n from 'i18next';
 import propTypes from '../../tools/propTypes';
 import NotificationCard from '../../components/NotificationCard/NotificationCard';
-import { getNotifications, setSeenNotifications } from '../../actions/notification';
+import { deleteNotification, getNotifications, setSeenNotifications } from '../../actions/notification';
 
 
 function Notifications(props) {
   const { session } = props;
 
   const [page] = useState(0);
-  const [notifications, setNotificationss] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     getNotifications().then((response) => {
       if (!response.error) {
-        setNotificationss(response.notifications.reverse());
+        setNotifications(response.notifications.reverse());
         setSeenNotifications();
       }
     });
@@ -30,12 +30,21 @@ function Notifications(props) {
     return <Redirect to="/sign_in" />;
   }
 
+  const removeNotification = (id) => {
+    deleteNotification(id).then((response) => {
+      if (!response.error) {
+        setNotifications(response.notifications.reverse());
+      }
+    });
+  };
+
   const renderList = () => notifications.map(
     (item) => (
       <NotificationCard
         key={item._id}
         event={item}
         history={props.history}
+        removeNotification={() => removeNotification(item._id)}
       />
     ),
   );
