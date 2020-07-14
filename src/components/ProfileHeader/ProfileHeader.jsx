@@ -45,7 +45,7 @@ const coverChanged = (event) => {
 
 function ProfileHeader(props) {
   const {
-    company, name, profileUrl, coverUrl, isMyProfile, setCompany, session,
+    company, name, profileUrl, coverUrl, isMyProfile, setCompany, session, history,
   } = props;
 
   const currentUser = session.user;
@@ -118,6 +118,10 @@ function ProfileHeader(props) {
     );
   };
 
+  const leftButtonOptions = {
+    name: 'Mis Conexiones',
+    onClick: () => history.push('my_connections'),
+  };
 
   return (
     <div className="profile-header">
@@ -136,7 +140,7 @@ function ProfileHeader(props) {
         { isMyProfile && <input className="profile-image-input" onChange={avatarChanged} type="file" accept="image/*" />}
       </div>
       <div className="profile-action-area">
-        <Button className={`connect ${!isMyProfile ? 'invisible' : ''}`} type="button">Mis Conexiones</Button>
+        <Button className={`connect ${!isMyProfile ? 'invisible' : ''}`} type="button" onClick={leftButtonOptions.onClick}>{leftButtonOptions.name}</Button>
         <h3 className="profile-header-title">{name}</h3>
         {getRightButton()}
       </div>

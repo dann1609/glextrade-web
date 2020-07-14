@@ -20,6 +20,7 @@ import Notifications from '../../pages/Notifications/Notifications';
 import { persistSession, restoreSession } from '../../actions/persist';
 import { getNotifications } from '../../actions/notification';
 import Chat from '../Chat/Chat';
+import MyConnections from '../../pages/MyConnections/MyConnections';
 
 class App extends Component {
   constructor(props) {
@@ -88,6 +89,7 @@ class App extends Component {
             <Route path="/profile" component={Profile} />
             <Route path="/companies/:id" component={Profile} />
             <Route path="/companies" component={Companies} />
+            <Route path="/my_connections" component={MyConnections} />
             <Route path="/notifications" component={Notifications} />
             <Route path="/" component={Home} />
           </Switch>

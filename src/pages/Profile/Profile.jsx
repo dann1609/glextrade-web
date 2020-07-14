@@ -42,7 +42,7 @@ const getProfileUser = (props) => {
 };
 
 function Profile(props) {
-  const { session } = props;
+  const { session, history } = props;
 
   const user = getProfileUser(props);
   const [company, setCompany] = useState(user.company);
@@ -95,6 +95,7 @@ function Profile(props) {
           coverUrl={coverUrl}
           isMyProfile={isMyProfile}
           session={session}
+          history={history}
         />
         <ProfileField label="Nombre de la empresa" value={name} />
         <ProfileField label="Industria" value={industryName} />

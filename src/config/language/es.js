@@ -55,6 +55,10 @@ const es = {
     /* COMPANIES */
     COMPANIES_PARAGRAPH_1: 'Exportadores e importadores registrados.',
 
+    /* MY CONNECTIONS */
+    MY_CONNECTIONS_PARAGRAPH_0: 'Aun no tienes conexiones',
+    MY_CONNECTIONS_PARAGRAPH_1: 'Mis conexiones',
+
     /* NOTIFICATIONS */
     NOTIFICATIONS_PARAGRAPH_0: 'No hay notificaciones',
     NOTIFICATIONS_PARAGRAPH_1: 'Mis notificaciones',
