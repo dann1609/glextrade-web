@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './NotificationCard.scss';
 import defaultImage from '../../assets/images/default_avatar.jpg';
@@ -83,10 +84,12 @@ const NotificationCard = (props) => {
 NotificationCard.propTypes = {
   history: propTypes.history.isRequired,
   event: propTypes.event,
+  removeNotification: PropTypes.func,
 };
 
 NotificationCard.defaultProps = {
   event: null,
+  removeNotification: () => {},
 };
 
 export default NotificationCard;

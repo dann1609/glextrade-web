@@ -13,6 +13,11 @@
     font-weight: bold;
     font-family: "Noto Sans", sans-serif;
     padding: $half-standard-spacing 0;
+
+    &.editable{
+      color: $color-orange;
+    }
+
   }
 
   .profile-field-value{
@@ -20,5 +25,10 @@
     font-family: "Noto Sans", sans-serif;
     font-weight: 300;
     padding: $half-standard-spacing 0;
+
+    &.editable{
+      background-color: white;
+    }
+
   }
 }

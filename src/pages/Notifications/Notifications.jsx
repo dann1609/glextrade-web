@@ -63,9 +63,7 @@ function Notifications(props) {
 
 Notifications.propTypes = {
   ...propTypes.ScreenProptypes,
-  ...{
-    session: propTypes.session,
-  },
+  session: propTypes.session,
 };
 
 Notifications.defaultProps = {

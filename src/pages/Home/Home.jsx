@@ -192,9 +192,6 @@ function Home(props) {
 
 Home.propTypes = {
   ...propTypes.ScreenProptypes,
-  ...{
-    session: propTypes.session,
-  },
 };
 
 export default Home;

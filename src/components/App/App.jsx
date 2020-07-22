@@ -33,7 +33,7 @@ class App extends Component {
     this.checkNotifications();
     this.socket = io.connect(`${process.env.REACT_APP_API_DOMAIN}/api`);
 
-    this.socket.on('notifications', (data) => {
+    this.socket.on('notifications', () => {
       this.setState((previousState) => ({ newNotifications: previousState.newNotifications + 1 }));
     });
   }

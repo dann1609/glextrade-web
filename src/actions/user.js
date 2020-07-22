@@ -1,8 +1,9 @@
 import UsersApi from '../api/usersApi';
-import { dispatch, getAuthorization, getState } from '../config/store';
+import { dispatch, getAuthorization } from '../config/store';
 import { setSession, setUser } from './reducers/session';
 import S3Api from '../api/s3Api';
-import CompanyApi from '../api/companyApi';
+import StorageApi from '../api/StorageApi';
+import { updateCompany } from './company';
 
 export async function signUp(query) {
   const {
@@ -52,6 +53,11 @@ export async function refreshUser() {
   }
 }
 
+export async function signOut() {
+  StorageApi.saveSession({});
+  dispatch(setSession({}));
+}
+
 export async function uploadPicture(query) {
   const { name, type, file } = query;
 
@@ -71,14 +77,9 @@ export async function uploadPicture(query) {
     });
 
     if (uploadS3Response.success) {
-      const { session } = getState();
-
-      const companyUpdateResponse = await CompanyApi.updateCompany({
+      updateCompany({
         profileUrl: signS3Response.url,
-      }, getAuthorization());
-
-      session.user.company = companyUpdateResponse;
-      dispatch(setSession(session));
+      });
     }
   }
 }
@@ -102,14 +103,9 @@ export async function uploadCoverPicture(query) {
     });
 
     if (uploadS3Response.success) {
-      const { session } = getState();
-
-      const companyUpdateResponse = await CompanyApi.updateCompany({
+      updateCompany({
         coverUrl: signS3Response.url,
-      }, getAuthorization());
-
-      session.user.company = companyUpdateResponse;
-      dispatch(setSession(session));
+      });
     }
   }
 }
@@ -120,13 +116,8 @@ export async function uploadVideo(query) {
   const uploadS3Response = await S3Api.uploadS3Video(file);
 
   if (uploadS3Response.success) {
-    const { session } = getState();
-
-    const companyUpdateResponse = await CompanyApi.updateCompany({
+    updateCompany({
       videoUrl: uploadS3Response.url,
-    }, getAuthorization());
-
-    session.user.company = companyUpdateResponse;
-    dispatch(setSession(session));
+    });
   }
 }

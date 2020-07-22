@@ -19,11 +19,11 @@ function MyConnections(props) {
   };
 
   const renderList = () => network.map(
-    ({ company }) => (
+    ({ companyItem }) => (
       <CompanyCardProfile
-        key={company._id}
-        company={company}
-        onClick={() => goToCompanyProfile(company._id)}
+        key={companyItem._id}
+        company={companyItem}
+        onClick={() => goToCompanyProfile(companyItem._id)}
       />
     ),
   );
@@ -42,9 +42,7 @@ function MyConnections(props) {
 
 MyConnections.propTypes = {
   ...propTypes.ScreenProptypes,
-  ...{
-    session: propTypes.session,
-  },
+  session: propTypes.session,
 };
 
 MyConnections.defaultProps = {
