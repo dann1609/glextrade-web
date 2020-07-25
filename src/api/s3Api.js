@@ -39,24 +39,6 @@ const S3Api = {
         },
       };
     }),
-  uploadS3Video: (data) => {
-    const formData = new FormData();
-    formData.append('companyVideo', data);
-    return fetch(`${process.env.REACT_APP_API_DOMAIN}/api/s3/upload_video`, {
-      method: 'POST',
-      headers: {},
-      mode: 'cors',
-      body: formData,
-    }).then((response) => response.json())
-      .catch((error) => {
-        console.error(error);
-        return {
-          error: {
-            message: "Can't reach server",
-          },
-        };
-      });
-  },
 };
 
 export default S3Api;

@@ -21,20 +21,26 @@ import { persistSession, restoreSession } from '../../actions/persist';
 import { getNotifications } from '../../actions/notification';
 import Chat from '../Chat/Chat';
 import MyConnections from '../../pages/MyConnections/MyConnections';
+import { addNewNotification, setNotificationsList } from '../../actions/reducers/notifications';
+import { dispatch } from '../../config/store';
+import { updateCompany } from '../../actions/company';
 
 class App extends Component {
   constructor(props) {
     super(props);
     restoreSession();
-    this.state = {
-      notifications: [],
-      newNotifications: 0,
-    };
     this.checkNotifications();
     this.socket = io.connect(`${process.env.REACT_APP_API_DOMAIN}/api`);
 
     this.socket.on('notifications', () => {
-      this.setState((previousState) => ({ newNotifications: previousState.newNotifications + 1 }));
+      dispatch(addNewNotification());
+    });
+
+    this.socket.on('video_updated', (data) => {
+      console.log('notify', data);
+      updateCompany({
+        videoUrl: data.videoUrl,
+      });
     });
   }
 
@@ -52,27 +58,19 @@ class App extends Component {
     window.removeEventListener('beforeunload', this.saveState);
   }
 
-  setNotifications=(notifications) => {
-    this.setState({
-      notifications,
-    });
-  }
-
   checkNotifications=() => {
     getNotifications().then((response) => {
       if (!response.error) {
-        this.setNotifications(response.notifications);
+        setNotificationsList(response.notifications.reverse());
       }
     });
   }
 
   render() {
-    const { notifications, newNotifications } = this.state;
-
     return (
       <Router>
         <div className="app-style">
-          <HeaderBar notifications={notifications} newNotifications={newNotifications} />
+          <HeaderBar />
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

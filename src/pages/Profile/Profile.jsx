@@ -11,9 +11,8 @@ import ProfileHeader from '../../components/ProfileHeader/ProfileHeader';
 import countryList from '../../tools/countries';
 import industryList from '../../tools/industries';
 import companyTypes from '../../tools/companyTypes';
-import { uploadVideo } from '../../actions/user';
 import propTypes from '../../tools/propTypes';
-import { getCompanyById, updateCompany } from '../../actions/company';
+import { getCompanyById, updateCompany, uploadProfileVideo } from '../../actions/company';
 
 const isProfileScreen = (props) => props.match.path === '/profile';
 
@@ -70,7 +69,7 @@ function Profile(props) {
     if (file) {
       const { name, type } = file;
 
-      await uploadVideo({
+      await uploadProfileVideo({
         name,
         type,
         file,

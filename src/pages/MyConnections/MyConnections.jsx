@@ -19,11 +19,11 @@ function MyConnections(props) {
   };
 
   const renderList = () => network.map(
-    ({ companyItem }) => (
+    ({ company }) => (
       <CompanyCardProfile
-        key={companyItem._id}
-        company={companyItem}
-        onClick={() => goToCompanyProfile(companyItem._id)}
+        key={company._id}
+        company={company}
+        onClick={() => goToCompanyProfile(company._id)}
       />
     ),
   );

@@ -109,15 +109,3 @@ export async function uploadCoverPicture(query) {
     }
   }
 }
-
-export async function uploadVideo(query) {
-  const { file } = query;
-
-  const uploadS3Response = await S3Api.uploadS3Video(file);
-
-  if (uploadS3Response.success) {
-    updateCompany({
-      videoUrl: uploadS3Response.url,
-    });
-  }
-}

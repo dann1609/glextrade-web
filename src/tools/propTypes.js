@@ -28,6 +28,10 @@ const session = PropTypes.shape({
   user,
 });
 
+const notifications = PropTypes.shape({
+
+});
+
 const event = PropTypes.shape({
 
 });
@@ -47,6 +51,7 @@ export default {
   ScreenProptypes,
   history,
   session,
+  notifications,
   company,
   event,
   chat,
