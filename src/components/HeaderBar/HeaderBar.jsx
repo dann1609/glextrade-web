@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import i18n from 'i18next';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,10 +11,10 @@ import propTypes from '../../tools/propTypes';
 import { signOut } from '../../actions/user';
 
 function HeaderBar(props) {
-  const { session, notifications, newNotifications } = props;
+  const { session, notifications } = props;
   const signedIn = session.token;
 
-  const pendingNotifications = notifications.reduce((total, notification) => {
+  const pendingNotifications = notifications.notificationsList.reduce((total, notification) => {
     if (!notification.seen) {
       return total + 1;
     }
@@ -56,7 +55,7 @@ function HeaderBar(props) {
             <li>
               <Link className="bell-icon-link" to="/notifications">
                 <FontAwesomeIcon className="sub-home-icon" icon={faBell} />
-                {pendingNotifications + newNotifications}
+                {pendingNotifications + notifications.newNotifications}
               </Link>
             </li>
             <li className="profile-option">
@@ -77,20 +76,19 @@ function HeaderBar(props) {
 HeaderBar.propTypes = {
   ...propTypes.ScreenProptypes,
   session: propTypes.session,
-  notifications: PropTypes.arrayOf(PropTypes.shape({
-
-  })),
-  newNotifications: PropTypes.number,
+  notifications: propTypes.notifications,
 };
 
 HeaderBar.defaultProps = {
   session: null,
-  notifications: [],
-  newNotifications: 0,
+  notifications: {
+
+  },
 };
 
 const mapStateToProps = (state) => ({
   session: state.session,
+  notifications: state.notifications,
 });
 
 export default compose(withRouter, connect(mapStateToProps))(HeaderBar);

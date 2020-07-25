@@ -24,8 +24,20 @@ export async function updateCompany(data) {
 
   const companyUpdateResponse = await CompanyApi.updateCompany(data, getAuthorization());
 
-  console.log(companyUpdateResponse);
+  if (!companyUpdateResponse.error) {
+    session.user.company = companyUpdateResponse;
+    dispatch(setSession(session));
+  }
+}
 
-  session.user.company = companyUpdateResponse;
-  dispatch(setSession(session));
+export async function uploadProfileVideo(query) {
+  const { session } = getState();
+  const { file } = query;
+
+  const uploadVideoResponse = await CompanyApi.updatePreviewVideo(file, getAuthorization());
+
+  if (!uploadVideoResponse.error) {
+    session.user.company = uploadVideoResponse;
+    dispatch(setSession(session));
+  }
 }
