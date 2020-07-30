@@ -106,26 +106,27 @@ function Profile(props) {
 
   return (
     <div className="profile">
+      <ProfileHeader
+        company={company}
+        setCompany={setCompany}
+        name={name}
+        profileUrl={profileUrl}
+        coverUrl={coverUrl}
+        isMyProfile={isMyProfile}
+        session={session}
+        history={history}
+        editingProfile={editing}
+        editProfile={setEditing}
+        saveProfile={saveProfile}
+      />
+      <div className="profile-content">
       <section className="profile-data-section">
-        <ProfileHeader
-          company={company}
-          setCompany={setCompany}
-          name={name}
-          profileUrl={profileUrl}
-          coverUrl={coverUrl}
-          isMyProfile={isMyProfile}
-          session={session}
-          history={history}
-          editingProfile={editing}
-          editProfile={setEditing}
-          saveProfile={saveProfile}
-        />
         <ProfileField label="Nombre de la empresa" value={name} />
         <ProfileField label="Industria" value={industryName} />
         <ProfileField label="País" value={countryName} />
         <ProfileField label="Tipo de empresa" value={typeName} />
         <ProfileField label="Teléfono" value={phone} contentEditable={editing} onChange={(value) => onChange('phone', value)} />
-        <ProfileField label="Website" value={website} contentEditable={editing} onChange={(value) => onChange('website', value)} />
+        <ProfileField label="Página web" value={website} contentEditable={editing} onChange={(value) => onChange('website', value)} />
       </section>
       <section className="profile-video-section">
         <div className="profile-video-container">
@@ -140,6 +141,7 @@ function Profile(props) {
         { loading && <div className="loader profile-video-loader" /> }
         { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
       </section>
+      </div>
     </div>
   );
 }

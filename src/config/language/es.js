@@ -6,7 +6,7 @@ const es = {
     /* Header */
     ABOUT: 'Quienes somos',
     SIGN_UP_YOUR_COMPANY: 'Registra tu empresa',
-    SIGN_IN: 'Ingresa',
+    SIGN_IN: 'Ingresar',
     PROFILE: 'Perfil',
     SEARCH_COMPANY: 'Lista de Compañias',
 
@@ -65,9 +65,9 @@ const es = {
 
     /* Footer */
     COLOMBIA_ADDRESS: 'Cra 5 # 75 -11, Bogota, Colombia',
-    COLOMBIA_PHONE: 'Phone: +57 314-610-1765',
+    COLOMBIA_PHONE: 'Teléfono: +57 314-610-1765',
     COLOMBIA_EMAIL: 'Email: cllinas@glextrade.com',
-    MIAMI_ADDRESS: '355 SW 25th Rd, Miami, FL',
+    MIAMI_ADDRESS: '355 SW 25th Rd, USA, Miami, FL',
   },
 };
 

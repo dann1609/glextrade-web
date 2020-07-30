@@ -40,7 +40,7 @@ function ProfileHeader(props) {
   const connectDialog = () => {
     setModal({
       visible: true,
-      message: `Deseas enviar una invitación a conectar a ${company.name}?`,
+      message: `Deseas enviar una invitación a conectar con ${company.name}?`,
       actions: [{
         name: 'Enviar',
         onClick: connectWithCompany,
@@ -156,7 +156,7 @@ function ProfileHeader(props) {
         {isMyProfile && (
         <>
           <FontAwesomeIcon className="cover-add-icon" icon={faCamera} />
-          <p className="cover-add-text">{coverUrl ? 'Cambia tu cover foto' : 'Sube tu cover foto'}</p>
+          <p className="cover-add-text">{coverUrl ? 'Cambia tu foto de portada' : 'Sube tu foto de portada'}</p>
         </>
         )}
       </div>

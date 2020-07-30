@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 25vh;
+  margin-bottom: $double-standard-spacing;
 
   .cover-image {
     position: absolute;
@@ -70,6 +71,9 @@
     left:0;
     right:0;
     bottom:0;
+    &:hover{
+      cursor: pointer;
+    }
   }
 
   .profile-image-container{
@@ -100,6 +104,9 @@
       bottom:0;
       left:0;
       right:0;
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
 
@@ -115,9 +122,12 @@
   .profile-header-title{
     color: $color-dark;
     margin: 0 auto;
+    text-align: center;
+
   }
 
   .connect{
+    border-radius: 22px;
 
     .icon{
       color: #008800;

@@ -61,6 +61,7 @@
   .sub-home-text-title {
     margin: $standard-spacing;
     font-weight: 300;
+    height: 7rem;
   }
 
   .sub-home-text-body {
@@ -98,6 +99,7 @@
           font-size: 1.3rem;
           text-decoration: underline;
           padding: 0 $triple-standard-spacing;
+          cursor:pointer;
         }
       }
   }
