@@ -18,7 +18,7 @@ function FooterBar() {
         </div>
         <div className="footer-content">
           <div className="footer-text">{i18n.t('MIAMI_ADDRESS')}</div>
-          <div className="footer-text" >{i18n.t('COPYRIGHT')}</div>
+          <div className="footer-text">{i18n.t('COPYRIGHT')}</div>
           <div className="footer-text" />
         </div>
         <div className="footer-content">{}</div>

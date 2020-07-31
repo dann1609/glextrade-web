@@ -21,7 +21,6 @@
     text-align: center;
     padding: 0 $standard-spacing;
     font-size: 1.25rem;
-    font-family: sans-serif;
 
     &:hover {
       text-decoration-line: underline;
@@ -33,7 +32,6 @@
 
   .homeLink {
     font-size: 3rem;
-    font-family: sans-serif;
     margin-right: auto;
   }
 }
@@ -61,7 +59,6 @@
       padding: 0 $standard-spacing;
       margin: 0;
       font-size: 1.25rem;
-      font-family: sans-serif;
       font-weight: normal;
 
       &:hover {

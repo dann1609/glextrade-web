@@ -36,6 +36,13 @@ function Profile(props) {
   const [editing, setEditing] = useState(false);
   const [editedCompany, setEditedCompany] = useState({});
 
+  const getDefaultVideo = () => {
+    if (isMyProfile) {
+      return 'https://pruebaglextrade.s3.amazonaws.com/video_introduccion_glextrade_perfil_espanol.mp4';
+    }
+  };
+
+
   useEffect(() => {
     if (!company) {
       const { match } = props;
@@ -92,6 +99,8 @@ function Profile(props) {
   const typeObject = _.find(companyTypes, { code: type });
   const typeName = typeObject && typeObject.es;
 
+  const loadingVideo = () => loading || company.uploadingVideo;
+
   const onChange = (type, value) => {
     const newState = { [type]: value };
     setEditedCompany({ ...editedCompany, ...newState });
@@ -120,27 +129,27 @@ function Profile(props) {
         saveProfile={saveProfile}
       />
       <div className="profile-content">
-      <section className="profile-data-section">
-        <ProfileField label="Nombre de la empresa" value={name} />
-        <ProfileField label="Industria" value={industryName} />
-        <ProfileField label="País" value={countryName} />
-        <ProfileField label="Tipo de empresa" value={typeName} />
-        <ProfileField label="Teléfono" value={phone} contentEditable={editing} onChange={(value) => onChange('phone', value)} />
-        <ProfileField label="Página web" value={website} contentEditable={editing} onChange={(value) => onChange('website', value)} />
-      </section>
-      <section className="profile-video-section">
-        <div className="profile-video-container">
-          { !videoUrl
+        <section className="profile-data-section">
+          <ProfileField label="Nombre de la empresa" value={name} />
+          <ProfileField label="Industria" value={industryName} />
+          <ProfileField label="País" value={countryName} />
+          <ProfileField label="Tipo de empresa" value={typeName} />
+          <ProfileField label="Teléfono" value={phone} contentEditable={editing} onChange={(value) => onChange('phone', value)} />
+          <ProfileField label="Página web" value={website} contentEditable={editing} onChange={(value) => onChange('website', value)} />
+        </section>
+        <section className="profile-video-section">
+          <div className="profile-video-container">
+            { !(videoUrl || getDefaultVideo())
         && <p className="profile-video-pretext">{ isMyProfile ? 'Sube aqui tu video de 30 segundos' : 'No hay video disponible'}</p>}
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video key={videoUrl} className="profile-video" controls>
-            <source src={videoUrl} />
-            Your browser does not support HTML video.
-          </video>
-        </div>
-        { loading && <div className="loader profile-video-loader" /> }
-        { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
-      </section>
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video key={videoUrl || getDefaultVideo()} className="profile-video" controls>
+              <source src={videoUrl || getDefaultVideo()} />
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          { loadingVideo() && <div className="loader profile-video-loader" /> }
+          { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
+        </section>
       </div>
     </div>
   );

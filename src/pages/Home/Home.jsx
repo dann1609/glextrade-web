@@ -166,7 +166,7 @@ function Home(props) {
   return (
     <div className="home">
       <section className="home-1">
-        <h1>{i18n.t('HOME_TITLE_1')}</h1>
+        <h1 className="home-title-1">{i18n.t('HOME_TITLE_1')}</h1>
       </section>
       <section className="home-2">
         <h2>{i18n.t('HOME_TITLE_2').toUpperCase()}</h2>

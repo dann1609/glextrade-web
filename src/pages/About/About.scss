@@ -2,7 +2,6 @@
 
 .about {
   h1 {
-    font-family: Montserrat, sans-serif;
     font-weight: 300;
     color: $color-orange;
     margin-left: $octuple-standard-spacing;
@@ -10,13 +9,11 @@
   }
 
   h2 {
-    font-family: Montserrat, sans-serif;
     font-weight: 300;
     color: $color-orange;
   }
 
   h4 {
-    font-family: Montserrat, sans-serif;
     font-weight: 300;
   }
 
@@ -26,6 +23,12 @@
     justify-content: center;
     align-items: center;
     background-color: $color-dark;
+    overflow: hidden;
+
+    .about-1-title {
+      animation: scroll-up 1s linear infinite;
+      animation-iteration-count: 1
+    }
 
     .about-1-paragraph {
       margin-top: 0;
@@ -33,6 +36,9 @@
       padding-left: $sextuple-standard-spacing;
       padding-right: $sextuple-standard-spacing;
       font-size: 1.56rem;
+
+      animation: scroll-up 1s linear infinite;
+      animation-iteration-count: 1
     }
   }
 
@@ -42,12 +48,21 @@
     justify-content: center;
     align-items: center;
     background-color: $color-orange-17;
+    overflow: hidden;
+
+    .about-2-title {
+      animation: scroll-up 1s linear infinite;
+      animation-iteration-count: 1
+    }
 
     .about-2-paragraph {
       margin-top: 0;
       color: $color-dark;
       margin-bottom: $quadruple-standard-spacing;
       font-size: 1.9rem;
+
+      animation: scroll-up 1s linear infinite;
+      animation-iteration-count: 1
     }
   }
 
