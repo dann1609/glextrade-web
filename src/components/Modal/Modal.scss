@@ -11,6 +11,11 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 
+  &.visible .modal-content{
+    animation: scroll-up 0.4s linear infinite;
+    animation-iteration-count: 1
+  }
+
   .modal-content{
     display: flex;
     flex-direction: column;
@@ -24,6 +29,8 @@
     .modal-message {
       color: $color-dark;
       flex-grow: 1;
+      white-space: pre;
+      text-align: justify;
     }
 
     .close {

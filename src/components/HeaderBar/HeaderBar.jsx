@@ -35,6 +35,9 @@ function HeaderBar(props) {
             <li>
               <Link to="/about">{i18n.t('ABOUT')}</Link>
             </li>
+            <li>
+              <Link to="/companies">{i18n.t('SEARCH_COMPANY')}</Link>
+            </li>
             {!signedIn
               && (
               <>
@@ -47,25 +50,22 @@ function HeaderBar(props) {
               </>
               )}
             {signedIn
-          && (
-          <>
-            <li>
-              <Link to="/companies">{i18n.t('SEARCH_COMPANY')}</Link>
-            </li>
-            <li>
-              <Link className="bell-icon-link" to="/notifications">
-                <FontAwesomeIcon className="sub-home-icon" icon={faBell} />
-                {pendingNotifications + notifications.newNotifications}
-              </Link>
-            </li>
-            <li className="profile-option">
-              <Link to="/profile">{i18n.t('PROFILE')}</Link>
-              <div className="dropdown-content">
-                <h4 className="logout-option" onClick={logout}>Salir</h4>
-              </div>
-            </li>
-          </>
-          )}
+            && (
+              <>
+                <li>
+                  <Link className="bell-icon-link" to="/notifications">
+                    <FontAwesomeIcon className="sub-home-icon" icon={faBell} />
+                    {pendingNotifications + notifications.newNotifications}
+                  </Link>
+                </li>
+                <li className="profile-option">
+                  <Link to="/profile">{i18n.t('PROFILE')}</Link>
+                  <div className="dropdown-content">
+                    <h4 className="logout-option" onClick={logout}>Salir</h4>
+                  </div>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>
