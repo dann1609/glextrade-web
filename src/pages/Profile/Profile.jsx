@@ -130,7 +130,7 @@ function Profile(props) {
       />
       <div className="profile-content">
         <section className="profile-data-section">
-          <ProfileField label="Nombre de la empresa" value={name} />
+          <ProfileField label="Nombre de la empresa" value={name} contentEditable={editing} onChange={(value) => onChange('name', value)} />
           <ProfileField label="Industria" value={industryName} />
           <ProfileField label="País" value={countryName} />
           <ProfileField label="Tipo de empresa" value={typeName} />
