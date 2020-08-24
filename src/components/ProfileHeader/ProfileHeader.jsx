@@ -119,7 +119,7 @@ function ProfileHeader(props) {
         };
       }
     } else {
-      rightButtonOptions.name = 'Conectar';
+      rightButtonOptions.name = 'Enviar invitacion a conectar';
       rightButtonOptions.onClick = connectDialog;
 
       if (invitationSender) {
@@ -151,21 +151,23 @@ function ProfileHeader(props) {
 
   return (
     <div className="profile-header">
-      {coverUrl && <img src={coverUrl} alt="Cover" className="cover-image" />}
-      <div className={`cover-add-container ${coverUrl ? '' : 'full-cover'}`}>
-        {isMyProfile && (
-        <>
-          <FontAwesomeIcon className="cover-add-icon" icon={faCamera} />
-          <p className="cover-add-text">{coverUrl ? 'Cambia tu foto de portada' : 'Sube tu foto de portada'}</p>
-        </>
-        )}
+      <div className="cover-area">
+        {coverUrl && <img src={coverUrl} alt="Cover" className="cover-image" />}
+        <div className={`cover-add-container ${coverUrl ? '' : 'full-cover'}`}>
+          {isMyProfile && (
+          <>
+            <FontAwesomeIcon className="cover-add-icon" icon={faCamera} />
+            <p className="cover-add-text">{coverUrl ? 'Cambia tu foto de portada' : 'Sube tu foto de portada'}</p>
+          </>
+          )}
+        </div>
+        {isMyProfile && <input className="cover-image-input" onChange={coverChanged} type="file" accept="image/*" />}
+        <div className="profile-image-container">
+          <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
+          { isMyProfile && <input className="profile-image-input" onChange={avatarChanged} type="file" accept="image/*" />}
+        </div>
+        { loading && <div className="loader profile-header-loader" /> }
       </div>
-      {isMyProfile && <input className="cover-image-input" onChange={coverChanged} type="file" accept="image/*" />}
-      <div className="profile-image-container">
-        <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
-        { isMyProfile && <input className="profile-image-input" onChange={avatarChanged} type="file" accept="image/*" />}
-      </div>
-      { loading && <div className="loader profile-header-loader" /> }
       <div className="profile-action-area">
         <Button className={`connect ${!isMyProfile ? 'invisible' : ''}`} type="button" onClick={leftButtonOptions.onClick}>{leftButtonOptions.name}</Button>
         <h3 className="profile-header-title">{name}</h3>

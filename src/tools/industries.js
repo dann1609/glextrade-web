@@ -74,6 +74,42 @@ const industryList = [{
   es: 'Telecomunicaciones',
   code: 'tl',
 },
+{
+  es: 'Lacteos',
+  code: 'la',
+},
+{
+  es: 'Vinos',
+  code: 'wn',
+},
+{
+  es: 'Calzado y Moda',
+  code: 'sm',
+},
+{
+  es: 'Carnicos y Embutidos',
+  code: 'ms',
+},
+{
+  es: 'Chocolates',
+  code: 'ct',
+},
+{
+  es: 'Granos y Semillas',
+  code: 'gs',
+},
+{
+  es: 'Maquinaria',
+  code: 'ma',
+},
+{
+  es: 'Madera',
+  code: 'wo',
+},
+{
+  es: 'Productos Veterinarios',
+  code: 'vt',
+},
 ];
 
 export default industryList;
