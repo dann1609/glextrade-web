@@ -1,12 +1,12 @@
 @import "src/index";
 
-.sign-up-form-container {
+.sign-in-form-container {
   display: flex;
   flex-direction: column;
   padding: $standard-spacing 0;
   width: 500px;
 
-  .sign-up-submit{
+  .sign-in-submit{
     height: $quadruple-standard-spacing;
     min-width: 12rem;
     margin: $standard-spacing auto;

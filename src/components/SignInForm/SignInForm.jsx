@@ -48,10 +48,10 @@ class SignInForm extends Component {
      }
 
      return (
-       <form className={`sign-up-form-container ${className} }`} onSubmit={this.handleSubmit}>
-         <TextInput className="sign-up-textInput" label="Correo Electronico" type="email" onChange={(value) => this.onChange('email', value)} />
-         <TextInput className="sign-up-textInput" label="Clave" type="password" onChange={(value) => this.onChange('password', value)} />
-         <input className="sign-up-submit" value="Ingresa" type="submit" disabled={disabled} />
+       <form className={`sign-in-form-container ${className} }`} onSubmit={this.handleSubmit}>
+         <TextInput className="sign-in-textInput" label="Correo Electronico" type="email" onChange={(value) => this.onChange('email', value)} />
+         <TextInput className="sign-in-textInput" label="Clave" type="password" onChange={(value) => this.onChange('password', value)} />
+         <input className="sign-in-submit" value="Ingresa" type="submit" disabled={disabled} />
        </form>
      );
    }

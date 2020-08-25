@@ -30,6 +30,7 @@ function Profile(props) {
 
   const user = getProfileUser(props);
   const [company, setCompany] = useState(user.company);
+  const [extra, setExtra] = useState({});
   const isMyProfile = session.user && company && session.user.company._id === company._id;
 
   const [loading, setLoading] = useState(false);
@@ -113,6 +114,35 @@ function Profile(props) {
     }
   };
 
+  const renderMiniatures = () => {
+    const extraImages = company.extraUrl.length;
+
+    const toRender = [...company.extraUrl];
+
+    for (let i = 0; i < 6 - extraImages; i++) {
+      toRender.push({});
+    }
+
+
+    return toRender.map((miniature, index) => <img src={miniature.url} className="mini-extra-image" />);
+  };
+
+  const renderImageContainer = () => {
+    return null;
+
+    if (!isMyProfile && company.extraUrl.length == 0) {
+      return null;
+    }
+
+    return (
+      <div className="profile-extra-container">
+        <img src={extra.url} className="extra-image" />
+        {company.extraUrl.length == 0 && <p className="extra-image-pretext">Sube aqui fotos de tus productos</p>}
+        {renderMiniatures()}
+      </div>
+    );
+  };
+
   return (
     <div className="profile">
       <ProfileHeader
@@ -149,6 +179,7 @@ function Profile(props) {
           </div>
           { loadingVideo() && <div className="loader profile-video-loader" /> }
           { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
+          { renderImageContainer()}
         </section>
       </div>
     </div>

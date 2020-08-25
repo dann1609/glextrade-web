@@ -110,6 +110,10 @@ const industryList = [{
   es: 'Productos Veterinarios',
   code: 'vt',
 },
+{
+  es: 'Joyeria',
+  code: 'jw',
+},
 ];
 
 export default industryList;

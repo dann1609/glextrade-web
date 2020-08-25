@@ -68,6 +68,11 @@ const es = {
     COLOMBIA_PHONE: 'Teléfono: +57 314-610-1765',
     COLOMBIA_EMAIL: 'Email: cllinas@glextrade.com',
     MIAMI_ADDRESS: '355 SW 25th Rd, USA, Miami, FL',
+
+    /* Errors */
+    COMPANY_ALREADY_REGISTERED: 'La compañia ya ha sido registrada',
+    USER_ALREADY_REGISTERED: 'El usuario ya ha sido registrado',
+
   },
 };
 

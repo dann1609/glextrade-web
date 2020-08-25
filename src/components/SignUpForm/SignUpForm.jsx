@@ -14,11 +14,15 @@ import countryList from '../../tools/countries';
 import companyTypes from '../../tools/companyTypes';
 import industryList from '../../tools/industries';
 import propTypes from '../../tools/propTypes';
+import Modal from '../Modal/Modal';
+import { getErrorMessage } from '../../tools/errorTypes';
 
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      modal: {},
+    };
     this.countries = _.orderBy(countryList, 'es').map((country) => ({
       label: country.es,
       value: country.code,
@@ -44,7 +48,12 @@ class SignUpForm extends Component {
         name, country, industry, type, password, email, phone, website,
       });
       if (response.error) {
-        //
+        this.setState({
+          modal: {
+            visible: true,
+            message: `No se ha podido registrar, ${getErrorMessage(response.error)}`,
+          },
+        });
       } else {
         history.push('profile');
       }
@@ -127,7 +136,7 @@ class SignUpForm extends Component {
    render() {
      const {
        navigate, name, country, industry, type, password, password2, email, phonePrefix, nameError,
-       countryError, industryError, typeError, passwordError, password2Error, emailError,
+       countryError, industryError, typeError, passwordError, password2Error, emailError, modal,
      } = this.state;
      const error = nameError || countryError || industryError || typeError || passwordError
          || password2Error || emailError;
@@ -139,19 +148,27 @@ class SignUpForm extends Component {
      }
 
      return (
-       <form className={`sign-up-form-container ${className} }`} onSubmit={this.handleSubmit}>
-         <TextInput className="sign-up-textInput" label="Nombre de Empresa" placeholder="Nombre de empresa" onChange={(value) => this.onChange('name', value)} onBlur={this.onBlurName} error={nameError} />
-         <SelectInput label="Pais" placeholder="Pais donde se encuentra tu empresa" list={this.countries} onChange={(value) => this.onChange('country', value)} onBlur={this.onBlurCountry} error={countryError} />
-         <SelectInput label="Industria" placeholder="Sector al cual pertenece tu empresa" list={this.industries} onChange={(value) => this.onChange('industry', value)} onBlur={this.onBlurIndustry} error={industryError} />
-         <SelectInput label="Tipo de empresa" placeholder="Tipo de empresa" list={this.types} onChange={(value) => this.onChange('type', value)} onBlur={this.onBlurType} error={typeError} />
-         <TextInput className="sign-up-textInput" label="Clave" placeholder="Crea tu clave" type="password" onChange={(value) => this.onChange('password', value)} onBlur={this.onBlurPassword} error={passwordError} />
-         <TextInput className="sign-up-textInput" label="Confirmar Clave" placeholder="Crea tu clave" type="password" onChange={(value) => this.onChange('password2', value)} onBlur={this.onBlurPassword2} error={password2Error} />
-         <TextInput className="sign-up-textInput" label="Correo Electronico" placeholder="Tu correo empresarial" type="email" onChange={(value) => this.onChange('email', value)} onBlur={this.onBlurEmail} error={emailError} />
-         <TextInput className="sign-up-textInput" label="Telefono" placeholder="Tu telefono de contacto" prefix={phonePrefix ? `+${phonePrefix}` : ''} onChange={(value) => this.onChange('phone', value)} />
-         <TextInput className="sign-up-textInput" label="Website" placeholder="Tu pagina Web" onChange={(value) => this.onChange('website', value)} />
+       <>
+         <form className={`sign-up-form-container ${className} }`} onSubmit={this.handleSubmit}>
+           <TextInput className="sign-up-textInput" label="Nombre de Empresa" placeholder="Nombre de empresa" onChange={(value) => this.onChange('name', value)} onBlur={this.onBlurName} error={nameError} />
+           <SelectInput label="Pais" placeholder="Pais donde se encuentra tu empresa" list={this.countries} onChange={(value) => this.onChange('country', value)} onBlur={this.onBlurCountry} error={countryError} />
+           <SelectInput label="Industria" placeholder="Sector al cual pertenece tu empresa" list={this.industries} onChange={(value) => this.onChange('industry', value)} onBlur={this.onBlurIndustry} error={industryError} />
+           <SelectInput label="Tipo de empresa" placeholder="Tipo de empresa" list={this.types} onChange={(value) => this.onChange('type', value)} onBlur={this.onBlurType} error={typeError} />
+           <TextInput className="sign-up-textInput" label="Clave" placeholder="Crea tu clave" type="password" onChange={(value) => this.onChange('password', value)} onBlur={this.onBlurPassword} error={passwordError} />
+           <TextInput className="sign-up-textInput" label="Confirmar Clave" placeholder="Crea tu clave" type="password" onChange={(value) => this.onChange('password2', value)} onBlur={this.onBlurPassword2} error={password2Error} />
+           <TextInput className="sign-up-textInput" label="Correo Electronico" placeholder="Tu correo empresarial" type="email" onChange={(value) => this.onChange('email', value)} onBlur={this.onBlurEmail} error={emailError} />
+           <TextInput className="sign-up-textInput" label="Telefono" placeholder="Tu telefono de contacto" prefix={phonePrefix ? `+${phonePrefix}` : ''} onChange={(value) => this.onChange('phone', value)} />
+           <TextInput className="sign-up-textInput" label="Website" placeholder="Tu pagina Web" onChange={(value) => this.onChange('website', value)} />
 
-         <input className="sign-up-submit" value="Registrar mi empresa" type="submit" disabled={disabled} />
-       </form>
+           <input className="sign-up-submit" value="Registrar mi empresa" type="submit" disabled={disabled} />
+         </form>
+         <Modal
+           visible={modal.visible}
+           message={modal.message}
+           close={() => this.setState({ modal: { visible: false } })}
+           actions={modal.actions}
+         />
+       </>
      );
    }
 }
