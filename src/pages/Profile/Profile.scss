@@ -66,9 +66,22 @@
         z-index: 5;
       }
       .profile-video-input{
-        margin-top: $standard-spacing;
+        width: 0;
+        height:0;
         &:hover{
           cursor: pointer;
+        }
+      }
+
+      .profile-video-actions-container {
+        width: 100%;
+        padding: $standard-spacing 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+
+        .profile-video-actions {
+          border-radius: 22px;
         }
       }
 

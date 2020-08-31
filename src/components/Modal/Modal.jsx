@@ -5,7 +5,7 @@ import './Modal.scss';
 
 function Modal(props) {
   const {
-    visible, close, message, actions,
+    visible, close, message, actions, children,
   } = props;
 
   const closeModal = () => {
@@ -19,6 +19,7 @@ function Modal(props) {
       <div className="modal-content">
         <span className="close" onClick={closeModal} role="button" tabIndex="0">&times;</span>
         <p className="modal-message">{message}</p>
+        <div className="modal-children-container">{children}</div>
         <div className="modal-action-container">
           {renderActions()}
         </div>

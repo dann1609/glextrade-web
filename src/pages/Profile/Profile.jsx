@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Redirect,
 } from 'react-router-dom';
@@ -12,7 +12,10 @@ import countryList from '../../tools/countries';
 import industryList from '../../tools/industries';
 import companyTypes from '../../tools/companyTypes';
 import propTypes from '../../tools/propTypes';
-import { getCompanyById, updateCompany, uploadProfileVideo } from '../../actions/company';
+import {
+  getCompanyById, removeProfileVideo, updateCompany, uploadProfileVideo,
+} from '../../actions/company';
+import Button from '../../components/Button/Button';
 
 const isProfileScreen = (props) => props.match.path === '/profile';
 
@@ -36,6 +39,8 @@ function Profile(props) {
   const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editedCompany, setEditedCompany] = useState({});
+
+  const profileVideoRef = useRef(null);
 
   const getDefaultVideo = () => {
     if (isMyProfile) {
@@ -85,6 +90,14 @@ function Profile(props) {
     }
 
     setLoading(false);
+  };
+
+  const removeVideo = async () => {
+    await removeProfileVideo();
+  };
+
+  const replaceVideo = () => {
+    profileVideoRef.current.click();
   };
 
   const {
@@ -178,7 +191,13 @@ function Profile(props) {
             </video>
           </div>
           { loadingVideo() && <div className="loader profile-video-loader" /> }
-          { isMyProfile && <input className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />}
+          { isMyProfile && (
+          <div className="profile-video-actions-container">
+            <Button className="profile-video-actions" onClick={removeVideo}>Eliminar Video</Button>
+            <input ref={profileVideoRef} className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />
+            <Button className="profile-video-actions" onClick={replaceVideo}>Remplazar Video</Button>
+          </div>
+          )}
           { renderImageContainer()}
         </section>
       </div>

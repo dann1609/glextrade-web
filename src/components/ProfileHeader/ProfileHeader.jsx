@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faCheck } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
 import './ProfileHeader.scss';
 import defaultImage from '../../assets/images/default_avatar.jpg';
-import { uploadPicture, uploadCoverPicture } from '../../actions/user';
+import {
+  uploadProfilePicture, uploadCoverPicture, removeProfilePicture, removeCoverPicture,
+} from '../../actions/user';
 import Modal from '../Modal/Modal';
 import { connect } from '../../actions/company';
 import Button from '../Button/Button';
@@ -27,6 +29,9 @@ function ProfileHeader(props) {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const profilePictureRef = useRef(null);
+  const coverPictureRef = useRef(null);
 
   const connectWithCompany = () => {
     connect(company._id).then((response) => {
@@ -57,6 +62,55 @@ function ProfileHeader(props) {
     dispatch(setActiveChat(chatRoom));
   };
 
+  const onClickImage = (imageType) => {
+    const modal = {
+      visible: true,
+    };
+
+    switch (imageType) {
+      case 'profile':
+        modal.message = 'Foto de Perfil';
+        if (isMyProfile) {
+          modal.actions = [{
+            name: 'Eliminar Foto',
+            onClick: removeProfilePicture,
+          }, {
+            name: 'Cambiar Foto',
+            onClick: () => {
+              profilePictureRef.current.click();
+            },
+          }];
+        }
+        modal.children = <img className="big-profile-image" src={profileUrl || defaultImage} />;
+        break;
+      case 'cover':
+        modal.message = 'Foto de Portada';
+        if (isMyProfile) {
+          modal.actions = [{
+            name: 'Eliminar Foto',
+            onClick: removeCoverPicture,
+          }, {
+            name: 'Cambiar Foto',
+            onClick: () => {
+              coverPictureRef.current.click();
+            },
+          }];
+        }
+        modal.children = <img className="big-profile-image" src={coverUrl || defaultImage} />;
+        break;
+    }
+
+    setModal(modal);
+  };
+
+  const onClickProfile = () => {
+    onClickImage('profile');
+  };
+
+  const onClickCover = () => {
+    onClickImage('cover');
+  };
+
   const avatarChanged = async (event) => {
     setLoading(true);
 
@@ -66,7 +120,7 @@ function ProfileHeader(props) {
     if (file) {
       const { name, type } = file;
 
-      await uploadPicture({
+      await uploadProfilePicture({
         name,
         type,
         file,
@@ -149,11 +203,13 @@ function ProfileHeader(props) {
     onClick: () => history.push('my_connections'),
   };
 
+  console.log('render profile header', profileUrl);
+
   return (
     <div className="profile-header">
       <div className="cover-area">
         {coverUrl && <img src={coverUrl} alt="Cover" className="cover-image" />}
-        <div className={`cover-add-container ${coverUrl ? '' : 'full-cover'}`}>
+        <div className={`cover-add-container ${coverUrl ? '' : 'full-cover'}`} onClick={onClickCover}>
           {isMyProfile && (
           <>
             <FontAwesomeIcon className="cover-add-icon" icon={faCamera} />
@@ -161,10 +217,10 @@ function ProfileHeader(props) {
           </>
           )}
         </div>
-        {isMyProfile && <input className="cover-image-input" onChange={coverChanged} type="file" accept="image/*" />}
+        {isMyProfile && <input ref={coverPictureRef} className="cover-image-input" onChange={coverChanged} type="file" accept="image/*" />}
         <div className="profile-image-container">
-          <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" />
-          { isMyProfile && <input className="profile-image-input" onChange={avatarChanged} type="file" accept="image/*" />}
+          <img src={profileUrl || defaultImage} alt="Avatar" className="profile-image" onClick={onClickProfile} />
+          { isMyProfile && <input ref={profilePictureRef} className="profile-image-input" onChange={avatarChanged} type="file" accept="image/*" />}
         </div>
         { loading && <div className="loader profile-header-loader" /> }
       </div>
@@ -178,7 +234,9 @@ function ProfileHeader(props) {
         message={modal.message}
         close={() => setModal({ visible: false })}
         actions={modal.actions}
-      />
+      >
+        {modal.children}
+      </Modal>
     </div>
   );
 }

@@ -41,3 +41,9 @@ export async function uploadProfileVideo(query) {
     dispatch(setSession(session));
   }
 }
+
+export async function removeProfileVideo() {
+  await updateCompany({
+    videoUrl: null,
+  });
+}

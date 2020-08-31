@@ -58,7 +58,7 @@ export async function signOut() {
   dispatch(setSession({}));
 }
 
-export async function uploadPicture(query) {
+export async function uploadProfilePicture(query) {
   const { name, type, file } = query;
 
   const signS3Response = await S3Api.signS3({
@@ -82,6 +82,12 @@ export async function uploadPicture(query) {
       });
     }
   }
+}
+
+export async function removeProfilePicture() {
+  updateCompany({
+    profileUrl: null,
+  });
 }
 
 export async function uploadCoverPicture(query) {
@@ -108,4 +114,10 @@ export async function uploadCoverPicture(query) {
       });
     }
   }
+}
+
+export async function removeCoverPicture() {
+  updateCompany({
+    coverUrl: null,
+  });
 }

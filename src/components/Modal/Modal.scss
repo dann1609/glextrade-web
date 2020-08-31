@@ -33,6 +33,13 @@
       text-align: justify;
     }
 
+    .modal-children-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 100%;
+    }
+
     .close {
       position: absolute;
       top:$standard-spacing;
