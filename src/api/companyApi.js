@@ -51,6 +51,23 @@ const CompanyApi = {
         };
       });
   },
+  updateExtraPicture: (data, position, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/companies/update_extra_picture${position ? `/${position}` : ''}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization,
+    },
+    body: JSON.stringify(data),
+  }).then((response) => response.json())
+    .then((responseJson) => responseJson)
+    .catch((error) => {
+      console.error(error);
+      return {
+        error: {
+          message: "Can't reach server",
+        },
+      };
+    }),
   getCompanyById: (id, Authorization) => fetch(`${process.env.REACT_APP_API_DOMAIN}/api/companies/${id}?profile_view=true`, {
     method: 'GET',
     headers: {

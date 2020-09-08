@@ -51,7 +51,7 @@ class SignUpForm extends Component {
         this.setState({
           modal: {
             visible: true,
-            message: `No se ha podido registrar, ${getErrorMessage(response.error)}`,
+            message: `${i18n.t('REGISTER_UNSUCCESSFUL')} ${getErrorMessage(response.error)}`,
           },
         });
       } else {
@@ -150,17 +150,17 @@ class SignUpForm extends Component {
      return (
        <>
          <form className={`sign-up-form-container ${className} }`} onSubmit={this.handleSubmit}>
-           <TextInput className="sign-up-textInput" label="Nombre de Empresa" placeholder="Nombre de empresa" onChange={(value) => this.onChange('name', value)} onBlur={this.onBlurName} error={nameError} />
-           <SelectInput label="Pais" placeholder="Pais donde se encuentra tu empresa" list={this.countries} onChange={(value) => this.onChange('country', value)} onBlur={this.onBlurCountry} error={countryError} />
-           <SelectInput label="Industria" placeholder="Sector al cual pertenece tu empresa" list={this.industries} onChange={(value) => this.onChange('industry', value)} onBlur={this.onBlurIndustry} error={industryError} />
-           <SelectInput label="Tipo de empresa" placeholder="Tipo de empresa" list={this.types} onChange={(value) => this.onChange('type', value)} onBlur={this.onBlurType} error={typeError} />
-           <TextInput className="sign-up-textInput" label="Clave" placeholder="Crea tu clave" type="password" onChange={(value) => this.onChange('password', value)} onBlur={this.onBlurPassword} error={passwordError} />
-           <TextInput className="sign-up-textInput" label="Confirmar Clave" placeholder="Crea tu clave" type="password" onChange={(value) => this.onChange('password2', value)} onBlur={this.onBlurPassword2} error={password2Error} />
-           <TextInput className="sign-up-textInput" label="Correo Electronico" placeholder="Tu correo empresarial" type="email" onChange={(value) => this.onChange('email', value)} onBlur={this.onBlurEmail} error={emailError} />
-           <TextInput className="sign-up-textInput" label="Telefono" placeholder="Tu telefono de contacto" prefix={phonePrefix ? `+${phonePrefix}` : ''} onChange={(value) => this.onChange('phone', value)} />
-           <TextInput className="sign-up-textInput" label="Website" placeholder="Tu pagina Web" onChange={(value) => this.onChange('website', value)} />
+           <TextInput className="sign-up-textInput" label={i18n.t('COMPANY_NAME')} placeholder={i18n.t('COMPANY_PLACEHOLDER')} onChange={(value) => this.onChange('name', value)} onBlur={this.onBlurName} error={nameError} />
+           <SelectInput label={i18n.t('COUNTRY')} placeholder={i18n.t('COUNTRY_PLACEHOLDER')} list={this.countries} onChange={(value) => this.onChange('country', value)} onBlur={this.onBlurCountry} error={countryError} />
+           <SelectInput label={i18n.t('INDUSTRY')} placeholder={i18n.t('INDUSTRY_PLACEHOLDER')} list={this.industries} onChange={(value) => this.onChange('industry', value)} onBlur={this.onBlurIndustry} error={industryError} />
+           <SelectInput label={i18n.t('COMPANY_TYPE')} placeholder={i18n.t('TYPE_PLACEHOLDER')} list={this.types} onChange={(value) => this.onChange('type', value)} onBlur={this.onBlurType} error={typeError} />
+           <TextInput className="sign-up-textInput" label={i18n.t('PASSWORD')} placeholder={i18n.t('PASSWORD_PLACEHOLDER')} type="password" onChange={(value) => this.onChange('password', value)} onBlur={this.onBlurPassword} error={passwordError} />
+           <TextInput className="sign-up-textInput" label={i18n.t('CONFIRM_PASSWORD')} placeholder={i18n.t('CONFIRM_PASSWORD_PLACEHOLDER')} type="password" onChange={(value) => this.onChange('password2', value)} onBlur={this.onBlurPassword2} error={password2Error} />
+           <TextInput className="sign-up-textInput" label={i18n.t('EMAIL')} placeholder={i18n.t('EMAIL_PLACEHOLDER')} type="email" onChange={(value) => this.onChange('email', value)} onBlur={this.onBlurEmail} error={emailError} />
+           <TextInput className="sign-up-textInput" label={i18n.t('PHONE')} placeholder={i18n.t('PHONE_PLACEHOLDER')} prefix={phonePrefix ? `+${phonePrefix}` : ''} onChange={(value) => this.onChange('phone', value)} />
+           <TextInput className="sign-up-textInput" label={i18n.t('WEBSITE')} placeholder={i18n.t('WEBSITE_PLACEHOLDER')} onChange={(value) => this.onChange('website', value)} />
 
-           <input className="sign-up-submit" value="Registrar mi empresa" type="submit" disabled={disabled} />
+           <input className="sign-up-submit" value={i18n.t('SIGN_UP')} type="submit" disabled={disabled} />
          </form>
          <Modal
            visible={modal.visible}

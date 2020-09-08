@@ -25,6 +25,21 @@ function Companies(props) {
     });
   }, [page]);
 
+  const registerToSeeDialog = () => {
+    setModal({
+      visible: true,
+      message: i18n.t('INVITATION_REGISTER'),
+      actions: [{
+        name: i18n.t('SIGN_UP'),
+        onClick: () => props.history.push('sign_up'),
+      },
+      {
+        name: i18n.t('SIGN_IN'),
+        onClick: () => props.history.push('sign_in'),
+      }],
+    });
+  };
+
   const goToCompanyProfile = (id) => {
     if (session.token) {
       props.history.push(`companies/${id}`);
@@ -42,21 +57,6 @@ function Companies(props) {
       />
     ),
   );
-
-  const registerToSeeDialog = () => {
-    setModal({
-      visible: true,
-      message: 'Para ver el perfil y conectar con las compañias debes estar registrado.\nDeseas registrarte?',
-      actions: [{
-        name: 'Registrarme',
-        onClick: () => props.history.push('sign_up'),
-      },
-      {
-        name: 'Iniciar Sesion',
-        onClick: () => props.history.push('sign_in'),
-      }],
-    });
-  };
 
   return (
     <div className="companies">

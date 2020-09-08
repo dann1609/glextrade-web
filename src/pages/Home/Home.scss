@@ -9,6 +9,7 @@
 
   .home-1 {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background-image: url("../../../src/assets/images/containers.jpg");
@@ -17,8 +18,19 @@
     overflow: hidden;
 
     .home-title-1 {
+      display: flex;
+      width: 0;
+      flex-grow: 1;
       animation: scroll-up 1s linear infinite;
-      animation-iteration-count: 1
+      animation-iteration-count: 1;
+      margin-left: $triple-standard-spacing;
+      margin-right: $triple-standard-spacing;
+    }
+
+    .home-video {
+      width: 42vw;
+      height: 23.625vw;
+      margin-right: $triple-standard-spacing;
     }
   }
 
@@ -94,6 +106,8 @@
         padding: 0 $standard-spacing;
         color: white;
         font-size: 1rem;
+
+        text-transform:uppercase;
 
         background-color: $color-dark;
         transition: min-width 0.5s, font-size 0.5s, padding 0.5s;

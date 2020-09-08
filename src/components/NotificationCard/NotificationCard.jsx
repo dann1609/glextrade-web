@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
 
 import './NotificationCard.scss';
 import defaultImage from '../../assets/images/default_avatar.jpg';
@@ -10,11 +11,11 @@ import { connect } from '../../actions/company';
 const getMessage = (type, data) => {
   switch (type) {
     case 'SEEN_PROFILE':
-      return `${data.company.name} ha visto tu perfil`;
+      return `${data.company.name} ${i18n.t('NOTIFICATIONS_SEEN_PROFILE')}`;
     case 'CONNECTION_REQUEST':
-      return `${data.company.name} quiere conectar contigo`;
+      return `${data.company.name} ${i18n.t('NOTIFICATIONS_REQUEST')}`;
     case 'CONNECTION_ACCEPTED':
-      return `${data.company.name} aceptó tu invitación`;
+      return `${data.company.name} ${i18n.t('NOTIFICATIONS_ACCEPTED')}}`;
     default:
       return 'No message';
   }
@@ -47,9 +48,9 @@ const NotificationCard = (props) => {
   switch (type) {
     case 'CONNECTION_REQUEST':
       notificationActions.acceptAction = acceptConnection;
-      notificationActions.acceptMessage = 'Aceptar';
+      notificationActions.acceptMessage = i18n.t('ACCEPT');
       notificationActions.cancelAction = ignoreConnection;
-      notificationActions.cancelMessage = 'Ignorar';
+      notificationActions.cancelMessage = i18n.t('IGNORE');
     case 'CONNECTION_ACCEPTED':
     case 'SEEN_PROFILE':
       notificationActions.container = () => props.history.push(`companies/${data.company._id}`);

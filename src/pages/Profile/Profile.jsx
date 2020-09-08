@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import i18n from 'i18next';
 
 import './Profile.scss';
 import ProfileField from '../../components/ProfileField/ProfileField';
@@ -13,9 +14,10 @@ import industryList from '../../tools/industries';
 import companyTypes from '../../tools/companyTypes';
 import propTypes from '../../tools/propTypes';
 import {
-  getCompanyById, removeProfileVideo, updateCompany, uploadProfileVideo,
+  getCompanyById, removeExtraPicture, removeProfileVideo, updateCompany, uploadExtraPicture, uploadProfileVideo,
 } from '../../actions/company';
 import Button from '../../components/Button/Button';
+import Modal from '../../components/Modal/Modal';
 
 const isProfileScreen = (props) => props.match.path === '/profile';
 
@@ -33,14 +35,20 @@ function Profile(props) {
 
   const user = getProfileUser(props);
   const [company, setCompany] = useState(user.company);
-  const [extra, setExtra] = useState({});
   const isMyProfile = session.user && company && session.user.company._id === company._id;
 
-  const [loading, setLoading] = useState(false);
+  const [loadingVideo, setLoadingVideo] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editedCompany, setEditedCompany] = useState({});
+  const [extraIndex, setExtraIndex] = useState(0);
+  const [loadingExtra, setLoadingExtra] = useState(false);
+  const [modal, setModal] = useState({
+    visible: false,
+  });
+
 
   const profileVideoRef = useRef(null);
+  const extraImageRef = useRef(null);
 
   const getDefaultVideo = () => {
     if (isMyProfile) {
@@ -74,7 +82,7 @@ function Profile(props) {
   }
 
   const videoChanged = async (event) => {
-    setLoading(true);
+    setLoadingVideo(true);
 
     const { files } = event.target;
     const file = files[0];
@@ -89,7 +97,24 @@ function Profile(props) {
       });
     }
 
-    setLoading(false);
+    setLoadingVideo(false);
+  };
+
+  const onAddExtraImage = async (event) => {
+    const { files } = event.target;
+    const file = files[0];
+
+    if (file) {
+      setLoadingExtra(true);
+      const { name, type } = file;
+
+      await uploadExtraPicture({
+        name,
+        type,
+        file,
+      });
+      setLoadingExtra(false);
+    }
   };
 
   const removeVideo = async () => {
@@ -98,6 +123,10 @@ function Profile(props) {
 
   const replaceVideo = () => {
     profileVideoRef.current.click();
+  };
+
+  const addExtraImage = () => {
+    extraImageRef.current.click();
   };
 
   const {
@@ -113,7 +142,7 @@ function Profile(props) {
   const typeObject = _.find(companyTypes, { code: type });
   const typeName = typeObject && typeObject.es;
 
-  const loadingVideo = () => loading || company.uploadingVideo;
+  const uploadingVideo = () => loadingVideo || company.uploadingVideo;
 
   const onChange = (type, value) => {
     const newState = { [type]: value };
@@ -136,22 +165,89 @@ function Profile(props) {
       toRender.push({});
     }
 
+    return toRender.map((miniature, index) => {
+      const setIndex = () => {
+        if (miniature.url) {
+          setExtraIndex(index);
+        }
+      };
 
-    return toRender.map((miniature, index) => <img src={miniature.url} className="mini-extra-image" />);
+      const removeExtra = () => {
+        setLoadingExtra(true);
+        removeExtraPicture(index).then(() => {
+          setLoadingExtra(false);
+        });
+        setModal({
+          visible: false,
+        });
+      };
+
+      const openRemoveExtraDialog = () => {
+        setModal({
+          visible: true,
+          message: `${i18n.t('REMOVE_EXTRA_MESSAGE')}`,
+          actions: [{
+            name: i18n.t('REMOVE'),
+            onClick: removeExtra,
+          }],
+        });
+      };
+
+      if (miniature.url) {
+        return (
+          <div className="mini-extra-container">
+            <img src={miniature.url} className="mini-extra-image" onClick={setIndex} />
+            <span className="mini-extra-remove" onClick={openRemoveExtraDialog} role="button" tabIndex="0">&times;</span>
+          </div>
+        );
+      }
+      return (
+        <div className="mini-extra-container" />
+      );
+    });
   };
 
   const renderImageContainer = () => {
-    return null;
-
-    if (!isMyProfile && company.extraUrl.length == 0) {
+    if (!isMyProfile && !company.extraUrl?.length) {
       return null;
     }
 
+    const extraLength = company.extraUrl.length;
+
+    if (extraLength > 0 && extraIndex >= extraLength) {
+      setExtraIndex(extraLength - 1);
+    }
+
+    const extra = company.extraUrl[extraIndex];
+
+    const next = () => {
+      if (extraIndex < extraLength - 1) {
+        setExtraIndex(extraIndex + 1);
+      } else {
+        setExtraIndex(0);
+      }
+    };
+
+    const prev = () => {
+      if (extraIndex > 0) {
+        setExtraIndex(extraIndex - 1);
+      } else {
+        setExtraIndex(extraLength - 1);
+      }
+    };
+
     return (
       <div className="profile-extra-container">
-        <img src={extra.url} className="extra-image" />
-        {company.extraUrl.length == 0 && <p className="extra-image-pretext">Sube aqui fotos de tus productos</p>}
-        {renderMiniatures()}
+        <div className="profile-extra-image-container">
+          {extra && <img src={extra?.url} className="extra-image" onClick={addExtraImage} />}
+          <a className="extra-prev" onClick={prev}>&#10094;</a>
+          <a className="extra-next" onClick={next}>&#10095;</a>
+          {company.extraUrl.length == 0 && <p className="extra-image-pretext" onClick={addExtraImage}>{i18n.t('UPLOAD_EXTRA_PICTURES')}</p>}
+          { loadingExtra && <div className="loader extra-image-loader" /> }
+        </div>
+        <div className="extra-mini-container">{renderMiniatures()}</div>
+        {company.extraUrl.length < 6 && <Button className="extra-actions" onClick={addExtraImage}>{i18n.t('ADD_EXTRA')}</Button>}
+        <input ref={extraImageRef} className="extra-input" onChange={onAddExtraImage} type="file" accept="image/*" />
       </div>
     );
   };
@@ -173,34 +269,42 @@ function Profile(props) {
       />
       <div className="profile-content">
         <section className="profile-data-section">
-          <ProfileField label="Nombre de la empresa" value={name} contentEditable={editing} onChange={(value) => onChange('name', value)} />
-          <ProfileField label="Industria" value={industryName} />
-          <ProfileField label="País" value={countryName} />
-          <ProfileField label="Tipo de empresa" value={typeName} />
-          <ProfileField label="Teléfono" value={phone} contentEditable={editing} onChange={(value) => onChange('phone', value)} />
-          <ProfileField label="Página web" value={website} contentEditable={editing} onChange={(value) => onChange('website', value)} />
+          <ProfileField label={i18n.t('COMPANY_NAME')} value={name} contentEditable={editing} onChange={(value) => onChange('name', value)} />
+          <ProfileField label={i18n.t('INDUSTRY')} value={industryName} />
+          <ProfileField label={i18n.t('COUNTRY')} value={countryName} />
+          <ProfileField label={i18n.t('COMPANY_TYPE')} value={typeName} />
+          <ProfileField label={i18n.t('PHONE')} value={phone} contentEditable={editing} onChange={(value) => onChange('phone', value)} />
+          <ProfileField label={i18n.t('WEBSITE')} value={website} contentEditable={editing} onChange={(value) => onChange('website', value)} />
         </section>
         <section className="profile-video-section">
           <div className="profile-video-container">
-            { !(videoUrl || getDefaultVideo())
-        && <p className="profile-video-pretext">{ isMyProfile ? 'Sube aqui tu video de 30 segundos' : 'No hay video disponible'}</p>}
+            { !(videoUrl)
+        && <p className="profile-video-pretext" onClick={replaceVideo}>{ isMyProfile ? i18n.t('UPLOAD_VIDEO') : i18n.t('NO_VIDEO')}</p>}
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-            <video key={videoUrl || getDefaultVideo()} className="profile-video" controls>
-              <source src={videoUrl || getDefaultVideo()} />
+            <video key={videoUrl} className="profile-video" controls>
+              <source src={videoUrl} />
               Your browser does not support HTML video.
             </video>
           </div>
-          { loadingVideo() && <div className="loader profile-video-loader" /> }
+          { uploadingVideo() && <div className="loader profile-video-loader" /> }
           { isMyProfile && (
           <div className="profile-video-actions-container">
-            <Button className="profile-video-actions" onClick={removeVideo}>Eliminar Video</Button>
+            <Button className="profile-video-actions" onClick={removeVideo}>{i18n.t('DELETE_VIDEO')}</Button>
             <input ref={profileVideoRef} className="profile-video-input" onChange={videoChanged} type="file" accept="video/*" />
-            <Button className="profile-video-actions" onClick={replaceVideo}>Remplazar Video</Button>
+            <Button className="profile-video-actions" onClick={replaceVideo}>{i18n.t('UPDATE_VIDEO')}</Button>
           </div>
           )}
           { renderImageContainer()}
         </section>
       </div>
+      <Modal
+        visible={modal.visible}
+        message={modal.message}
+        close={() => setModal({ visible: false })}
+        actions={modal.actions}
+      >
+        {modal.children}
+      </Modal>
     </div>
   );
 }

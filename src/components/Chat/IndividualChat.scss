@@ -92,6 +92,7 @@
     width: $double-standard-spacing;
     height: $double-standard-spacing;
     border-radius: $standard-spacing;
+    object-fit: cover;
   }
   .message {
     color: $color-dark;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
 
 import './Chat.scss';
 import defaultImage from '../../assets/images/default_avatar.jpg';
@@ -56,7 +57,7 @@ function Chat(props) {
         />
       ));
     }
-    return <h4 className="chat-no-messages">No Messages</h4>;
+    return <h4 className="chat-no-messages">{i18n.t('CHAT_NO_MESSAGES')}</h4>;
   };
 
   const renderIndividualChats = () => {
@@ -87,7 +88,7 @@ function Chat(props) {
       <div className="chat-menu-container">
         <div className="chat-name-container" onClick={toggleChat} role="button" tabIndex="0">
           <img src={defaultImage} alt="Avatar" className="chat-image" />
-          <h4 className="chat-title">Chat</h4>
+          <h4 className="chat-title">{i18n.t('CHAT_TITLE')}</h4>
         </div>
         <div className={`chat-list-container ${chatOpen ? 'chat-list-container-open' : ''}`}>
           {renderChatListContainer()}

@@ -37,9 +37,9 @@
           display: flex;
           position: absolute;
           top:$standard-spacing;
-          left:$standard-spacing;
-          right: $standard-spacing;
-          bottom: 0;
+          left:$double-standard-spacing;
+          right: $double-standard-spacing;
+          bottom: $standard-spacing;
           margin:0;
           padding: $standard-spacing;
           align-items: center;
@@ -49,12 +49,16 @@
           font-size: 3.5rem;
           color: $color-orange;
           background: $color-dark;
+          border-style: dashed;
+          border-color: $color-orange;
+          cursor: pointer;
         }
 
         .profile-video{
           width: 100%;
           height: 100%;
           box-sizing: content-box;
+          background-color: $color-dark;
         }
       }
 
@@ -82,43 +86,142 @@
 
         .profile-video-actions {
           border-radius: 22px;
+          margin-left: auto;
+          margin-right: auto;
         }
       }
 
       .profile-extra-container{
+        display: flex;
+        flex-direction: column;
         position: relative;
         padding: $standard-spacing $standard-spacing 0 $standard-spacing;
         box-sizing: border-box;
         width: 100%;
 
-        .extra-image{
-          width: 100%;
-          height: 28.125vw;
-          min-height: $min-width*0.2815;
-        }
-
-        .extra-image-pretext{
+        .profile-extra-image-container {
           display: flex;
-          position: absolute;
-          top:$standard-spacing;
-          left:$standard-spacing;
-          right: $standard-spacing;
-          bottom: 0;
-          margin:0;
-          padding: $standard-spacing;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          z-index: 1;
-          font-size: 3.5rem;
-          color: $color-orange;
-          background: $color-dark;
+          position: relative;
+          height: 28.125vw;
+          width: 100%;
+          background-color: $color-dark;
+
+          .extra-image {
+            width: 100%;
+            height: 28.125vw;
+            min-height: $min-width*0.2815;
+            object-fit: contain;
+            background-color: $color-dark;
+          }
+
+          .extra-prev, .extra-next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: $color-dark;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+
+            &:hover {
+              color: white;
+              background-color: rgba(0,0,0,0.8);
+            }
+          }
+
+          .extra-next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+          }
+
+          .extra-image-pretext {
+            display: flex;
+            position: absolute;
+            top: 2.3vw;
+            left: $triple-standard-spacing;
+            right: $triple-standard-spacing;
+            bottom: -2.3vw;
+            margin: 0;
+            padding: $standard-spacing;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 1;
+            font-size: 3.5rem;
+            color: $color-orange;
+            background: transparent;
+            border-style: dashed;
+            border-color: $color-orange;
+            cursor: pointer;
+          }
+
+          .extra-image-loader{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -10vw;
+            margin-top: -10vw;
+            height:20vw;
+            width:20vw;
+            z-index: 5;
+          }
         }
 
-        .mini-extra-image{
+        .extra-mini-container{
+          display: flex;
+          flex-direction: row;
+          margin-bottom: $double-standard-spacing;
+          background-color: $color-dark;
+        }
+
+        .mini-extra-container {
+          display: flex;
+          position: relative;
           width: 16.66%;
           height: 4.687vw;
           min-height: $min-width*0.04687;
+          cursor: pointer;
+
+          .mini-extra-image {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            border-width: 0;
+            object-fit: cover;
+          }
+
+          .mini-extra-remove {
+            position: absolute;
+            top: $quarter-standard-spacing;
+            right: $quarter-standard-spacing;
+            color: $color-dark;
+            float: right;
+            font-size: 28px;
+            line-height: 16px;
+            border-radius: 8px;
+            background-color: white;
+            font-weight: bold;
+          }
+        }
+
+        .extra-actions {
+          border-radius: 22px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: $double-standard-spacing;
+        }
+
+        .extra-input{
+          width: 0;
+          height:0;
+          &:hover{
+            cursor: pointer;
+          }
         }
       }
     }

@@ -61,7 +61,7 @@ function HeaderBar(props) {
                 <li className="profile-option">
                   <Link to="/profile">{i18n.t('PROFILE')}</Link>
                   <div className="dropdown-content">
-                    <h4 className="logout-option" onClick={logout}>Salir</h4>
+                    <h4 className="logout-option" onClick={logout}>{i18n.t('LOG_OUT')}</h4>
                   </div>
                 </li>
               </>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
 
 import { getChatRoom, sendMessage, updateMyMessage } from '../../actions/messages';
 import defaultImage from '../../assets/images/default_avatar.jpg';
@@ -94,7 +95,7 @@ function IndividualChat(props) {
         </div>
         <div className="input-container">
           <textarea className="chat-input" value={message} onChange={handleChange} />
-          <Button className="send" type="button" onClick={send}>Enviar</Button>
+          <Button className="send" type="button" onClick={send}>{i18n.t('SEND')}</Button>
         </div>
       </div>
     </div>

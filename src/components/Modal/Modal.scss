@@ -44,7 +44,7 @@
       position: absolute;
       top:$standard-spacing;
       right: $standard-spacing;
-      color: #aaa;
+      color: $color-dark;
       float: right;
       font-size: 28px;
       line-height: 16px;
@@ -53,9 +53,10 @@
 
     .close:hover,
     .close:focus {
-      color: black;
+      color: white;
       text-decoration: none;
       cursor: pointer;
+      background-color: $color-dark;
     }
   }
 }

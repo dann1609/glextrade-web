@@ -3,6 +3,7 @@ import {
   Redirect, withRouter,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
 
 import './SignInForm.scss';
 import { signIn } from '../../actions/user';
@@ -49,9 +50,9 @@ class SignInForm extends Component {
 
      return (
        <form className={`sign-in-form-container ${className} }`} onSubmit={this.handleSubmit}>
-         <TextInput className="sign-in-textInput" label="Correo Electronico" type="email" onChange={(value) => this.onChange('email', value)} />
-         <TextInput className="sign-in-textInput" label="Clave" type="password" onChange={(value) => this.onChange('password', value)} />
-         <input className="sign-in-submit" value="Ingresa" type="submit" disabled={disabled} />
+         <TextInput className="sign-in-textInput" label={i18n.t('EMAIL')} type="email" onChange={(value) => this.onChange('email', value)} />
+         <TextInput className="sign-in-textInput" label={i18n.t('PASSWORD')} type="password" onChange={(value) => this.onChange('password', value)} />
+         <input className="sign-in-submit" value={i18n.t('SIGN_IN')} type="submit" disabled={disabled} />
        </form>
      );
    }

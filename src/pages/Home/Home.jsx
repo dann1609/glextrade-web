@@ -167,6 +167,15 @@ function Home(props) {
     <div className="home">
       <section className="home-1">
         <h1 className="home-title-1">{i18n.t('HOME_TITLE_1')}</h1>
+        <iframe
+          className="home-video"
+          width="764"
+          height="430"
+          src="https://www.youtube.com/embed/oh9gHayc_EU"
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </section>
       <section className="home-2">
         <h2>{i18n.t('HOME_TITLE_2').toUpperCase()}</h2>
@@ -184,7 +193,7 @@ function Home(props) {
         </div>
         <div className="home-separator" />
         <h2 className="home-3-sub-title fast-register-label">{i18n.t('REGISTER_YOUR_COMPANY_REDIRECT')}</h2>
-        <button onClick={goToRegister} className="home-3-to-register" type="button">REGISTRAR MI EMPRESA</button>
+        <button onClick={goToRegister} className="home-3-to-register" type="button">{i18n.t('SIGN_UP')}</button>
       </section>
     </div>
   );

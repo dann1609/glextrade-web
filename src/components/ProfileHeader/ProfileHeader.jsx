@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faCheck } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+import i18n from 'i18next';
 
 import './ProfileHeader.scss';
 import defaultImage from '../../assets/images/default_avatar.jpg';
@@ -45,9 +46,9 @@ function ProfileHeader(props) {
   const connectDialog = () => {
     setModal({
       visible: true,
-      message: `Deseas enviar una invitación a conectar con ${company.name}?`,
+      message: `${i18n.t('INVITATION_CONNECT_VERIFICATION')} ${company.name}?`,
       actions: [{
-        name: 'Enviar',
+        name: i18n.t('SEND'),
         onClick: connectWithCompany,
       }],
     });
@@ -69,13 +70,13 @@ function ProfileHeader(props) {
 
     switch (imageType) {
       case 'profile':
-        modal.message = 'Foto de Perfil';
+        modal.message = i18n.t('PROFILE_PICTURE');
         if (isMyProfile) {
           modal.actions = [{
-            name: 'Eliminar Foto',
+            name: i18n.t('DELETE_PICTURE'),
             onClick: removeProfilePicture,
           }, {
-            name: 'Cambiar Foto',
+            name: i18n.t('CHANGE_PICTURE'),
             onClick: () => {
               profilePictureRef.current.click();
             },
@@ -84,13 +85,13 @@ function ProfileHeader(props) {
         modal.children = <img className="big-profile-image" src={profileUrl || defaultImage} />;
         break;
       case 'cover':
-        modal.message = 'Foto de Portada';
+        modal.message = i18n.t('COVER_PICTURE');
         if (isMyProfile) {
           modal.actions = [{
-            name: 'Eliminar Foto',
+            name: i18n.t('DELETE_PICTURE'),
             onClick: removeCoverPicture,
           }, {
-            name: 'Cambiar Foto',
+            name: i18n.t('CHANGE_PICTURE'),
             onClick: () => {
               coverPictureRef.current.click();
             },
@@ -161,29 +162,29 @@ function ProfileHeader(props) {
 
     if (isMyProfile) {
       if (editingProfile) {
-        rightButtonOptions.name = 'Guardar';
+        rightButtonOptions.name = i18n.t('SAVE');
         rightButtonOptions.onClick = () => {
           editProfile(false);
           saveProfile();
         };
       } else {
-        rightButtonOptions.name = 'Editar Perfil';
+        rightButtonOptions.name = i18n.t('EDIT_PROFILE');
         rightButtonOptions.onClick = () => {
           editProfile(true);
         };
       }
     } else {
-      rightButtonOptions.name = 'Enviar invitacion a conectar';
+      rightButtonOptions.name = i18n.t('INVITATION_SEND');
       rightButtonOptions.onClick = connectDialog;
 
       if (invitationSender) {
-        rightButtonOptions.name = 'Invitacion enviada';
+        rightButtonOptions.name = i18n.t('INVITATION_SENT');
         rightButtonOptions.onClick = null;
         rightButtonOptions.disabled = true;
       }
 
       if (connection) {
-        rightButtonOptions.name = 'Mensaje';
+        rightButtonOptions.name = i18n.t('MESSAGE');
         rightButtonOptions.onClick = sendMessage;
       }
     }
@@ -199,11 +200,9 @@ function ProfileHeader(props) {
   };
 
   const leftButtonOptions = {
-    name: 'Mis Conexiones',
+    name: i18n.t('MY_CONNECTIONS'),
     onClick: () => history.push('my_connections'),
   };
-
-  console.log('render profile header', profileUrl);
 
   return (
     <div className="profile-header">
@@ -213,7 +212,7 @@ function ProfileHeader(props) {
           {isMyProfile && (
           <>
             <FontAwesomeIcon className="cover-add-icon" icon={faCamera} />
-            <p className="cover-add-text">{coverUrl ? 'Cambia tu foto de portada' : 'Sube tu foto de portada'}</p>
+            <p className="cover-add-text">{coverUrl ? i18n.t('CHANGE_COVER_PICTURE') : i18n.t('UPLOAD_COVER_PICTURE')}</p>
           </>
           )}
         </div>

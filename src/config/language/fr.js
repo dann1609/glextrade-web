@@ -1,4 +1,4 @@
-const en = {
+const fr = {
   translation: {
     GLEXTRADE: 'Glextrade',
     COPYRIGHT: 'Copyright © 2020 Glextrade',
@@ -128,4 +128,4 @@ const en = {
   },
 };
 
-export default en;
+export default fr;
