@@ -81,8 +81,8 @@ const es = {
 
     /* Profile */
     EDIT_PROFILE: 'Editar Perfil',
-    CHANGE_PICTURE: 'Cambiar Foto',
-    DELETE_PICTURE: 'Eliminar Foto',
+    CHANGE_PICTURE: 'Eliminar Foto',
+    DELETE_PICTURE: 'Cambiar Foto',
     PROFILE_PICTURE: 'Foto de Perfil',
     COVER_PICTURE: 'Foto de Portada',
     CHANGE_COVER_PICTURE: 'Cambia tu foto de portada',

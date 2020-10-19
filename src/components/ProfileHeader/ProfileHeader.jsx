@@ -73,13 +73,13 @@ function ProfileHeader(props) {
         modal.message = i18n.t('PROFILE_PICTURE');
         if (isMyProfile) {
           modal.actions = [{
-            name: i18n.t('DELETE_PICTURE'),
-            onClick: removeProfilePicture,
-          }, {
             name: i18n.t('CHANGE_PICTURE'),
             onClick: () => {
               profilePictureRef.current.click();
             },
+          }, {
+            name: i18n.t('DELETE_PICTURE'),
+            onClick: removeProfilePicture,
           }];
         }
         modal.children = <img className="big-profile-image" src={profileUrl || defaultImage} />;
@@ -88,13 +88,13 @@ function ProfileHeader(props) {
         modal.message = i18n.t('COVER_PICTURE');
         if (isMyProfile) {
           modal.actions = [{
-            name: i18n.t('DELETE_PICTURE'),
-            onClick: removeCoverPicture,
-          }, {
             name: i18n.t('CHANGE_PICTURE'),
             onClick: () => {
               coverPictureRef.current.click();
             },
+          }, {
+            name: i18n.t('DELETE_PICTURE'),
+            onClick: removeCoverPicture,
           }];
         }
         modal.children = <img className="big-profile-image" src={coverUrl || defaultImage} />;
