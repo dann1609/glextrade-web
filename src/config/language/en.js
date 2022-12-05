@@ -1,7 +1,7 @@
 const en = {
   translation: {
-    GLEXTRADE: 'Glextrade',
-    COPYRIGHT: 'Copyright © 2020 Glextrade',
+    GLEXTRADE: 'Okanagantrade',
+    COPYRIGHT: 'Copyright © 2020 Okanagantrade',
     ACCEPT: 'Accept',
     IGNORE: 'Ignore',
     SAVE: 'Save',
@@ -28,7 +28,7 @@ const en = {
 
 
     /* Home */
-    HOME_TITLE_1: 'Glextrade: Connecting exporters and importers around the world',
+    HOME_TITLE_1: 'OkanaganTrade: Connecting exporters and importers around the world',
     HOME_TITLE_2: 'How does it work',
     SUB_HOME_TITLE_1: 'Register your company',
     SUB_HOME_BODY_1: 'Create your company profile with basic information on your company',
@@ -54,7 +54,7 @@ const en = {
     CL_PARAGRAPH: 'Carlos has over seven years of experience developing products across industries such as chemicals, manufacturing, food and beverages and plastics. After working in the international factoring and supply chain finance industry helping exporters and importers with their working capital needs he decided to launch Glextrade. He holds an MBA from Babson College in Boston and a B.Sc in Chemical Engineering.',
 
     DP_POSITION: 'Co-founder/CTO',
-    DP_PARAGRAPH: 'Daniel has over five years of experience in app and web development. After working over four years with tech start-ups in the U.S. he decided to join Glextrade. He holds a B.Sc in Electronic Engineering.',
+    DP_PARAGRAPH: 'Daniel has over five years of experience in app and web development. After working over four years with tech start-ups in the U.S. he decided to join Okanagantrade. He holds a B.Sc in Electronic Engineering.',
 
     /* SignIn */
     SIGN_UP_TITLE_1: 'Register your company to connect with exporters and importers',
@@ -76,7 +76,7 @@ const en = {
     PASSWORD_TOO_SHORT: 'Your password must have at least 8 characters',
     PASSWORD_DONT_MATCH: "Your password doesn't match",
     INVALID_EMAIL: 'Invalid email',
-    REGISTER_UNSUCCESSFUL: 'Invalid registration. Please contact us at cllinas@glextrade.com',
+    REGISTER_UNSUCCESSFUL: 'Invalid registration. Please contact us at dpadilla@okanagantrade.com',
 
     /* Profile */
     EDIT_PROFILE: 'Edit profile',
@@ -112,10 +112,10 @@ const en = {
     INVITATION_REGISTER: 'To see company profiles and connect you must be registered.\nDo you wish to register?',
 
     /* Footer */
-    COLOMBIA_ADDRESS: 'Cra 5 # 75 -11, Bogota, Colombia',
-    COLOMBIA_PHONE: 'Phone: +57 314-610-1765',
-    COLOMBIA_EMAIL: 'Email: cllinas@glextrade.com',
-    MIAMI_ADDRESS: '355 SW 25th Rd, USA, Miami, FL',
+    COLOMBIA_ADDRESS: 'Cra 43#98-86 AP208, Barranquilla, Colombia',
+    COLOMBIA_PHONE: 'Phone: +57 3003328292',
+    COLOMBIA_EMAIL: 'Email: dpadilla@okanagantrade.com',
+    MIAMI_ADDRESS: '1695 Deleenheer Rd, Vernon, BC',
 
     /* Errors */
     COMPANY_ALREADY_REGISTERED: 'This company already has an account',

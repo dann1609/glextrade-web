@@ -79,7 +79,8 @@
     display: flex;
     flex-grow: 1;
     padding-top: 50%;
-    margin: 0 $standard-spacing;
+    margin: 0 auto;
+    max-width: 30rem;
 
     .member-image{
       position: absolute;

@@ -5,7 +5,6 @@ import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 import './About.scss';
 
-import CLlinasPicture from '../../assets/images/CLlinas-profile.jpg';
 import DPadillaPicture from '../../assets/images/DPadilla-profile.jpg';
 
 function MemberCard(member) {
@@ -28,13 +27,6 @@ function MemberCard(member) {
 
 function about() {
   const members = [
-    {
-      url: CLlinasPicture,
-      name: 'Carlos Llinas',
-      position: i18n.t('CL_POSITION'),
-      paragraph: i18n.t('CL_PARAGRAPH'),
-      linkedinLink: 'https://www.linkedin.com/in/carlosllinas1/',
-    },
     {
       url: DPadillaPicture,
       name: 'Daniel Padilla',

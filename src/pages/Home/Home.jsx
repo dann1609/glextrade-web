@@ -171,7 +171,7 @@ function Home(props) {
           className="home-video"
           width="764"
           height="430"
-          src="https://www.youtube.com/embed/oh9gHayc_EU"
+          src="https://www.youtube.com/embed/O6Yr4QtCIl8"
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
